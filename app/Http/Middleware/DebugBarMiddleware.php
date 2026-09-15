@@ -21,7 +21,9 @@ class DebugBarMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next){
-        app('debugbar')->disable();
+        if (class_exists(\Barryvdh\Debugbar\ServiceProvider::class)) {
+            app('debugbar')->disable();
+        }
 
         $value = \Session::get('developer');
         $pin = base64_decode($value);

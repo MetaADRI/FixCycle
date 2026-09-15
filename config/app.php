@@ -138,7 +138,7 @@ return [
     |
     */
 
-    'providers' => [
+    'providers' => array_filter([
 
         /*
          * Laravel Framework Service Providers...
@@ -183,8 +183,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-    ],
+        class_exists(\Barryvdh\Debugbar\ServiceProvider::class)
+            ? \Barryvdh\Debugbar\ServiceProvider::class
+            : null,
+    ], fn ($provider) => $provider !== null),
 
     /*
     |--------------------------------------------------------------------------
@@ -235,7 +237,6 @@ return [
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => \Intervention\Image\Facades\Image::class,
-        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
     ],
 
 ];
