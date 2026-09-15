@@ -1,14 +1,15 @@
 'use client';
 
 import { Button, Icon, StatusPill } from '@fixcycle/ui';
-import { getCapabilities, isStandaloneMode } from '@fixcycle/pwa-core';
+import { useCapabilities, useStandaloneMode } from '@fixcycle/pwa-core';
 
 import { t } from '@/lib/i18n';
 import { useRuntime } from '@/lib/runtime-context';
 
 export function OfflinePanel(): React.ReactNode {
   const { runtime } = useRuntime();
-  const capabilities = getCapabilities();
+  const capabilities = useCapabilities();
+  const standalone = useStandaloneMode();
 
   return (
     <div className="flex flex-col items-center gap-4 px-4 py-16 text-center">
@@ -21,14 +22,14 @@ export function OfflinePanel(): React.ReactNode {
         {t('offline.reload', runtime.locale)}
       </Button>
       <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-        <StatusPill tone={capabilities.online ? 'success' : 'danger'}>
-          online: {capabilities.online ? 'yes' : 'no'}
+        <StatusPill tone={capabilities && capabilities.online ? 'success' : 'danger'}>
+          online: {capabilities ? (capabilities.online ? 'yes' : 'no') : '…'}
         </StatusPill>
-        <StatusPill tone={capabilities.serviceWorker ? 'success' : 'neutral'}>
-          service worker: {capabilities.serviceWorker ? 'active' : 'missing'}
+        <StatusPill tone={!capabilities || capabilities.serviceWorker ? 'success' : 'neutral'}>
+          service worker: {capabilities ? (capabilities.serviceWorker ? 'active' : 'missing') : '…'}
         </StatusPill>
-        <StatusPill tone={isStandaloneMode() ? 'success' : 'neutral'}>
-          standalone: {isStandaloneMode() ? 'yes' : 'no'}
+        <StatusPill tone={standalone ? 'success' : 'neutral'}>
+          standalone: {standalone ? 'yes' : 'no'}
         </StatusPill>
       </div>
     </div>

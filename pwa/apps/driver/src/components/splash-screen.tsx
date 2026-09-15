@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { mapConfiguration } from '@fixcycle/config';
 import { fetchDriverConfiguration } from '@fixcycle/api-client';
 import { Icon, IconButton, Spinner } from '@fixcycle/ui';
-import { getCapabilities } from '@fixcycle/pwa-core';
+import { useCapabilities } from '@fixcycle/pwa-core';
 
 import { api } from '@/lib/api';
 import { t } from '@/lib/i18n';
@@ -56,11 +56,11 @@ export function DriverSplashScreen({ onReady }: DriverSplashScreenProps): React.
     };
   }, [loadConfiguration]);
 
-  const capabilities = getCapabilities();
+  const capabilities = useCapabilities();
 
   return (
     <div className="flex min-h-dvh flex-col bg-[var(--fc-bg-primary)]">
-      {capabilities.online ? null : <OfflineBanner />}
+      {capabilities ? (capabilities.online ? null : <OfflineBanner />) : null}
       <div className="mx-auto flex w-full max-w-[430px] flex-1 flex-col items-center justify-between px-6 py-10">
         <div className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
           <div className="flex h-24 w-24 items-center justify-center rounded-[1.75rem] bg-white/10 ring-1 ring-white/15">

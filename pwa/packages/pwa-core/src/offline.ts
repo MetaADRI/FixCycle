@@ -1,7 +1,28 @@
+import { useEffect, useState } from 'react';
+
 export interface Capabilities {
   online: boolean;
   serviceWorker: boolean;
   touch: boolean;
+}
+
+export function useCapabilities(): Capabilities | null {
+  const [capabilities, setCapabilities] = useState<Capabilities | null>(null);
+  useEffect(() => {
+    setCapabilities(getCapabilities());
+    return subscribeOnlineChange((online) => {
+      setCapabilities((current) => (current ? { ...current, online } : current));
+    });
+  }, []);
+  return capabilities;
+}
+
+export function useStandaloneMode(): boolean {
+  const [standalone, setStandalone] = useState(false);
+  useEffect(() => {
+    setStandalone(isStandaloneMode());
+  }, []);
+  return standalone;
 }
 
 export interface OfflineStatus {

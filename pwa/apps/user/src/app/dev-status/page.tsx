@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchUserConfiguration, UnauthorizedError } from '@fixcycle/api-client';
 import { apiBaseUrl, hasMerchantCredentials, publicEnv, type RuntimeConfiguration } from '@fixcycle/config';
 import { Button, Icon, Spinner, StatusPill } from '@fixcycle/ui';
-import { detectInstallEligibility, getCapabilities, isStandaloneMode } from '@fixcycle/pwa-core';
+import { useCapabilities, useInstallEligibility, useStandaloneMode } from '@fixcycle/pwa-core';
 
 import { api } from '@/lib/api';
 import { useRuntime } from '@/lib/runtime-context';
@@ -74,8 +74,9 @@ export default function DevStatusPage(): React.ReactNode {
     void runPing();
   }, [runPing]);
 
-  const capabilities = getCapabilities();
-  const install = detectInstallEligibility();
+  const capabilities = useCapabilities();
+  const install = useInstallEligibility();
+  const standalone = useStandaloneMode();
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col gap-4 bg-[var(--fc-surface-raised)] px-4 py-6">
@@ -113,16 +114,20 @@ export default function DevStatusPage(): React.ReactNode {
       </SectionCard>
 
       <SectionCard title="Device capabilities">
-        <EnvRow label="Online" value={capabilities.online ? 'yes' : 'no'} tone={capabilities.online ? 'ok' : 'bad'} />
+        <EnvRow
+          label="Online"
+          value={capabilities ? (capabilities.online ? 'yes' : 'no') : '…'}
+          tone={!capabilities || capabilities.online ? 'ok' : 'bad'}
+        />
         <EnvRow
           label="Service worker"
-          value={capabilities.serviceWorker ? 'supported' : 'unsupported'}
-          tone={capabilities.serviceWorker ? 'ok' : 'warn'}
+          value={capabilities ? (capabilities.serviceWorker ? 'supported' : 'unsupported') : '…'}
+          tone={!capabilities || capabilities.serviceWorker ? 'ok' : 'warn'}
         />
-        <EnvRow label="Touch" value={capabilities.touch ? 'yes' : 'no'} />
-        <EnvRow label="Standalone" value={isStandaloneMode() ? 'yes' : 'no'} />
-        <EnvRow label="Install platform" value={install.platform} />
-        <EnvRow label="Install available" value={install.canInstall ? 'yes' : 'no'} />
+        <EnvRow label="Touch" value={capabilities ? (capabilities.touch ? 'yes' : 'no') : '…'} />
+        <EnvRow label="Standalone" value={standalone ? 'yes' : 'no'} />
+        <EnvRow label="Install platform" value={install?.platform ?? '…'} />
+        <EnvRow label="Install available" value={install ? (install.canInstall ? 'yes' : 'no') : '…'} />
       </SectionCard>
 
       <SectionCard title="Configuration endpoint">

@@ -39,6 +39,14 @@ export function detectInstallEligibility(): InstallEligibility {
   };
 }
 
+export function useInstallEligibility(): InstallEligibility | null {
+  const [eligibility, setEligibility] = useState<InstallEligibility | null>(null);
+  useEffect(() => {
+    setEligibility(detectInstallEligibility());
+  }, []);
+  return eligibility;
+}
+
 declare global {
   interface WindowEventMap {
     beforeinstallprompt: BeforeInstallPromptEvent;
