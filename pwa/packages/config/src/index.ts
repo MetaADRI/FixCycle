@@ -31,7 +31,11 @@ export function hasMerchantCredentials(env: PublicEnv = publicEnv): boolean {
 }
 
 export function apiBaseUrl(env: PublicEnv = publicEnv): string {
-  return env.apiBase.replace(/\/+$/, '');
+  const base = env.apiBase.replace(/\/+$/, '');
+  if (base.length === 0) {
+    return '';
+  }
+  return base.endsWith('/api') ? base : `${base}/api`;
 }
 
 export function merchantDefaultLocale(env: PublicEnv = publicEnv): string {
