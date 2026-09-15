@@ -1,0 +1,16 @@
+node_modules/
+.next/
+dist/
+build/
+*.tsbuildinfo
+.env
+.env.local
+.env.*.local
+!.env.example
+public/assets/
+apps/user/public/sw.js
+android-source/
+.DS_Store
+*.log
+npm-debug.log*
+coverage/

@@ -1,0 +1,34 @@
+{
+  "name": "@fixcycle/user",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fixcycle user PWA shell (Next.js App Router + Serwist)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fixcycle/api-client": "0.1.0",
+    "@fixcycle/config": "0.1.0",
+    "@fixcycle/pwa-core": "0.1.0",
+    "@fixcycle/ui": "0.1.0",
+    "@serwist/next": "^9.0.0",
+    "@tanstack/react-query": "^5.0.0",
+    "@types/leaflet": "^1.9.22",
+    "leaflet": "^1.9.4",
+    "next": "^15.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "serwist": "^9.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.9.0"
+  }
+}

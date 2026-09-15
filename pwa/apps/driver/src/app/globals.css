@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-brand: var(--fc-bg-primary);
+  --color-accent: var(--fc-bg-secondary);
+  --color-ink: var(--fc-text-primary);
+  --color-ink-subtle: var(--fc-text-secondary);
+  --color-surface: var(--fc-surface);
+  --color-surface-raised: var(--fc-surface-raised);
+  --color-border: var(--fc-border);
+  --color-success: var(--fc-success);
+  --color-warning: var(--fc-warning);
+  --color-danger: var(--fc-danger);
+  --color-info: var(--fc-info);
+}
+
+:root {
+  --fc-bg-primary: #0b1b3f;
+  --fc-bg-secondary: #ff6b35;
+  --fc-text-primary: #101828;
+  --fc-text-secondary: #667085;
+  --fc-surface: #ffffff;
+  --fc-surface-raised: #f5f6fa;
+  --fc-border: #e6e8ee;
+  --fc-overlay: rgba(11, 27, 63, 0.5);
+  --fc-success: #17b26a;
+  --fc-warning: #f79009;
+  --fc-danger: #e5484d;
+  --fc-info: #2563eb;
+  --fc-shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+  --fc-radius-sm: 0.5rem;
+  --fc-radius-md: 0.875rem;
+  --fc-radius-lg: 1.25rem;
+  --fc-font: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+html,
+body {
+  background: var(--fc-bg-primary);
+  color: var(--fc-text-primary);
+  font-family: var(--fc-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  overscroll-behavior-y: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}

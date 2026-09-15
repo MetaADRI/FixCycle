@@ -1,0 +1,24 @@
+{
+  "name": "fixcycle-pwa",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fixcycle PWA monorepo: user, driver and store apps consuming the existing Laravel APIs",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @fixcycle/user",
+    "dev:driver": "npm run dev --workspace @fixcycle/driver",
+    "build": "npm run build --workspace @fixcycle/user",
+    "build:driver": "npm run build --workspace @fixcycle/driver",
+    "start": "npm run start --workspace @fixcycle/user",
+    "start:driver": "npm run start --workspace @fixcycle/driver",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "typecheck:driver": "npm run typecheck --workspace @fixcycle/driver",
+    "icons": "node scripts/generate-icons.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

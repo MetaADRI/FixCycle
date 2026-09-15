@@ -1,0 +1,30 @@
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy to Live Server
+          script:
+            - echo "Starting Deployment to Live Server"
+            - pipe: atlassian/ssh-run:0.8.0
+              variables:
+                SSH_USER: $LIVE_SERVER_USER
+                SERVER: $LIVE_SERVER_HOST
+                COMMAND: |
+                  git config --global --add safe.directory $LIVE_SERVER_PATH
+                  cd $LIVE_SERVER_PATH
+                  git pull origin master
+    ms_v3_developement:
+      - step:
+          name: Deploy to Dev Server
+          script:
+            - echo "Starting Deployment to Dev Server"
+            - pipe: atlassian/ssh-run:0.8.0
+              variables:
+                SSH_USER: $DEV_SERVER_USER
+                SERVER: $DEV_SERVER_HOST
+                COMMAND: |
+                  git config --global --add safe.directory $DEV_SERVER_PATH
+                  cd $DEV_SERVER_PATH
+                  git pull origin ms_v3_developement
