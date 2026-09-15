@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import type { ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 
 import { publicEnv } from '@fixcycle/config';
 
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: ReactNode }): React
             <noscript>
               <div style={{ padding: '16px', textAlign: 'center' }}>{appName} requires JavaScript.</div>
             </noscript>
-            {children}
+            <Suspense fallback={null}>{children}</Suspense>
           </AuthProvider>
         </RuntimeProvider>
       </body>
