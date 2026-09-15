@@ -32,7 +32,7 @@ export function HomeBannerIllustration({ className = '' }: IllustrationProps): R
         <rect x="64" y="256" width="340" height="26" rx="13" fill="white" opacity="0.9" />
         <rect x="64" y="304" width="300" height="16" rx="8" fill="white" opacity="0.55" />
         <rect x="64" y="332" width="360" height="16" rx="8" fill="white" opacity="0.4" />
-        <rect x="64" y="384" width="220" height="52" rx="26" fill="var(--fc-accent, #f5a623)" />
+        <rect x="64" y="384" width="220" height="52" rx="26" fill="var(--fc-accent, #f76f01)" />
         <rect x="92" y="404" width="120" height="12" rx="6" fill="var(--fc-bg-secondary, #0d3b66)" opacity="0.6" />
       </g>
 
@@ -47,12 +47,12 @@ export function HomeBannerIllustration({ className = '' }: IllustrationProps): R
         <rect x="700" y="180" width="150" height="260" rx="26" stroke="var(--fc-bg-primary, #f0f4f8)" strokeWidth="12" fill="none" opacity="0.25" />
         <rect x="726" y="240" width="52" height="10" rx="5" fill="white" opacity="0.3" />
         <rect x="726" y="264" width="98" height="90" rx="12" fill="white" opacity="0.18" />
-        <rect x="740" y="286" width="40" height="12" rx="6" fill="var(--fc-accent, #f5a623)" opacity="0.8" />
+        <rect x="740" y="286" width="40" height="12" rx="6" fill="var(--fc-accent, #f76f01)" opacity="0.8" />
         <rect x="740" y="308" width="58" height="12" rx="6" fill="var(--fc-bg-primary, #f0f4f8)" opacity="0.4" />
       </g>
 
       {/* Cartoon bolt / location pin accents */}
-      <g fill="var(--fc-accent, #f5a623)">
+      <g fill="var(--fc-accent, #f76f01)">
         <path d="M470 150l12-14 8 14-12 14z" opacity="0.85" />
         <circle cx="916" cy="250" r="10" opacity="0.7" />
         <circle cx="80" cy="470" r="8" opacity="0.6" />
@@ -85,9 +85,9 @@ export function EmptyHomeIllustration({ className = '' }: IllustrationProps): Re
       <path d="M44 120c8 18 26 30 46 30" stroke="var(--fc-bg-secondary, #0d3b66)" strokeWidth="2" strokeDasharray="3 5" strokeLinecap="round" opacity="0.4" />
       <path d="M156 120c-8 18-26 30-46 30" stroke="var(--fc-bg-secondary, #0d3b66)" strokeWidth="2" strokeDasharray="3 5" strokeLinecap="round" opacity="0.4" />
       {/* Sparkles */}
-      <circle cx="56" cy="58" r="2.5" fill="var(--fc-accent, #f5a623)" />
-      <circle cx="150" cy="56" r="2" fill="var(--fc-accent, #f5a623)" />
-      <path d="M52 48l3-3m98 1l3-3" stroke="var(--fc-accent, #f5a623)" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="56" cy="58" r="2.5" fill="var(--fc-accent, #f76f01)" />
+      <circle cx="150" cy="56" r="2" fill="var(--fc-accent, #f76f01)" />
+      <path d="M52 48l3-3m98 1l3-3" stroke="var(--fc-accent, #f76f01)" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }

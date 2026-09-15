@@ -36,7 +36,7 @@ export default function LaundryHomePage(): React.ReactNode {
 
       <main className="flex-1 pb-16 pt-3">
         {/* Banner */}
-        <section className="mx-4 mb-4 overflow-hidden rounded-2xl bg-gradient-to-br from-[#223a6b] to-[#33508f] p-4">
+        <section className="mx-4 mb-4 overflow-hidden rounded-2xl bg-gradient-to-br from-[#287e0a] to-[#4ea031] p-4">
           <div className="flex items-center gap-2">
             <span className="flex h-2 w-2 rounded-full bg-[#17b26a]" />
             <span className="text-xs font-semibold text-[#17b26a]">Available now</span>

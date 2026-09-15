@@ -98,8 +98,13 @@ export default function LoginPage(): React.ReactNode {
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)] px-6 pt-16 pb-8">
       <div className="mb-8 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--fc-bg-secondary)]/10">
-          <Icon name="taxi" size={36} className="text-[var(--fc-bg-secondary)]" />
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[var(--fc-bg-secondary)]/10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icons/fixcycle-logo.png"
+            alt={t('login.title', runtime.locale)}
+            className="h-14 w-14 rounded-xl object-contain"
+          />
         </div>
         <h1 className="text-xl font-extrabold text-[var(--fc-text-primary)]">
           {t('login.title', runtime.locale)}

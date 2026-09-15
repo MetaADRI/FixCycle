@@ -394,7 +394,7 @@ function bookingData(booking: Booking): Record<string, unknown> {
     share_able_link: 'https://fixcycle.example/share',
     tip_already_paid: false,
     polydata: base
-      ? { polyline_width: '5', polyline_color: '#ff6b35', polyline: polylineFor(base, progress) }
+      ? { polyline_width: '5', polyline_color: '#f76f01', polyline: polylineFor(base, progress) }
       : {},
     still_marker: base
       ? { marker_type: 'dest', marker_lat: base.dropLat, marker_long: base.dropLng }
@@ -2139,12 +2139,12 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
             cms_pages: [],
           },
           theme_cofig: {
-            primary_color_user: '#ff6b35',
+            primary_color_user: '#287e0a',
             user_app_logo: '',
           },
-          bg_color_primary: '#0b1b3f',
-          text_color_primary: '#101828',
-          text_color_secondary: '#667085',
+          bg_color_primary: '#1a383b',
+          text_color_primary: '#1a383b',
+          text_color_secondary: '#4a5953',
           login: { email: 0, phone: 1, otp: 1, skip_login: 0, ignore_login: 0 },
           register: { phone: 1, email: 0, gender: 0, userImage_enable: 0 },
           social: { enable: 0, google: 0, facebook: 0 },
@@ -2219,8 +2219,8 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
                 price_card_owner: 'dynamic',
                 multi_store: 0,
                 is_coming_soon: 0,
-                segment_background_gradient_1: '#ff6b35',
-                segment_background_gradient_2: '#ff9a5c',
+                segment_background_gradient_1: '#287e0a',
+                segment_background_gradient_2: '#4ea031',
               },
               {
                 id: 'food',
@@ -2381,9 +2381,9 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           drawer_definition: { uid, type: 'icon', icon, title, screen_name: screenName },
         });
         data = {
-          drawer_backgroud: '#0b1b3f',
+          drawer_backgroud: '#1a383b',
           data: [
-            { drawer_name: 'DRAWER_HEADER', drawer_definition: { image: '', background_color: '#0b1b3f', text_color: '#ffffff', secondary_text_color: '#cbd5e1' } },
+            { drawer_name: 'DRAWER_HEADER', drawer_definition: { image: '', background_color: '#1a383b', text_color: '#ffffff', secondary_text_color: '#cbd5e1' } },
             { ...item('p12-profile', 'account', 'My Profile', 'PROFILE') },
             { ...item('p12-history', 'history', 'My History', 'MY_HISTORY') },
             { ...item('p12-wallet', 'wallet', 'Wallet', 'WALLET') },
@@ -2580,7 +2580,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
                   driver_marker_long: driverPos.lng,
                   driver_marker_bearing: 45,
                 },
-          polydata: ref ? { polyline_width: '5', polyline_color: '#ff6b35', polyline: polylineFor(ref, progress) } : {},
+          polydata: ref ? { polyline_width: '5', polyline_color: '#f76f01', polyline: polylineFor(ref, progress) } : {},
           location: {},
           location_updates:
             status === '1001'

@@ -31,7 +31,7 @@ const iconColors: Record<RideMapMarker['kind'], string> = {
   pickup: '#16a34a',
   drop: '#dc2626',
   stop: '#f59e0b',
-  driver: '#2563eb',
+  driver: '#f76f01',
 };
 
 export function RideMap({
@@ -125,7 +125,7 @@ export function RideMap({
         if (polylineRef.current.length > 1) {
           const ll = polylineRef.current.map((p) => [p.lat, p.lng] as [number, number]);
           L.polyline(ll, {
-            color: '#2563eb',
+            color: '#287e0a',
             weight: 4,
             opacity: 0.8,
             lineJoin: 'round',

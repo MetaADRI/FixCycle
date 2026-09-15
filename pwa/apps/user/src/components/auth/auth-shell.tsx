@@ -2,8 +2,6 @@
 
 import type { ReactNode } from 'react';
 
-import { Icon } from '@fixcycle/ui';
-
 import { useRuntime } from '@/lib/runtime-context';
 
 export interface AuthShellProps {
@@ -22,10 +20,15 @@ export function AuthShell({ children }: AuthShellProps): ReactNode {
               <img
                 src={runtime.businessLogoUrl}
                 alt={runtime.appName}
-                className="h-14 w-14 rounded-xl object-contain"
+                className="h-16 w-16 rounded-xl object-contain"
               />
             ) : (
-              <Icon name="taxi" size={44} className="text-[var(--fc-bg-secondary)]" />
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src="/icons/fixcycle-logo.png"
+                alt={runtime.appName}
+                className="h-16 w-16 rounded-xl object-contain"
+              />
             )}
           </div>
           <h1 className="text-2xl font-extrabold tracking-tight text-white">{runtime.appName}</h1>

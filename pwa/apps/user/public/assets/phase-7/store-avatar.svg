@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
-  <circle cx="48" cy="48" r="48" fill="#ff6b35"/>
+  <circle cx="48" cy="48" r="48" fill="#f76f01"/>
   <g fill="#ffffff">
     <rect x="22" y="34" width="52" height="10" rx="3"/>
     <path d="M30 40V54C30 58 33 61 37 61H59C63 61 66 58 66 54V40H58V46C58 49 55 52 52 52C49 52 46 49 46 46V40H38V46C38 49 35 52 32 52C29 52 26 49 26 46V40H22V34Z"/>
     <rect x="28" y="66" width="40" height="6" rx="3" opacity="0.9"/>
   </g>
-  <circle cx="40" cy="34" r="4" fill="#0b1b3f"/>
-  <circle cx="56" cy="34" r="4" fill="#0b1b3f"/>
+  <circle cx="40" cy="34" r="4" fill="#1a383b"/>
+  <circle cx="56" cy="34" r="4" fill="#1a383b"/>
 </svg>

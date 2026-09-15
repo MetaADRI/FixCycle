@@ -3,8 +3,8 @@
   <circle cx="120" cy="80" r="44" fill="#ffffff" stroke="#e6e8ee" stroke-width="3"/>
   <circle cx="120" cy="80" r="30" fill="#17a96a"/>
   <path d="M106 80L115 89L135 69" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M60 44L64 50M64 38L68 44M176 44L180 50M180 38L184 44M200 100L204 106M204 94L208 100M40 100L44 106M44 94L48 100" stroke="#ff6b35" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="208" cy="52" r="4" fill="#ff6b35"/>
-  <circle cx="34" cy="64" r="4" fill="#ff6b35"/>
-  <circle cx="52" cy="114" r="4" fill="#ff6b35"/>
+  <path d="M60 44L64 50M64 38L68 44M176 44L180 50M180 38L184 44M200 100L204 106M204 94L208 100M40 100L44 106M44 94L48 100" stroke="#f76f01" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="208" cy="52" r="4" fill="#f76f01"/>
+  <circle cx="34" cy="64" r="4" fill="#f76f01"/>
+  <circle cx="52" cy="114" r="4" fill="#f76f01"/>
 </svg>

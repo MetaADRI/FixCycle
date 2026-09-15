@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="160" viewBox="0 0 240 160" fill="none">
   <rect width="240" height="160" rx="20" fill="#f5f6fa"/>
   <path d="M40 40C40 32 46 26 54 26H162C170 26 176 32 176 40V92C176 100 170 106 162 106H120C116 106 114 106 110 108L112 104C112 101 110 100 106 100H54C46 100 40 94 40 86V40Z" fill="#ffffff" stroke="#e6e8ee" stroke-width="3"/>
-  <circle cx="74" cy="56" r="4" fill="#ff6b35"/>
+  <circle cx="74" cy="56" r="4" fill="#f76f01"/>
   <circle cx="96" cy="56" r="4" fill="#e6e8ee"/>
   <circle cx="118" cy="56" r="4" fill="#e6e8ee"/>
   <circle cx="140" cy="56" r="4" fill="#e6e8ee"/>
   <path d="M62 76H140" stroke="#e6e8ee" stroke-width="3" stroke-linecap="round"/>
-  <path d="M158 80C166 80 172 74 172 66C172 58 166 52 158 52" stroke="#ff6b35" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="62" cy="120" r="4" fill="#ff6b35"/>
+  <path d="M158 80C166 80 172 74 172 66C172 58 166 52 158 52" stroke="#f76f01" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="62" cy="120" r="4" fill="#f76f01"/>
   <circle cx="82" cy="120" r="4" fill="#e6e8ee"/>
   <circle cx="102" cy="120" r="4" fill="#e6e8ee"/>
   <circle cx="122" cy="120" r="4" fill="#e6e8ee"/>

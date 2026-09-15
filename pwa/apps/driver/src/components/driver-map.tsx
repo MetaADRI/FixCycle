@@ -112,7 +112,7 @@ export function DriverMap({
       ) : null}
       {/* Markers */}
       {driverProj ? pin(driverProj.x, driverProj.y, '#22c55e', 'D') : null}
-      {pickupProj ? pin(pickupProj.x, pickupProj.y, '#3b82f6', 'P') : null}
+      {pickupProj ? pin(pickupProj.x, pickupProj.y, '#287e0a', 'P') : null}
       {dropProj ? pin(dropProj.x, dropProj.y, '#ef4444', 'X') : null}
       {projected.length === 0 ? (
         <text x={500} y={500} textAnchor="middle" fontSize={28} fill="var(--fc-text-secondary)" opacity={0.5}>

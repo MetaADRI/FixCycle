@@ -27,8 +27,13 @@ export function InstallHelp(): React.ReactNode {
   return (
     <div className="flex flex-col gap-6 px-1 py-6">
       <div className="flex flex-col items-center gap-3 text-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-[var(--fc-bg-primary)]">
-          <Icon name="taxi" size={32} className="text-[var(--fc-bg-secondary)]" />
+        <span className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-[1.5rem] bg-[var(--fc-bg-primary)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icons/fixcycle-logo.png"
+            alt={runtime.appName}
+            className="h-14 w-14 rounded-xl object-contain"
+          />
         </span>
         <h2 className="text-lg font-bold text-[var(--fc-text-primary)]">{runtime.appName}</h2>
         <p className="max-w-sm text-sm leading-6 text-[var(--fc-text-secondary)]">

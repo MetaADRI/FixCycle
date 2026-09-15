@@ -76,10 +76,10 @@ export interface RuntimeConfiguration {
 }
 
 const DEFAULT_THEME: ThemeColorSet = {
-  bgColorPrimary: '#0b1b3f',
-  bgColorSecondary: '#ff6b35',
-  textColorPrimary: '#101828',
-  textColorSecondary: '#667085',
+  bgColorPrimary: '#1a383b',
+  bgColorSecondary: '#287e0a',
+  textColorPrimary: '#1a383b',
+  textColorSecondary: '#4a5953',
 };
 
 const DEFAULTS: RuntimeConfiguration = {

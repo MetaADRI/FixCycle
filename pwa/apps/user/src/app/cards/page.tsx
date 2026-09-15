@@ -79,7 +79,7 @@ export default function CardsPage(): ReactNode {
           <ul className="flex flex-col gap-3">
             {cards.cards.map((card) => (
               <li key={card.id}>
-                <div className="rounded-[var(--fc-radius-lg)] border border-[var(--fc-border)] bg-gradient-to-br from-[#0b1b3f] to-[#1e3a8a] p-5 text-white">
+                <div className="rounded-[var(--fc-radius-lg)] border border-[var(--fc-border)] bg-gradient-to-br from-[#1a383b] to-[#287e0a] p-5 text-white">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-semibold uppercase tracking-widest text-white/70">{card.brand || 'Card'}</span>
                     {card.isDefault ? <StatusPill tone="success">{t('cards.default', locale)}</StatusPill> : null}

@@ -27,9 +27,9 @@ export function BookingIllustration({ className = '' }: IllustrationProps): Reac
         <circle cx="2.5" cy="2" r="6" stroke="var(--fc-bg-secondary, #0d3b66)" strokeWidth="2.5" fill="white" />
       </g>
       {/* Sparkle */}
-      <circle cx="58" cy="60" r="2.5" fill="var(--fc-accent, #f5a623)" />
-      <circle cx="148" cy="72" r="2" fill="var(--fc-accent, #f5a623)" />
-      <path d="M52 70l3-3m98 8l3-3" stroke="var(--fc-accent, #f5a623)" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="58" cy="60" r="2.5" fill="var(--fc-accent, #f76f01)" />
+      <circle cx="148" cy="72" r="2" fill="var(--fc-accent, #f76f01)" />
+      <path d="M52 70l3-3m98 8l3-3" stroke="var(--fc-accent, #f76f01)" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -48,9 +48,9 @@ export function VerifiedIllustration({ className = '' }: IllustrationProps): Rea
       <circle cx="100" cy="85" r="10" stroke="var(--fc-bg-secondary, #0d3b66)" strokeWidth="2" fill="white" />
       <path d="M88 118c0-8 5-14 12-14s12 6 12 14" stroke="var(--fc-bg-secondary, #0d3b66)" strokeWidth="2" fill="white" />
       {/* Sparkle */}
-      <circle cx="56" cy="66" r="2.5" fill="var(--fc-accent, #f5a623)" />
-      <circle cx="150" cy="62" r="2" fill="var(--fc-accent, #f5a623)" />
-      <path d="M52 56l3-3m98 4l3-3" stroke="var(--fc-accent, #f5a623)" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="56" cy="66" r="2.5" fill="var(--fc-accent, #f76f01)" />
+      <circle cx="150" cy="62" r="2" fill="var(--fc-accent, #f76f01)" />
+      <path d="M52 56l3-3m98 4l3-3" stroke="var(--fc-accent, #f76f01)" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -67,20 +67,20 @@ export function FastBookingIllustration({ className = '' }: IllustrationProps): 
       {/* Content on phone screen */}
       <rect x="84" y="64" width="32" height="6" rx="3" fill="var(--fc-bg-secondary, #0d3b66)" opacity="0.2" />
       <rect x="84" y="74" width="24" height="4" rx="2" fill="var(--fc-bg-secondary, #0d3b66)" opacity="0.12" />
-      <rect x="84" y="84" width="32" height="20" rx="4" fill="var(--fc-accent, #f5a623)" opacity="0.25" />
-      <rect x="84" y="88" width="16" height="3" rx="1.5" fill="var(--fc-accent, #f5a623)" opacity="0.5" />
-      <rect x="84" y="94" width="20" height="3" rx="1.5" fill="var(--fc-accent, #f5a623)" opacity="0.35" />
+      <rect x="84" y="84" width="32" height="20" rx="4" fill="var(--fc-accent, #f76f01)" opacity="0.25" />
+      <rect x="84" y="88" width="16" height="3" rx="1.5" fill="var(--fc-accent, #f76f01)" opacity="0.5" />
+      <rect x="84" y="94" width="20" height="3" rx="1.5" fill="var(--fc-accent, #f76f01)" opacity="0.35" />
       <rect x="84" y="110" width="32" height="16" rx="4" fill="var(--fc-bg-secondary, #0d3b66)" opacity="0.12" />
       {/* Clock */}
       <circle cx="145" cy="68" r="16" stroke="var(--fc-bg-secondary, #0d3b66)" strokeWidth="2.2" fill="white" />
       <line x1="145" y1="60" x2="145" y2="68" stroke="var(--fc-bg-secondary, #0d3b66)" strokeWidth="2" strokeLinecap="round" />
       <line x1="145" y1="68" x2="152" y2="72" stroke="var(--fc-bg-secondary, #0d3b66)" strokeWidth="2" strokeLinecap="round" />
       {/* Lightning bolt */}
-      <path d="M52 82l6-6 4 6-6 6z" fill="var(--fc-accent, #f5a623)" opacity="0.6" />
-      <path d="M50 92l5-5 3 5-5 5z" fill="var(--fc-accent, #f5a623)" opacity="0.4" />
+      <path d="M52 82l6-6 4 6-6 6z" fill="var(--fc-accent, #f76f01)" opacity="0.6" />
+      <path d="M50 92l5-5 3 5-5 5z" fill="var(--fc-accent, #f76f01)" opacity="0.4" />
       {/* Sparkle */}
-      <circle cx="55" cy="58" r="2" fill="var(--fc-accent, #f5a623)" />
-      <circle cx="152" cy="110" r="2.5" fill="var(--fc-accent, #f5a623)" />
+      <circle cx="55" cy="58" r="2" fill="var(--fc-accent, #f76f01)" />
+      <circle cx="152" cy="110" r="2.5" fill="var(--fc-accent, #f76f01)" />
     </svg>
   );
 }

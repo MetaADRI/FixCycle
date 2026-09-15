@@ -75,7 +75,12 @@ export function SplashScreen({ onReady }: SplashScreenProps): React.ReactNode {
                 className="h-16 w-16 rounded-xl object-contain"
               />
             ) : (
-              <Icon name="taxi" size={52} className="text-[var(--fc-bg-secondary)]" />
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src="/icons/fixcycle-logo.png"
+                alt={runtime.appName}
+                className="h-16 w-16 rounded-xl object-contain"
+              />
             )}
           </div>
 
