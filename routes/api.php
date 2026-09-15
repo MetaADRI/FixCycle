@@ -2,31 +2,6 @@
 
 use Illuminate\Http\Request;
 
-// CORS: native apps keep the wildcard fallback (CORS_ALLOW_ALL=true).
-// The PWA origin can be allowlisted by setting CORS_ALLOW_ALL=false and
-// CORS_ALLOWED_ORIGINS (comma-separated). See .env.example (Phase 1).
-$corsAllowAll = env('CORS_ALLOW_ALL', true);
-if (is_string($corsAllowAll)) {
-    $corsAllowAll = $corsAllowAll === 'true' || $corsAllowAll === '1';
-}
-header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: *');
-if ($corsAllowAll) {
-    header('Access-Control-Allow-Origin: *');
-} else {
-    // Reflect the request origin only when it is on the allowlist. No
-    // Access-Control-Allow-Origin is emitted for unknown origins, which makes
-    // browsers block the response but leaves native apps unaffected.
-    $ctxAllowList = array_values(array_filter(array_map('trim', explode(',', (string) env('CORS_ALLOWED_ORIGINS', '')))));
-    $ctxRequestOrigin = $_SERVER['HTTP_ORIGIN'] ?? null;
-    header('Vary: Origin');
-    if ($ctxRequestOrigin && in_array($ctxRequestOrigin, $ctxAllowList, true)) {
-        header('Access-Control-Allow-Origin: ' . $ctxRequestOrigin);
-    }
-}
-//header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Credentials, Access-Control-Allow-Origin, Access-Control-Allow-Methods, Access-Control-Allow-Headers, aliasName, publicKey, secretKey, locale');
-
 
 Route::get('test', function (Request $request) {
     dd($request->all());
