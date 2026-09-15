@@ -1,0 +1,13 @@
+.git
+.gitignore
+vendor
+node_modules
+pwa
+*.zip
+*.apk
+.env
+storage/logs/*
+storage/framework/*
+storage/cache/*
+public/error_log
+.DS_Store
