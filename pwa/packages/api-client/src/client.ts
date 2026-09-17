@@ -30,6 +30,11 @@ export interface CreateClientOptions {
 
 const DEFAULT_TIMEOUT_MS = 15000;
 
+// Render free tier sleeps after inactivity; the first request after wake restarts
+// the container and can take 30-90s. Retry on timeout with escalating budgets so
+// cold starts succeed, while warm requests stay fast.
+const TIMEOUT_RETRY_BUDGETS_MS = [15000, 60000, 120000];
+
 function isPlainRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -66,6 +71,37 @@ export class ApiClient {
   }
 
   private async request<T>(
+    method: string,
+    path: string,
+    body?: unknown,
+    options: ApiRequestOptions & { formData?: boolean } = {},
+  ): Promise<ApiEnvelope<T>> {
+    let lastError: unknown;
+    const budgets = options.timeoutMs !== undefined
+      ? [options.timeoutMs]
+      : TIMEOUT_RETRY_BUDGETS_MS;
+    const progress: string[] = [];
+
+    for (let attempt = 0; attempt < budgets.length; attempt += 1) {
+      try {
+        return await this.requestOnce<T>(method, path, body, { ...options, timeoutMs: budgets[attempt] });
+      } catch (error) {
+        lastError = error;
+        if (!(error instanceof NetworkError) || !(error.cause instanceof Error) || error.cause.name !== 'TimeoutError') {
+          throw error;
+        }
+        progress.push(String(budgets[attempt]));
+      }
+      if (attempt + 1 < budgets.length && process.env.NODE_ENV !== 'test' && typeof window !== 'undefined') {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+      }
+    }
+
+    const detail = progress.length > 0 ? ` after ${progress.join('ms -> ')}ms` : '';
+    throw new NetworkError(`Request to ${path} timed out${detail}`, lastError);
+  }
+
+  private async requestOnce<T>(
     method: string,
     path: string,
     body?: unknown,
