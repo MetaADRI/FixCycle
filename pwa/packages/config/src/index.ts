@@ -35,7 +35,11 @@ export function apiBaseUrl(env: PublicEnv = publicEnv): string {
   if (base.length === 0) {
     return '';
   }
-  return base.endsWith('/api') ? base : `${base}/api`;
+  // A fully-specified base (e.g. "/api/mock" for the in-app mock route, or a
+  // host that already ends in "/api") is used as-is. Only bare origins
+  // (scheme://host[:port]) get the Laravel "/api" prefix appended.
+  const bareOrigin = /^[a-z][a-z0-9+.-]*:\/\/[^/]+$/i;
+  return bareOrigin.test(base) ? `${base}/api` : base;
 }
 
 export function merchantDefaultLocale(env: PublicEnv = publicEnv): string {
