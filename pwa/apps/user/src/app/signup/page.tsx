@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 
 import type { CountryOption } from '@fixcycle/config';
+import { isNationalNumberValid, phoneToE164 } from '@fixcycle/config';
 import { Button } from '@fixcycle/ui';
 
 import { useRouter } from 'next/navigation';
@@ -14,11 +15,6 @@ import { t } from '@/lib/i18n';
 import { messageFromError } from '@/lib/auth-errors';
 import { useAuth } from '@/lib/session';
 import { useRuntime } from '@/lib/runtime-context';
-
-function buildPhone(phonecode: string | undefined, number: string): string {
-  const digits = number.replace(/\D/g, '');
-  return `+${phonecode ?? ''}${digits}`;
-}
 
 export default function SignUpPage(): React.ReactNode {
   const { runtime } = useRuntime();
@@ -38,12 +34,12 @@ export default function SignUpPage(): React.ReactNode {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
-  const fullPhone = buildPhone(country?.phonecode, phone);
+  const fullPhone = phoneToE164(country?.phonecode, phone);
 
   const handleRegister = useCallback(async (): Promise<void> => {
     setError(null);
-    if (fullPhone.length < 8) {
-      setError(t('auth.phoneRequired', locale));
+    if (!isNationalNumberValid(country, phone)) {
+      setError(t('auth.phoneInvalid', locale));
       return;
     }
     if (firstName.trim().length === 0) {

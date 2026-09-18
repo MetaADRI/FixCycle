@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 
 import type { CountryOption } from '@fixcycle/config';
+import { isNationalNumberValid, phoneToE164 } from '@fixcycle/config';
 import { Button } from '@fixcycle/ui';
 
 import { useRouter } from 'next/navigation';
@@ -16,11 +17,6 @@ import { messageFromError } from '@/lib/auth-errors';
 import { useAuth } from '@/lib/session';
 import { useRuntime } from '@/lib/runtime-context';
 
-function buildPhone(phonecode: string | undefined, number: string): string {
-  const digits = number.replace(/\D/g, '');
-  return `+${phonecode ?? ''}${digits}`;
-}
-
 export default function LoginPage(): React.ReactNode {
   const { runtime } = useRuntime();
   const { signInWithPassword, signInAsGuest } = useAuth();
@@ -33,12 +29,12 @@ export default function LoginPage(): React.ReactNode {
   const [busy, setBusy] = useState(false);
 
   const locale = runtime.locale;
-  const fullPhone = buildPhone(country?.phonecode, phone);
+  const fullPhone = phoneToE164(country?.phonecode, phone);
 
   const handleSignIn = useCallback(async (): Promise<void> => {
     setError(null);
-    if (fullPhone.length < 8) {
-      setError(t('auth.phoneRequired', locale));
+    if (!isNationalNumberValid(country, phone)) {
+      setError(t('auth.phoneInvalid', locale));
       return;
     }
     if (password.length < 6) {
@@ -74,7 +70,11 @@ export default function LoginPage(): React.ReactNode {
               setError(null);
             }}
             onCountryChange={(selected) => setCountry(selected)}
-            error={error?.includes(t('auth.phoneRequired', locale)) ? error : undefined}
+            error={
+              error && (error.includes(t('auth.phoneRequired', locale)) || error.includes(t('auth.phoneInvalid', locale)))
+                ? error
+                : undefined
+            }
             autoFocus
           />
 

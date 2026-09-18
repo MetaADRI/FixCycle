@@ -74,13 +74,15 @@ export function PhoneField({
   const { loading, countries } = useCountries();
   const [open, setOpen] = useState(false);
 
-  const defaultCountry = countries[0] ?? null;
+  const defaultCountry = countries.find((c) => c.country_code === 'IN') ?? countries[0] ?? null;
 
   useEffect(() => {
     if (!country && defaultCountry) {
       onCountryChange(defaultCountry);
     }
   }, [country, defaultCountry, onCountryChange]);
+
+  const maxLen = country?.maxNumPhone ? Number(country.maxNumPhone) : undefined;
 
   const selectCountry = useCallback(
     (selected: CountryOption) => {
@@ -123,6 +125,7 @@ export function PhoneField({
           type="tel"
           inputMode="tel"
           value={value}
+          maxLength={maxLen}
           onChange={(event) => onValueChange(event.target.value)}
           placeholder="0000 0000"
           autoComplete={autoComplete ?? 'tel-national'}

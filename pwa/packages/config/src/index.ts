@@ -1,3 +1,5 @@
+import { normalizePhoneCode } from './countries';
+
 export type AppRole = 'user' | 'driver' | 'store';
 
 export interface PublicEnv {
@@ -387,7 +389,8 @@ export function mapCountries(value: unknown): CountryOption[] {
     return [
       {
         id,
-        phonecode: String(phonecode),
+        // Store the code WITHOUT a leading '+' — every render site prepends it.
+        phonecode: normalizePhoneCode(phonecode),
         country_code: typeof record['country_code'] === 'string' ? record['country_code'] : '',
         isoCode: typeof record['isoCode'] === 'string' ? record['isoCode'] : undefined,
         name: typeof record['name'] === 'string' ? record['name'] : undefined,
@@ -436,3 +439,11 @@ export function getEncryptionConfig(config: RuntimeConfiguration = getConfigurat
   }
   return { enabled: true, secret, iv };
 }
+
+export {
+  ALL_COUNTRIES,
+  normalizePhoneCode,
+  callingCodeOf,
+  phoneToE164,
+  isNationalNumberValid,
+} from './countries';

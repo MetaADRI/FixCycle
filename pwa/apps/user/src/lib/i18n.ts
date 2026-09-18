@@ -43,6 +43,7 @@ export type TranslationKey =
   | 'auth.loading'
   | 'auth.phone'
   | 'auth.phoneCode'
+  | 'auth.searchCountry'
   | 'auth.email'
   | 'auth.password'
   | 'auth.confirmPassword'
@@ -89,6 +90,7 @@ export type TranslationKey =
   | 'auth.guest'
   | 'auth.sessionExpired'
   | 'auth.phoneRequired'
+  | 'auth.phoneInvalid'
   | 'auth.otpRequired'
   | 'auth.passwordTooShort'
   | 'auth.passwordMismatch'
@@ -919,6 +921,7 @@ const DICTIONARY: Record<TranslationKey, string> = {
   'auth.loading': 'Just a moment',
   'auth.phone': 'Phone number',
   'auth.phoneCode': 'Code',
+  'auth.searchCountry': 'Search country or code',
   'auth.email': 'Email address',
   'auth.password': 'Password',
   'auth.confirmPassword': 'Confirm password',
@@ -965,6 +968,7 @@ const DICTIONARY: Record<TranslationKey, string> = {
   'auth.guest': 'Continue as guest',
   'auth.sessionExpired': 'Your session has ended. Please sign in again.',
   'auth.phoneRequired': 'Enter your phone number.',
+  'auth.phoneInvalid': 'Enter a valid phone number for the selected country.',
   'auth.otpRequired': 'Enter the verification code.',
   'auth.passwordTooShort': 'Password must be at least 6 characters.',
   'auth.passwordMismatch': 'Passwords do not match.',

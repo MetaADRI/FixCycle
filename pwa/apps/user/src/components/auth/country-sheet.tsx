@@ -37,15 +37,19 @@ export function CountrySheet({
   }, [open]);
 
   const filtered = useMemo(() => {
-    const needle = query.trim().toLowerCase();
-    if (needle.length === 0) {
+    const raw = query.trim().toLowerCase();
+    if (raw.length === 0) {
       return countries;
     }
+    const needle = raw;
+    const needleDigits = needle.replace(/[^0-9]/g, '');
     return countries.filter((country) => {
       return (
         (country.name ?? '').toLowerCase().includes(needle) ||
         country.country_code.toLowerCase().includes(needle) ||
-        country.phonecode.toLowerCase().includes(needle)
+        (country.isoCode ?? '').toLowerCase().includes(needle) ||
+        (needleDigits.length > 0 &&
+          country.phonecode.replace(/[^0-9]/g, '').includes(needleDigits))
       );
     });
   }, [countries, query]);
@@ -73,7 +77,7 @@ export function CountrySheet({
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder={t('auth.phoneCode', locale)}
+              placeholder={t('auth.searchCountry', locale)}
               className="w-full bg-transparent text-sm text-[var(--fc-text-primary)] outline-none placeholder:text-[var(--fc-text-secondary)]"
             />
           </div>

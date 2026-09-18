@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import type { CountryOption } from '@fixcycle/config';
-import { getLoginOptions } from '@fixcycle/config';
+import { getLoginOptions, isNationalNumberValid, phoneToE164 } from '@fixcycle/config';
 import { Button } from '@fixcycle/ui';
 
 import { useRouter } from 'next/navigation';
@@ -18,11 +18,6 @@ import { useAuth } from '@/lib/session';
 import { useRuntime } from '@/lib/runtime-context';
 
 type Step = 'phone' | 'otp' | 'password';
-
-function buildPhone(phonecode: string | undefined, number: string): string {
-  const digits = number.replace(/\D/g, '');
-  return `+${phonecode ?? ''}${digits}`;
-}
 
 export default function ForgotPasswordPage(): React.ReactNode {
   const { runtime } = useRuntime();
@@ -47,12 +42,12 @@ export default function ForgotPasswordPage(): React.ReactNode {
   const [busy, setBusy] = useState(false);
 
   const fullIdentifier =
-    channel === 'PHONE' ? buildPhone(country?.phonecode, identifier) : identifier.trim().toLowerCase();
+    channel === 'PHONE' ? phoneToE164(country?.phonecode, identifier) : identifier.trim().toLowerCase();
 
   const handleSendCode = useCallback(async (): Promise<void> => {
     setError(null);
-    if (channel === 'PHONE' && fullIdentifier.length < 8) {
-      setError(t('auth.phoneRequired', locale));
+    if (channel === 'PHONE' && !isNationalNumberValid(country, identifier)) {
+      setError(t('auth.phoneInvalid', locale));
       return;
     }
     if (channel === 'EMAIL' && !fullIdentifier.includes('@')) {
