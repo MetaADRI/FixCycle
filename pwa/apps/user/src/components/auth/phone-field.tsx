@@ -74,6 +74,14 @@ export function PhoneField({
   const { loading, countries } = useCountries();
   const [open, setOpen] = useState(false);
 
+  const defaultCountry = countries[0] ?? null;
+
+  useEffect(() => {
+    if (!country && defaultCountry) {
+      onCountryChange(defaultCountry);
+    }
+  }, [country, defaultCountry, onCountryChange]);
+
   const selectCountry = useCallback(
     (selected: CountryOption) => {
       onCountryChange(selected);

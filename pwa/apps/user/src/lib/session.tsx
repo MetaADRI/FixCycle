@@ -117,9 +117,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
   const signUp = useCallback(
     async (params: SignupParams): Promise<void> => {
-      if (params.isRegister === true && !params.loginOtp) {
-        throw new Error('A verification code is required to complete registration');
-      }
       const result = await signup(api, { ...params, encryption });
       if (
         result &&

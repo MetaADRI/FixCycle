@@ -71,6 +71,7 @@ export type TranslationKey =
   | 'auth.signIn'
   | 'auth.signUp'
   | 'auth.sendCode'
+  | 'auth.register'
   | 'auth.verify'
   | 'auth.forgotLink'
   | 'auth.newHere'
@@ -112,6 +113,7 @@ export type TranslationKey =
   | 'signup.smoker'
   | 'signup.nonSmoker'
   | 'signup.confirmPassword'
+  | 'signup.optional'
   | 'forgot.title'
   | 'forgot.subtitle'
   | 'forgot.newPassword'
@@ -945,6 +947,7 @@ const DICTIONARY: Record<TranslationKey, string> = {
   'auth.signIn': 'Sign in',
   'auth.signUp': 'Create account',
   'auth.sendCode': 'Send code',
+  'auth.register': 'Register',
   'auth.verify': 'Verify',
   'auth.forgotLink': 'Forgot password?',
   'auth.newHere': 'New to Fixcycle?',
@@ -977,13 +980,14 @@ const DICTIONARY: Record<TranslationKey, string> = {
   'cms.title': 'Page',
   'cms.notFound': 'This page does not exist.',
   'cms.loadFailed': 'Could not load this page right now.',
-  'signup.subtitle': 'Verify your number, then tell us about yourself',
+  'signup.subtitle': 'Create a free account to book trusted services near you',
   'signup.firstName': 'First name',
   'signup.lastName': 'Last name',
   'signup.gender': 'Gender',
   'signup.genderMale': 'Male',
   'signup.genderFemale': 'Female',
   'signup.confirmPassword': 'Confirm password',
+  'signup.optional': 'optional',
   'signup.smoker': 'Smoker',
   'signup.nonSmoker': 'Non-smoker',
   'forgot.title': 'Reset password',

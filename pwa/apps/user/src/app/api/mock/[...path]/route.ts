@@ -28,6 +28,20 @@ function fail(data: unknown = {}, message = 'Not implemented'): Ok {
   return { version: '1.0', result: '0', message, data, time: Date.now() };
 }
 
+// Country list shown in the phone-number picker (login + signup).
+const MOCK_COUNTRIES = [
+  { id: 91, phonecode: '+91', country_code: 'IN', isoCode: 'IN', name: 'India', currency: 'INR', minNumPhone: 10, maxNumPhone: 10 },
+  { id: 1, phonecode: '+1', country_code: 'US', isoCode: 'US', name: 'United States', currency: 'USD', minNumPhone: 10, maxNumPhone: 10 },
+  { id: 44, phonecode: '+44', country_code: 'GB', isoCode: 'GB', name: 'United Kingdom', currency: 'GBP', minNumPhone: 7, maxNumPhone: 11 },
+  { id: 27, phonecode: '+27', country_code: 'ZA', isoCode: 'ZA', name: 'South Africa', currency: 'ZAR', minNumPhone: 9, maxNumPhone: 10 },
+  { id: 234, phonecode: '+234', country_code: 'NG', isoCode: 'NG', name: 'Nigeria', currency: 'NGN', minNumPhone: 7, maxNumPhone: 11 },
+  { id: 92, phonecode: '+92', country_code: 'PK', isoCode: 'PK', name: 'Pakistan', currency: 'PKR', minNumPhone: 9, maxNumPhone: 10 },
+  { id: 880, phonecode: '+880', country_code: 'BD', isoCode: 'BD', name: 'Bangladesh', currency: 'BDT', minNumPhone: 7, maxNumPhone: 11 },
+  { id: 233, phonecode: '+233', country_code: 'GH', isoCode: 'GH', name: 'Ghana', currency: 'GHS', minNumPhone: 9, maxNumPhone: 9 },
+  { id: 254, phonecode: '+254', country_code: 'KE', isoCode: 'KE', name: 'Kenya', currency: 'KES', minNumPhone: 9, maxNumPhone: 9 },
+  { id: 63, phonecode: '+63', country_code: 'PH', isoCode: 'PH', name: 'Philippines', currency: 'PHP', minNumPhone: 10, maxNumPhone: 10 },
+];
+
 interface CheckoutRef {
   pickupLat: number;
   pickupLng: number;
@@ -2131,7 +2145,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
             splash_screen: 'Fixcycle',
             default_language: 'en',
             guest_user: 1,
-            network_code_visibility: 1,
+            network_code_visibility: 0,
             referral_code_mandatory_user_signup: 0,
             user_cpf_number_enable: 0,
             password_length_for_app: 8,
@@ -2149,9 +2163,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           register: { phone: 1, email: 0, gender: 0, userImage_enable: 0 },
           social: { enable: 0, google: 0, facebook: 0 },
           languages: [{ id: 1, name: 'English', short_name: 'EN' }],
-          countries: [
-            { id: 91, phonecode: '+91', country_code: 'IN', isoCode: 'IN', name: 'India', currency: 'INR', minNumPhone: 10, maxNumPhone: 10 },
-          ],
+          countries: MOCK_COUNTRIES,
         };
         break;
       }
@@ -2190,11 +2202,17 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
       }
 
       case 'user/countryList': {
-        data = {
-          response_data: [
-            { id: 91, phonecode: '+91', country_code: 'IN', isoCode: 'IN', name: 'India', currency: 'INR' },
-          ],
-        };
+        data = { countries: MOCK_COUNTRIES };
+        break;
+      }
+
+      case 'user/on-board': {
+        data = { access_token: 'mock-user-token-1', is_guest: false };
+        break;
+      }
+
+      case 'user/normal-reg': {
+        data = {};
         break;
       }
 
