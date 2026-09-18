@@ -52,9 +52,9 @@ async function getOrCreateEncryptionKey(): Promise<CryptoKey | null> {
   const rawKey = sessionStorage.getItem(`${STORAGE_PREFIX}:crypto-key`);
   if (rawKey) {
     const material = new Uint8Array(JSON.parse(rawKey));
-    return subtle.importKey('raw', material, 'AES-GCM', false, ['encrypt', 'decrypt']);
+    return subtle.importKey('raw', material, 'AES-GCM', true, ['encrypt', 'decrypt']);
   }
-  const key = await subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+  const key = await subtle.generateKey({ name: 'AES-GCM', length: 256 }, true, ['encrypt', 'decrypt']);
   const exported = await subtle.exportKey('raw', key);
   sessionStorage.setItem(`${STORAGE_PREFIX}:crypto-key`, JSON.stringify(Array.from(new Uint8Array(exported))));
   return key;
