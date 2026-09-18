@@ -116,8 +116,8 @@ export function Drawer({
                 onClick={() => onNavigate(name)}
                 className="flex min-h-[52px] w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-[var(--fc-overlay)]"
               >
-                <ItemGlyph icon={icon} />
-                <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--fc-text-primary)]">{title}</span>
+                    <ItemGlyph icon={icon} />
+                    <span className="min-w-0 flex-1 truncate text-sm font-medium text-white">{title}</span>
                 <Icon name="chevron-right" size={18} className="text-[var(--fc-text-secondary)]" />
               </button>
             );
@@ -128,7 +128,7 @@ export function Drawer({
               return null;
             }
             return (
-              <div key={`title-${index}`} className="px-4 py-3 text-[11px] font-bold uppercase tracking-wide text-[var(--fc-text-secondary)]">
+              <div key={`title-${index}`} className="px-4 py-3 text-[11px] font-bold uppercase tracking-wide text-white/80">
                 {title}
               </div>
             );

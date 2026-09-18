@@ -224,7 +224,12 @@ export function LocationPicker({
                     key={area.id}
                     type="button"
                     onClick={() => {
-                      onSelect({ label: area.name, areaId: area.id });
+                      onSelect({
+                        label: area.name,
+                        areaId: area.id,
+                        latitude: area.latitude,
+                        longitude: area.longitude,
+                      });
                       onClose();
                     }}
                     className={`flex w-full items-center gap-3 rounded-[var(--fc-radius-sm)] px-3 py-3 text-left ${

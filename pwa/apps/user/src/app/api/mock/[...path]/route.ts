@@ -2354,7 +2354,129 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
       }
 
       case 'user/areas': {
+        // Manual location picker area list. Source: Api\HomeController@Areas /user/areas
+        // Zambia (country_id 239) first — provinces + >=10 districts each.
+        const zm = (aid: number, province: string, district: string, lat: number, lng: number) => ({
+          id: `zm-${aid}`,
+          country_id: 239,
+          AreaName: district,
+          AreaID: `zm-${aid}`,
+          AreaName_Parent: province,
+          latitude: lat,
+          longitude: lng,
+        });
         data = [
+          // --- Lusaka Province (10 districts) ---
+          zm(1001, 'Lusaka', 'Lusaka', -15.3875, 28.3228),
+          zm(1002, 'Lusaka', 'Chilanga', -15.5731, 28.3159),
+          zm(1003, 'Lusaka', 'Chirundu', -16.3128, 28.7969),
+          zm(1004, 'Lusaka', 'Chongwe', -15.33, 28.68),
+          zm(1005, 'Lusaka', 'Kafue', -15.7689, 28.1813),
+          zm(1006, 'Lusaka', 'Luangwa', -15.6083, 30.3089),
+          zm(1007, 'Lusaka', 'Rufunsa', -15.2056, 29.2828),
+          zm(1008, 'Lusaka', 'Shibuyunji', -15.4514, 27.6),
+          zm(1009, 'Lusaka', 'Kabwe Rural', -14.641, 28.4),
+          zm(1010, 'Lusaka', 'Chifwema', -15.5728, 29.5043),
+          // --- Copperbelt Province (10 districts) ---
+          zm(1101, 'Copperbelt', 'Kitwe', -12.8024, 28.2132),
+          zm(1102, 'Copperbelt', 'Ndola', -12.9587, 28.6366),
+          zm(1103, 'Copperbelt', 'Chingola', -12.5284, 27.8788),
+          zm(1104, 'Copperbelt', 'Mufulira', -12.5408, 28.2513),
+          zm(1105, 'Copperbelt', 'Luanshya', -13.1385, 28.3916),
+          zm(1106, 'Copperbelt', 'Kalulushi', -12.8415, 28.1025),
+          zm(1107, 'Copperbelt', 'Chililabombwe', -12.3666, 27.7988),
+          zm(1108, 'Copperbelt', 'Mpongwe', -13.1785, 28.0995),
+          zm(1109, 'Copperbelt', 'Masaiti', -13.15, 28.7),
+          zm(1110, 'Copperbelt', 'Lufwanyama', -13.6167, 27.5667),
+          // --- Central Province (10 districts) ---
+          zm(1201, 'Central', 'Kabwe', -14.4499, 28.4464),
+          zm(1202, 'Central', 'Chibombo', -14.1969, 28.0247),
+          zm(1203, 'Central', 'Kapiri Mposhi', -13.8681, 28.8994),
+          zm(1204, 'Central', 'Mkushi', -13.6022, 29.4378),
+          zm(1205, 'Central', 'Mumbwa', -14.9995, 27.3073),
+          zm(1206, 'Central', 'Serenje', -13.1878, 30.1846),
+          zm(1207, 'Central', 'Chisamba', -14.6069, 28.3375),
+          zm(1208, 'Central', 'Itezhi-Tezhi', -15.8843, 26.0194),
+          zm(1209, 'Central', 'Ngabwe', -14.0125, 28.9639),
+          zm(1210, 'Central', 'Luano', -13.5, 29.2),
+          // --- Eastern Province (10 districts) ---
+          zm(1301, 'Eastern', 'Chipata', -13.6333, 32.65),
+          zm(1302, 'Eastern', 'Katete', -14.0778, 32.0369),
+          zm(1303, 'Eastern', 'Lundazi', -12.1, 33.05),
+          zm(1304, 'Eastern', 'Chadiza', -14.0689, 32.5378),
+          zm(1305, 'Eastern', 'Chama', -11.05, 33.4333),
+          zm(1306, 'Eastern', 'Petauke', -14.0214, 31.9073),
+          zm(1307, 'Eastern', 'Nyimba', -14.2992, 31.4419),
+          zm(1308, 'Eastern', 'Mambwe', -13.3708, 31.585),
+          zm(1309, 'Eastern', 'Lumezi', -12.0667, 32.5),
+          zm(1310, 'Eastern', 'Kasenengwa', -13.5581, 31.6497),
+          // --- Luapula Province (10 districts) ---
+          zm(1401, 'Luapula', 'Mansa', -11.1422, 28.8742),
+          zm(1402, 'Luapula', 'Samfya', -11.3586, 29.4658),
+          zm(1403, 'Luapula', 'Nchelenge', -9.7577, 28.03),
+          zm(1404, 'Luapula', 'Kawambwa', -9.7897, 29.0783),
+          zm(1405, 'Luapula', 'Mwense', -10.3247, 28.2392),
+          zm(1406, 'Luapula', 'Milenge', -11.1603, 28.45),
+          zm(1407, 'Luapula', 'Chiengi', -9.9689, 28.2422),
+          zm(1408, 'Luapula', 'Chembe', -11.7003, 28.7492),
+          zm(1409, 'Luapula', 'Chipili', -10.0833, 28.6833),
+          zm(1410, 'Luapula', 'Lunga', -10.2, 28.9),
+          // --- Muchinga Province (10 districts) ---
+          zm(1501, 'Muchinga', 'Chinsali', -10.5419, 32.1486),
+          zm(1502, 'Muchinga', 'Mpika', -11.6133, 31.12),
+          zm(1503, 'Muchinga', 'Isoka', -10.0822, 32.366),
+          zm(1504, 'Muchinga', 'Nakonde', -9.5481, 32.4369),
+          zm(1505, 'Muchinga', 'Mafinga', -9.7361, 32.8856),
+          zm(1506, 'Muchinga', 'Kanchibiya', -11.2979, 31.5),
+          zm(1507, 'Muchinga', 'Lavushimanda', -12.9167, 30.2),
+          zm(1508, 'Muchinga', "Shiwang'andu", -10.1344, 32.3681),
+          zm(1509, 'Muchinga', 'Chilinda', -11.05, 32.05),
+          zm(1510, 'Muchinga', 'Nsama', -9.1572, 32.4),
+          // --- Northern Province (10 districts) ---
+          zm(1601, 'Northern', 'Kasama', -10.5651, 30.7358),
+          zm(1602, 'Northern', 'Mbala', -8.8374, 31.3912),
+          zm(1603, 'Northern', 'Mporokoso', -9.6286, 30.9925),
+          zm(1604, 'Northern', 'Mpulungu', -8.806, 31.29),
+          zm(1605, 'Northern', 'Kaputa', -9.3841, 29.8),
+          zm(1606, 'Northern', 'Lupososhi', -11.8, 31.15),
+          zm(1607, 'Northern', 'Senga Hill', -8.7839, 30.7742),
+          zm(1608, 'Northern', 'Luwingu', -10.08, 29.33),
+          zm(1609, 'Northern', 'Mungwi', -9.8, 31.85),
+          zm(1610, 'Northern', 'Chilubi', -11.0406, 29.6822),
+          // --- North-Western Province (10 districts) ---
+          zm(1701, 'North-Western', 'Solwezi', -12.3328, 26.2011),
+          zm(1702, 'North-Western', 'Kasempa', -13.05, 25.6),
+          zm(1703, 'North-Western', 'Kabompo', -13.3, 24.2),
+          zm(1704, 'North-Western', 'Mufumbwe', -11.7, 24.8631),
+          zm(1705, 'North-Western', 'Mwinilunga', -11.25, 24.3561),
+          zm(1706, 'North-Western', 'Chavuma', -13.1333, 23.4167),
+          zm(1707, 'North-Western', 'Ikelenge', -11.06, 24.03),
+          zm(1708, 'North-Western', 'Zambezi', -13.3386, 23.1489),
+          zm(1709, 'North-Western', 'Manyinga', -12.55, 24.2),
+          zm(1710, 'North-Western', 'Mushindamo', -12.25, 26.4),
+          // --- Southern Province (10 districts) ---
+          zm(1801, 'Southern', 'Choma', -16.8488, 26.98),
+          zm(1802, 'Southern', 'Livingstone', -17.8546, 25.8502),
+          zm(1803, 'Southern', 'Mazabuka', -15.8354, 27.7),
+          zm(1804, 'Southern', 'Monze', -16.2628, 27.856),
+          zm(1805, 'Southern', 'Kalomo', -17.0758, 26.7803),
+          zm(1806, 'Southern', 'Namwala', -15.4142, 26.5342),
+          zm(1807, 'Southern', 'Siavonga', -16.3, 28.4),
+          zm(1808, 'Southern', 'Chikankata', -16.3, 27.9814),
+          zm(1809, 'Southern', 'Gwembe', -16.4658, 27.9022),
+          zm(1810, 'Southern', 'Sinazongwe', -16.0981, 27.6131),
+          // --- Western Province (10 districts) ---
+          zm(1901, 'Western', 'Mongu', -15.9306, 23.4978),
+          zm(1902, 'Western', 'Kaoma', -15.6823, 24.72),
+          zm(1903, 'Western', 'Senanga', -16.15, 23.99),
+          zm(1904, 'Western', 'Kalabo', -15.0231, 22.2192),
+          zm(1905, 'Western', 'Limulunga', -15.08, 23.1792),
+          zm(1906, 'Western', 'Lukulu', -14.3942, 23.0586),
+          zm(1907, 'Western', 'Sesheke', -17.4579, 24.3091),
+          zm(1908, 'Western', 'Shangombo', -16.3397, 23.0112),
+          zm(1909, 'Western', 'Nalolo', -15.0544, 23.5272),
+          zm(1910, 'Western', 'Sikongo', -14.0875, 22.8069),
+          // --- India (unchanged, no coords -> services stay gated off) ---
           { id: '1', country_id: 91, name: 'Mumbai' },
           { id: '2', country_id: 91, name: 'Delhi' },
         ];
@@ -2363,12 +2485,36 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
 
       case 'user/search/places': {
         const keyword = String(body['keyword'] ?? '');
+        const place = (id: string, mainText: string, secondaryText: string, lat: number, lng: number) => ({
+          place_id: id,
+          structured_formatting: { main_text: mainText, secondary_text: secondaryText },
+          geometry: { location: { lat, lng } },
+        });
         const places = [
-          { place_id: 'ch-1', mainText: `${keyword || 'Andheri'} West`, secondaryText: 'Mumbai, Maharashtra', latitude: 19.1197, longitude: 72.8468 },
-          { place_id: 'ch-2', mainText: `${keyword || 'Bandra'} West`, secondaryText: 'Mumbai, Maharashtra', latitude: 19.0544, longitude: 72.8406 },
-          { place_id: 'ch-3', mainText: `${keyword || 'Colaba'} Causeway`, secondaryText: 'Mumbai, Maharashtra', latitude: 18.9076, longitude: 72.8147 },
+          // Zambia — Lusaka first (country_id 239)
+          place('zm-1', 'Lusaka City Centre', 'Lusaka, Zambia', -15.3875, 28.3228),
+          place('zm-2', 'Woodlands, Lusaka', 'Lusaka, Zambia', -15.4126, 28.2685),
+          place('zm-3', 'Kabulonga, Lusaka', 'Lusaka, Zambia', -15.4331, 28.2993),
+          place('zm-4', 'Roma, Lusaka', 'Lusaka, Zambia', -15.3946, 28.2899),
+          place('zm-5', 'Ibex Hill, Lusaka', 'Lusaka, Zambia', -15.4086, 28.3341),
+          place('zm-6', 'Chelston, Lusaka', 'Lusaka, Zambia', -15.369, 28.383),
+          place('zm-7', 'Makeni, Lusaka', 'Lusaka, Zambia', -15.4606, 28.2592),
+          place('zm-8', 'Longacres, Lusaka', 'Lusaka, Zambia', -15.4014, 28.3228),
+          place('zm-9', 'Chilanga', 'Lusaka, Zambia', -15.5731, 28.3159),
+          place('zm-10', 'Chongwe', 'Lusaka, Zambia', -15.33, 28.68),
+          place('zm-11', 'Kafue', 'Lusaka, Zambia', -15.7689, 28.1813),
+          place('zm-12', 'Kitwe', 'Copperbelt, Zambia', -12.8024, 28.2132),
+          // India — unchanged
+          place('ch-1', 'Andheri West', 'Mumbai, Maharashtra', 19.1197, 72.8468),
+          place('ch-2', 'Bandra West', 'Mumbai, Maharashtra', 19.0544, 72.8406),
+          place('ch-3', 'Colaba Causeway', 'Mumbai, Maharashtra', 18.9076, 72.8147),
         ];
-        data = [{ keyword, places }];
+        const needle = keyword.trim().toLowerCase();
+        const matched =
+          needle.length > 0
+            ? places.filter((p) => p.structured_formatting.main_text.toLowerCase().includes(needle) || p.structured_formatting.secondary_text.toLowerCase().includes(needle))
+            : places;
+        data = [{ keyword, google_response: matched.length > 0 ? matched : places }];
         break;
       }
 

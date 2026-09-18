@@ -10,6 +10,8 @@ export interface AreaOption {
   id: string;
   countryId?: string;
   name: string;
+  latitude?: number;
+  longitude?: number;
   raw: Record<string, unknown>;
 }
 
@@ -20,6 +22,18 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function pickString(record: Record<string, unknown>, key: string): string {
   const value = record[key];
   return typeof value === 'string' ? value : '';
+}
+
+function pickNumber(record: Record<string, unknown>, key: string): number | undefined {
+  const value = record[key];
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return value;
+  }
+  if (typeof value === 'string' && value.trim() !== '') {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : undefined;
+  }
+  return undefined;
 }
 
 export function parseAreas(payload: unknown): AreaOption[] {
@@ -48,6 +62,8 @@ export function parseAreas(payload: unknown): AreaOption[] {
       id,
       countryId: pickString(entry, 'country_id'),
       name,
+      latitude: pickNumber(entry, 'latitude') ?? pickNumber(entry, 'lat'),
+      longitude: pickNumber(entry, 'longitude') ?? pickNumber(entry, 'long') ?? pickNumber(entry, 'lng'),
       raw: entry,
     });
   }
