@@ -2,9 +2,14 @@
   "name": "fixcycle-api-server",
   "version": "1.0.0",
   "private": true,
-  "description": "Standalone API server for Fixcycle PWA — zero dependencies",
+  "description": "Standalone API server for Fixcycle PWA — minimal dependencies; optional Neon/Postgres persistence via DATABASE_URL",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.3",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5"
   }
 }

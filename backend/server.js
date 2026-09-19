@@ -9,6 +9,10 @@
 const http = require('node:http');
 const { randomUUID, randomInt } = require('node:crypto');
 
+// Load optional .env (e.g. DATABASE_URL) — guarded so a missing dotenv install
+// never breaks the server when persistence is not configured.
+try { require('dotenv').config(); } catch (_) { /* dotenv not installed — fine */ }
+
 const PORT = Number(process.env.PORT) || 4001;
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -481,6 +485,142 @@ function getUserFromRequest(req) {
   return null;
 }
 
+// ── PostgreSQL (Neon) persistence — optional ────────────────────────────────
+// When process.env.DATABASE_URL is set, phone/password accounts are persisted
+// in a real Postgres `users` table (schema bootstrapped idempotently on first
+// use). When it is NOT set, the server keeps today's purely in-memory
+// behaviour (accept any phone/password combo for dev) — see the fallback logs
+// and the `dbEnabled` guards below.
+// NODE_ENV/PORT note: this stays a zero-surprise mock when unconfigured.
+
+const DATABASE_URL = String(process.env.DATABASE_URL || '').trim();
+
+// bcryptjs — pure JS bcrypt, no native build (only required when DB enabled).
+let bcrypt = null;
+try { bcrypt = require('bcryptjs'); } catch (_) { /* not installed */ }
+
+// Neon query function — created lazily and only when a URL is present.
+let db = null;
+if (DATABASE_URL) {
+  try {
+    const { neon } = require('@neondatabase/serverless');
+    db = neon(DATABASE_URL);
+  } catch (err) {
+    db = null;
+    console.error('[fixcycle-backend] Neon init failed — falling back to in-memory accounts:', err.message);
+  }
+}
+
+const dbEnabled = !!db && !!bcrypt;
+
+if (DATABASE_URL && dbEnabled) {
+  console.log('[fixcycle-backend] PostgreSQL (Neon) persistence ENABLED');
+} else if (DATABASE_URL) {
+  console.log('[fixcycle-backend] DATABASE_URL present but Neon/bcryptjs not available — falling back to in-memory accounts (no persistence)');
+}
+if (!DATABASE_URL) {
+  console.log('[fixcycle-backend] DATABASE_URL not set — falling back to in-memory accounts (no persistence)');
+}
+
+// Schema bootstrapped once per process, lazily, only when the DB is enabled.
+const USERS_TABLE_SQL = `
+  CREATE TABLE IF NOT EXISTS users (
+    id BIGSERIAL PRIMARY KEY,
+    phone VARCHAR(32) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100) DEFAULT '',
+    last_name VARCHAR(100) DEFAULT '',
+    email VARCHAR(191) DEFAULT '',
+    country_id INT DEFAULT 91,
+    signup_status VARCHAR(10) DEFAULT '1',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (phone)
+  )
+`;
+
+let schemaReady = null;
+
+function ensureSchema() {
+  if (!dbEnabled) return Promise.resolve();
+  if (!schemaReady) {
+    schemaReady = db(USERS_TABLE_SQL)
+      .then(() => {
+        console.log('[fixcycle-backend] users table ensured on Neon');
+      })
+      .catch((err) => {
+        schemaReady = null; // allow a later retry
+        throw err;
+      });
+  }
+  return schemaReady;
+}
+
+// Map a Postgres row into the in-memory user shape the rest of the mock reads
+// (handleDetails etc. still work because login/signup populate state.users).
+function userFromDbRow(row) {
+  return {
+    id: Number(row.id),
+    firstName: row.first_name || 'New',
+    lastName: row.last_name || 'User',
+    email: row.email || '',
+    phone: row.phone || '',
+    phoneCode: '+91',
+    countryCode: 'IN',
+    gender: '',
+    smokerType: 'no',
+    networkCode: '',
+    referralCode: '',
+    signupStatus: row.signup_status || '1',
+    walletBalance: '0',
+    outstandingAmount: '0',
+    country_id: Number(row.country_id) || 91,
+    merchant_id: 1,
+    user_type: 1,
+    is_guest: false,
+    passwordHash: row.password_hash || '',
+  };
+}
+
+// Password for a signup row. DB rows require a non-null password_hash; when the
+// register payload omits a password we use the same dev default the in-memory
+// DEMO_USER uses ('12345678') so the account stays usable for the mock flow.
+// Frontends that send a password always get that one hashed instead.
+async function signupPasswordFor(body) {
+  const pw = typeof body.password === 'string' && body.password.length > 0 ? body.password : '12345678';
+  return bcrypt.hash(pw, 10);
+}
+
+// Regular signup is an UPSERT keyed on phone: re-registering the same phone
+// updates the stored password + profile (matches the "normal-reg" update
+// semantics the Laravel API exhibits) while returning the same envelope.
+async function persistUser(body) {
+  const phone = pick(body.phone, '');
+  if (!dbEnabled || !phone) return null;
+  await ensureSchema();
+  await db(
+    `INSERT INTO users (phone, password_hash, first_name, last_name, email, country_id)
+     VALUES ($1, $2, $3, $4, $5, $6)
+     ON CONFLICT (phone) DO UPDATE SET
+       password_hash = EXCLUDED.password_hash,
+       first_name = EXCLUDED.first_name,
+       last_name = EXCLUDED.last_name,
+       email = EXCLUDED.email,
+       country_id = EXCLUDED.country_id`,
+    [phone, await signupPasswordFor(body), pick(body.first_name, 'New'), pick(body.last_name, 'User'), pick(body.email, ''), num(body.country_id, 91)],
+  );
+  const rows = await db('SELECT * FROM users WHERE phone = $1', [phone]);
+  return rows[0] ? userFromDbRow(rows[0]) : null;
+}
+
+// SELECT a single user row from the DB (used by login / login-otp). Returns the
+// mapped in-memory user, or null when the phone is not registered.
+async function findUserByPhone(phone) {
+  if (!dbEnabled || !phone) return null;
+  await ensureSchema();
+  const rows = await db('SELECT * FROM users WHERE phone = $1', [phone]);
+  return rows[0] ? userFromDbRow(rows[0]) : null;
+}
+
 // ── Booking lifecycle ───────────────────────────────────────────────────────
 
 function bookingStatusAt(booking) {
@@ -708,13 +848,26 @@ function handleOtp(body) {
   });
 }
 
-function handleLogin(body) {
+async function handleLogin(body) {
   const { phone, password } = body;
-  // Accept any phone/password combo for dev
-  const user = { ...DEMO_USER, phone: phone || DEMO_USER.phone };
-  const id = ++state.userSeq;
-  user.id = id;
-  state.users.set(id, user);
+  let user = null;
+
+  if (dbEnabled) {
+    // Real persistence mode: the account must exist in Postgres and the
+    // password must match its bcrypt hash. Failure keeps the file's existing
+    // `fail(...)` envelope style (HTTP stays 200, result:'0' signals failure).
+    user = await findUserByPhone(pick(phone, ''));
+    if (!user) return fail('Invalid credentials');
+    const match = await bcrypt.compare(password || '', user.passwordHash || '');
+    if (!match) return fail('Invalid credentials');
+  } else {
+    // Dev fallback: accept any phone/password combo for dev.
+    user = { ...DEMO_USER, phone: phone || DEMO_USER.phone };
+    const id = ++state.userSeq;
+    user.id = id;
+  }
+
+  state.users.set(user.id, user);
   const token = issueToken(user);
   return ok({
     access_token: token,
@@ -725,12 +878,23 @@ function handleLogin(body) {
   });
 }
 
-function handleLoginOtp(body) {
+async function handleLoginOtp(body) {
   const { phone } = body;
-  const user = { ...DEMO_USER, phone: phone || DEMO_USER.phone };
-  const id = ++state.userSeq;
-  user.id = id;
-  state.users.set(id, user);
+  let user = null;
+
+  if (dbEnabled) {
+    // OTP login still accepts the dev default OTP ('082025' via /user/otp),
+    // but the account must exist in Postgres to be issued a token.
+    user = await findUserByPhone(pick(phone, ''));
+    if (!user) return fail('Invalid credentials');
+  } else {
+    // Dev fallback: any phone accepted.
+    user = { ...DEMO_USER, phone: phone || DEMO_USER.phone };
+    const id = ++state.userSeq;
+    user.id = id;
+  }
+
+  state.users.set(user.id, user);
   const token = issueToken(user);
   return ok({
     access_token: token,
@@ -810,29 +974,35 @@ function handleLogout(body, user) {
   return ok({});
 }
 
-function handleSignup(body) {
-  const id = ++state.userSeq;
-  const user = {
-    id,
-    firstName: body.first_name || 'New',
-    lastName: body.last_name || 'User',
-    email: body.email || '',
-    phone: body.phone || '',
-    phoneCode: '+91',
-    countryCode: 'IN',
-    gender: body.user_gender || '',
-    smokerType: body.smoker_type || 'no',
-    networkCode: body.network_code || '',
-    referralCode: body.referral_code || '',
-    signupStatus: '1',
-    walletBalance: '0',
-    outstandingAmount: '0',
-    country_id: body.country_id || 91,
-    merchant_id: 1,
-    user_type: 1,
-    is_guest: false,
-  };
-  state.users.set(id, user);
+async function handleSignup(body) {
+  let user = await persistUser(body);
+
+  if (!user) {
+    // In-memory fallback (no DATABASE_URL, or signup payload has no phone).
+    const id = ++state.userSeq;
+    user = {
+      id,
+      firstName: body.first_name || 'New',
+      lastName: body.last_name || 'User',
+      email: body.email || '',
+      phone: body.phone || '',
+      phoneCode: '+91',
+      countryCode: 'IN',
+      gender: body.user_gender || '',
+      smokerType: body.smoker_type || 'no',
+      networkCode: body.network_code || '',
+      referralCode: body.referral_code || '',
+      signupStatus: '1',
+      walletBalance: '0',
+      outstandingAmount: '0',
+      country_id: body.country_id || 91,
+      merchant_id: 1,
+      user_type: 1,
+      is_guest: false,
+    };
+  }
+
+  state.users.set(user.id, user);
   const token = issueToken(user);
   return ok({
     access_token: token,
@@ -3267,7 +3437,9 @@ const server = http.createServer(async (req, res) => {
   try {
     const body = await readBody(req);
     const user = PUBLIC_ROUTES.has(pathname) ? null : getUserFromRequest(req);
-    const result = handler(body, user);
+    // Handlers may be sync (in-memory fallback) or async (Postgres mode);
+    // `await` resolves both.
+    const result = await handler(body, user);
     const json = JSON.stringify(result);
     res.writeHead(200, { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(json) });
     res.end(json);
