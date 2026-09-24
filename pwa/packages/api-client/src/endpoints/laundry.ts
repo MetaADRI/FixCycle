@@ -249,7 +249,7 @@ export async function fetchLaundryServices(
       name: str0(c['name'], str0(c['category_name'])),
       image: str0(c['image']),
     })),
-    currency: str0(d['currency'], '₹'),
+    currency: str0(d['currency'], 'K'),
     services: arr(d['services']).map((s) => ({
       id: num0(s['id'], num0(s['laundry_service_id'])),
       laundry_service_id: num0(s['laundry_service_id'], num0(s['id'])),
@@ -258,7 +258,7 @@ export async function fetchLaundryServices(
       formatted_price: str0(s['formatted_price']),
       title: str0(s['title'], str0(s['name'])),
       service_description: str0(s['service_description']),
-      currency: str0(s['currency'], '₹'),
+      currency: str0(s['currency'], 'K'),
       image: str0(s['image']),
       service_availability: str0(s['service_availability'], '1'),
       sequence: num0(s['sequence'], 0),
@@ -293,7 +293,7 @@ export async function fetchLaundryOutlets(
     image: str0(o['image']),
     is_outlet_open: toBool(o['is_outlet_open']),
     price_card_id: num0(o['price_card_id']),
-    currency: str0(o['currency'], '₹'),
+    currency: str0(o['currency'], 'K'),
     background_color: str0(o['background_color']),
   }));
 }
@@ -320,7 +320,7 @@ export async function fetchLaundryOutletDetail(
     image: str0(o['image']),
     is_outlet_open: toBool(o['is_outlet_open']),
     price_card_id: num0(o['price_card_id']),
-    currency: str0(o['currency'], '₹'),
+    currency: str0(o['currency'], 'K'),
     background_color: str0(o['background_color']),
   };
 }
@@ -500,7 +500,7 @@ function parseOrder(o: Record<string, unknown>): LaundryOrder {
     total_quantity: num0(o['total_quantity']),
     items_count: num0(o['items_count']),
     final_amount_paid: str0(o['final_amount_paid']),
-    currency: str0(o['currency'], '₹'),
+    currency: str0(o['currency'], 'K'),
     booking_date: str0(o['booking_date']),
     slot_time_text: str0(o['slot_time_text']),
     is_rated: toBool(o['is_rated']),

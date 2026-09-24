@@ -680,7 +680,7 @@ export function parseDriverBooking(data: Record<string, unknown>): DriverBooking
       typeof parsed.user_phone === 'string' ? parsed.user_phone : parsed.user_phone === undefined ? '' : String(parsed.user_phone),
     amount:
       typeof parsed.total_amount === 'string' ? parsed.total_amount : parsed.total_amount === undefined ? '0' : String(parsed.total_amount),
-    currency: parsed.currency ?? '₹',
+    currency: parsed.currency ?? 'K',
     otp: parsed.otp,
     status: toNumber(parsed.booking_status, 0),
     statusText: parsed.status_text ?? '',
@@ -870,7 +870,7 @@ export async function fetchDriverPaymentInfo(
   const totalAmount = data['total_amount'] ?? data['amount'] ?? data['payable_amount'];
   return {
     payableAmount: typeof totalAmount === 'string' ? totalAmount : totalAmount === undefined ? '0' : String(totalAmount),
-    currency: typeof data['currency'] === 'string' ? data['currency'] : '₹',
+    currency: typeof data['currency'] === 'string' ? data['currency'] : 'K',
     paymentMethods: methods,
     cashAmount: typeof data['cash_amount'] === 'string' ? data['cash_amount'] : '',
     onlineAmount: typeof data['online_amount'] === 'string' ? data['online_amount'] : '',
@@ -1848,7 +1848,7 @@ export function parseDriverSegmentServicesConfig(data: Record<string, unknown>):
   return {
     segmentId: String(data['segment_id'] ?? ''),
     segmentName: String(data['name'] ?? data['segment_name'] ?? ''),
-    currency: String(data['currency'] ?? '₹'),
+    currency: String(data['currency'] ?? 'K'),
     priceType: String(data['price_type'] ?? ''),
     priceTypeText: String(data['price_type_text'] ?? ''),
     minimumBookingAmount: String(data['minimum_booking_amount'] ?? '0'),

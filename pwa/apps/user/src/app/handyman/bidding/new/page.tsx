@@ -61,7 +61,7 @@ export default function HandymanNewBidPage(): React.ReactNode {
           <section className="rounded-2xl border border-[var(--fc-border)] bg-[var(--fc-surface-raised)] p-4">
             <h2 className="mb-2 text-sm font-bold text-[var(--fc-text-primary)]">Your Offer Price</h2>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[var(--fc-text-secondary)]">₹</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[var(--fc-text-secondary)]">K</span>
               <input
                 type="number"
                 value={offerPrice}

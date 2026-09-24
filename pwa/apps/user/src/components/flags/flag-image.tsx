@@ -41,7 +41,7 @@ export function FlagImage({ countryCode, countryName, size = 24, className, styl
 
   return (
     <img
-      src={`https://flagcdn.com/${countryCode.toLowerCase()}.svg`}
+      src={`${runtime.businessLogoUrl ? `/flags/${countryCode.toLowerCase()}.svg` : `https://flagcdn.com/${countryCode.toLowerCase()}.svg`}`}
       alt={countryName ? `${countryName} flag` : countryCode}
       width={size}
       height={Math.round(size * 0.75)}

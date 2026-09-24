@@ -113,7 +113,7 @@ export default function FoodProductPage(): React.ReactNode {
             {product.description ? (
               <p className="mt-1 text-sm text-[var(--fc-text-secondary)]">{product.description}</p>
             ) : null}
-            <p className="mt-2 text-lg font-bold text-[var(--fc-text-primary)]">₹ {product.price.toFixed(2)}</p>
+            <p className="mt-2 text-lg font-bold text-[var(--fc-text-primary)]">K {product.price.toFixed(2)}</p>
           </div>
         </section>
 
@@ -137,7 +137,7 @@ export default function FoodProductPage(): React.ReactNode {
                         <span className="text-sm font-bold text-[var(--fc-text-primary)]">{v.name}</span>
                       </span>
                       <span className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-[var(--fc-text-primary)]">₹ {v.price.toFixed(2)}</span>
+                        <span className="text-sm font-bold text-[var(--fc-text-primary)]">K {v.price.toFixed(2)}</span>
                         {active ? <Icon name="check" size={18} className="text-[var(--fc-bg-secondary)]" /> : null}
                       </span>
                     </button>
@@ -167,7 +167,7 @@ export default function FoodProductPage(): React.ReactNode {
                       <span className="text-sm font-bold text-[var(--fc-text-primary)]">{o.name}</span>
                       <span className="flex items-center gap-2">
                         {o.price > 0 ? (
-                          <span className="text-sm font-bold text-[var(--fc-text-primary)]">₹ {o.price.toFixed(2)}</span>
+                          <span className="text-sm font-bold text-[var(--fc-text-primary)]">K {o.price.toFixed(2)}</span>
                         ) : null}
                         <span
                           className={`flex h-5 w-5 items-center justify-center rounded-full border ${
@@ -212,7 +212,7 @@ export default function FoodProductPage(): React.ReactNode {
       <div className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[430px] px-4 pb-4">
         <Button block variant="primary" loading={flow.loading} onClick={() => void handleAdd()}>
           <span className="font-semibold">{t('food.add', runtime.locale)}</span>
-          <span className="font-bold">₹ {totalPrice.toFixed(2)}</span>
+          <span className="font-bold">K {totalPrice.toFixed(2)}</span>
         </Button>
       </div>
     </div>

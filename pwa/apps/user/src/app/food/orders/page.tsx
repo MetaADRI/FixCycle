@@ -159,7 +159,7 @@ function OrderCard({
       </p>
 
       <div className="mt-2 flex items-center justify-between border-t border-[var(--fc-border)] pt-2">
-        <span className="text-sm font-bold text-[var(--fc-text-primary)]">₹ {order.total_amount.toFixed(2)}</span>
+        <span className="text-sm font-bold text-[var(--fc-text-primary)]">K {order.total_amount.toFixed(2)}</span>
         <div className="flex gap-2">
           {order.order_status !== 11 && !statusCancelled ? (
             <Button variant="secondary" onClick={() => router.push(`/food/tracker/${order.id}`)}>

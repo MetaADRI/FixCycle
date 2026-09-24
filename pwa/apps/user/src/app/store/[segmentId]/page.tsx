@@ -145,10 +145,10 @@ function StoreCard({
             </span>
             <span>
               {t('store.deliveryFee', runtime.locale)}{' '}
-              {store.delivery_fee === 0 ? t('store.free', runtime.locale) : `₹ ${store.delivery_fee}`}
+              {store.delivery_fee === 0 ? t('store.free', runtime.locale) : `K ${store.delivery_fee}`}
             </span>
             <span>
-              {t('store.minimumOrder', runtime.locale)} ₹ {store.minimum_order}
+              {t('store.minimumOrder', runtime.locale)} K {store.minimum_order}
             </span>
           </span>
         </span>

@@ -91,7 +91,7 @@ export default function HandymanBidDetailPage(): React.ReactNode {
               ) : null}
               <div className="mt-2 flex items-center justify-between border-t border-[var(--fc-border)] pt-2">
                 <span className="text-base font-bold text-[var(--fc-text-primary)]">
-                  Offer: ₹{Number(detail.user_offer_price).toLocaleString('en-IN')}
+                  Offer: K{Number(detail.user_offer_price).toLocaleString('en-IN')}
                 </span>
                 <span className="text-xs text-[var(--fc-text-secondary)]">{detail.time_slot_text || detail.booked_at}</span>
               </div>
@@ -129,7 +129,7 @@ export default function HandymanBidDetailPage(): React.ReactNode {
                               <span className="text-xs text-[var(--fc-text-secondary)]">{bid.time_text}</span>
                             </div>
                           </div>
-                          <span className="text-lg font-bold text-[var(--fc-primary)]">₹{Number(bid.bid_amount).toLocaleString('en-IN')}</span>
+                          <span className="text-lg font-bold text-[var(--fc-primary)]">K{Number(bid.bid_amount).toLocaleString('en-IN')}</span>
                         </div>
 
                         <div className="mt-2 flex items-center gap-2">
@@ -149,7 +149,7 @@ export default function HandymanBidDetailPage(): React.ReactNode {
                                   type="number"
                                   value={counterAmount}
                                   onChange={(e) => setCounterAmount(e.target.value)}
-                                  placeholder="₹"
+                                  placeholder="K"
                                   className="w-20 rounded-xl border border-[var(--fc-border)] bg-[var(--fc-surface)] px-2 py-1.5 text-sm outline-none"
                                 />
                                 <Button variant="secondary" onClick={() => void handleCounter(bid.id)}>

@@ -101,7 +101,7 @@ export default function LaundryCartPage(): React.ReactNode {
                     />
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-bold text-[var(--fc-text-primary)]">{item.title}</p>
-                      <p className="text-xs text-[var(--fc-text-secondary)]">₹{item.price.toLocaleString('en-IN')} each</p>
+                      <p className="text-xs text-[var(--fc-text-secondary)]">K{item.price.toLocaleString('en-IN')} each</p>
                     </div>
                     <div className="flex shrink-0 items-center gap-2 rounded-full border border-[var(--fc-border)] bg-[var(--fc-surface)] p-1">
                       <button
@@ -121,7 +121,7 @@ export default function LaundryCartPage(): React.ReactNode {
                       </button>
                     </div>
                     <span className="w-16 shrink-0 text-right text-sm font-bold text-[var(--fc-text-primary)]">
-                      ₹{lineTotal(item.laundry_service_id).toLocaleString('en-IN')}
+                      K{lineTotal(item.laundry_service_id).toLocaleString('en-IN')}
                     </span>
                   </li>
                 ))}
@@ -154,25 +154,25 @@ export default function LaundryCartPage(): React.ReactNode {
             <section className="rounded-2xl border border-[var(--fc-border)] bg-[var(--fc-surface-raised)] p-4 space-y-1.5">
               <div className="flex justify-between text-xs">
                 <span className="text-[var(--fc-text-secondary)]">Cart Amount</span>
-                <span className="text-[var(--fc-text-primary)]">₹{cart?.cart_amount?.toLocaleString('en-IN') ?? '0'}</span>
+                <span className="text-[var(--fc-text-primary)]">K{cart?.cart_amount?.toLocaleString('en-IN') ?? '0'}</span>
               </div>
               <div className="flex justify-between text-xs">
                 <span className="text-[var(--fc-text-secondary)]">{t('laundry.deliveryCharges', runtime.locale)}</span>
-                <span className="text-[var(--fc-text-primary)]">₹{cart?.delivery_amount?.toLocaleString('en-IN') ?? '0'}</span>
+                <span className="text-[var(--fc-text-primary)]">K{cart?.delivery_amount?.toLocaleString('en-IN') ?? '0'}</span>
               </div>
               {(cart?.discount_amount ?? 0) > 0 ? (
                 <div className="flex justify-between text-xs">
                   <span className="text-[var(--fc-success)]">{t('laundry.discount', runtime.locale)}</span>
-                  <span className="text-[var(--fc-success)]">-₹{cart?.discount_amount?.toLocaleString('en-IN') ?? '0'}</span>
+                  <span className="text-[var(--fc-success)]">-K{cart?.discount_amount?.toLocaleString('en-IN') ?? '0'}</span>
                 </div>
               ) : null}
               <div className="flex justify-between text-xs">
                 <span className="text-[var(--fc-text-secondary)]">{t('laundry.tax', runtime.locale)}</span>
-                <span className="text-[var(--fc-text-primary)]">₹{cart?.tax?.toLocaleString('en-IN') ?? '0'}</span>
+                <span className="text-[var(--fc-text-primary)]">K{cart?.tax?.toLocaleString('en-IN') ?? '0'}</span>
               </div>
               <div className="flex justify-between border-t border-[var(--fc-border)] pt-2 text-sm font-bold">
                 <span className="text-[var(--fc-text-primary)]">{t('laundry.toPay', runtime.locale)}</span>
-                <span className="text-[var(--fc-text-primary)]">₹{cart?.final_amount?.toLocaleString('en-IN') ?? '0'}</span>
+                <span className="text-[var(--fc-text-primary)]">K{cart?.final_amount?.toLocaleString('en-IN') ?? '0'}</span>
               </div>
             </section>
 

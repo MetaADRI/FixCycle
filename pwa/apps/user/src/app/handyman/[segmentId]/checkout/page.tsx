@@ -114,7 +114,7 @@ function CheckoutInner(): React.ReactNode {
                     className="mt-0.5 h-4 w-4 accent-[var(--fc-primary)]"
                   />
                   <span className="text-sm text-[var(--fc-text-primary)]">
-                    Pay minimum booking amount (₹{minBill.toLocaleString('en-IN')}) now
+                    Pay minimum booking amount (K{minBill.toLocaleString('en-IN')}) now
                   </span>
                 </label>
               </section>
@@ -136,7 +136,7 @@ function CheckoutInner(): React.ReactNode {
             <section className="rounded-2xl border border-[var(--fc-border)] bg-[var(--fc-surface-raised)] p-4">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-[var(--fc-text-secondary)]">Services ({cart.ordered_services.length})</span>
-                <span className="font-bold text-[var(--fc-text-primary)]">₹{cart.final_amount.toLocaleString('en-IN')}</span>
+                <span className="font-bold text-[var(--fc-text-primary)]">K{cart.final_amount.toLocaleString('en-IN')}</span>
               </div>
             </section>
 

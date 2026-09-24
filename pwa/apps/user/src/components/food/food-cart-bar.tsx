@@ -28,7 +28,7 @@ export function FoodCartBar({
           </span>
           <span>{t('food.cart', runtime.locale)}</span>
         </span>
-        <span className="font-bold">₹ {total.toFixed(2)}</span>
+        <span className="font-bold">K {total.toFixed(2)}</span>
         <Icon name="chevron-right" size={18} />
       </Button>
     </div>

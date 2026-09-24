@@ -184,7 +184,7 @@ export default function FoodStorePage(): React.ReactNode {
                       {p.variants.length > 1 ? ' · ' + p.variants.length + ' ' + t('food.variant', runtime.locale).toLowerCase() : ''}
                     </span>
                   ) : null}
-                  <span className="text-sm font-bold text-[var(--fc-text-primary)]">₹ {p.price.toFixed(2)}</span>
+                  <span className="text-sm font-bold text-[var(--fc-text-primary)]">K {p.price.toFixed(2)}</span>
                 </button>
                 <button
                   onClick={() => void handleAdd(p)}

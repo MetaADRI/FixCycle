@@ -64,7 +64,7 @@ export default function HandymanCartPage(): React.ReactNode {
                 <li key={svc.service_type_id} className="flex items-center gap-3 rounded-2xl border border-[var(--fc-border)] bg-[var(--fc-surface-raised)] p-3">
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-bold text-[var(--fc-text-primary)]">{svc.service_name}</p>
-                    <p className="text-xs text-[var(--fc-text-secondary)]">₹{svc.service_price.toLocaleString('en-IN')} per unit</p>
+                    <p className="text-xs text-[var(--fc-text-secondary)]">K{svc.service_price.toLocaleString('en-IN')} per unit</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
@@ -136,23 +136,23 @@ export default function HandymanCartPage(): React.ReactNode {
               <ul className="space-y-1.5 text-sm">
                 <li className="flex items-center justify-between">
                   <span className="text-[var(--fc-text-secondary)]">Subtotal</span>
-                  <span className="font-semibold text-[var(--fc-text-primary)]">₹{cart!.total_amount.toLocaleString('en-IN')}</span>
+                  <span className="font-semibold text-[var(--fc-text-primary)]">K{cart!.total_amount.toLocaleString('en-IN')}</span>
                 </li>
                 {cart!.discount_amount > 0 ? (
                   <li className="flex items-center justify-between">
                     <span className="text-[var(--fc-success)]">Discount</span>
-                    <span className="font-semibold text-[var(--fc-success)]">-₹{cart!.discount_amount.toLocaleString('en-IN')}</span>
+                    <span className="font-semibold text-[var(--fc-success)]">-K{cart!.discount_amount.toLocaleString('en-IN')}</span>
                   </li>
                 ) : null}
                 <li className="flex items-center justify-between border-t border-[var(--fc-border)] pt-1.5">
                   <span className="font-bold text-[var(--fc-text-primary)]">Final</span>
-                  <span className="font-bold text-[var(--fc-text-primary)]">₹{cart!.final_amount.toLocaleString('en-IN')}</span>
+                  <span className="font-bold text-[var(--fc-text-primary)]">K{cart!.final_amount.toLocaleString('en-IN')}</span>
                 </li>
               </ul>
             </section>
 
             <Button block variant="primary" onClick={handleCheckout}>
-              {t('handyman.checkout', runtime.locale)} · ₹{cart!.final_amount.toLocaleString('en-IN')}
+              {t('handyman.checkout', runtime.locale)} · K{cart!.final_amount.toLocaleString('en-IN')}
             </Button>
           </div>
         )}

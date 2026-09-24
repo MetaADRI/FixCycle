@@ -133,7 +133,7 @@ export default function HandymanHomePage(): React.ReactNode {
 
             {showMinBillNote ? (
               <p className="mt-3 px-4 text-xs text-[var(--fc-text-secondary)]">
-                {flow.services.min_bill_description || `Minimum booking amount: ₹${minBill.toLocaleString('en-IN')}`}
+                {flow.services.min_bill_description || `Minimum booking amount: K${minBill.toLocaleString('en-IN')}`}
               </p>
             ) : null}
 
@@ -166,7 +166,7 @@ export default function HandymanHomePage(): React.ReactNode {
                 onClick={() => router.push(`/handyman/${segmentId}/cart`)}
                 className="flex items-center gap-2"
               >
-                {cartCount} services · ₹{cartTotal.toLocaleString('en-IN')}
+                {cartCount} services · K{cartTotal.toLocaleString('en-IN')}
               </Button>
             ) : null}
             {flow.selectedServiceIds.length > 0 ? (

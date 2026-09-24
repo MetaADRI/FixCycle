@@ -224,7 +224,7 @@ function CheckoutInner(): React.ReactNode {
               </div>
               {flow.promo ? (
                 <p className="mt-1 text-xs font-semibold text-[var(--fc-success)]">
-                  {t('store.promoApplied', runtime.locale)}: -₹ {flow.promo.discount_value.toFixed(2)}
+                  {t('store.promoApplied', runtime.locale)}: -K {flow.promo.discount_value.toFixed(2)}
                 </p>
               ) : null}
               {flow.error && !flow.promo ? (
@@ -237,12 +237,12 @@ function CheckoutInner(): React.ReactNode {
               <ul className="space-y-1.5 text-sm">
                 <li className="flex items-center justify-between">
                   <span className="text-[var(--fc-text-secondary)]">{t('store.subtotal', runtime.locale)}</span>
-                  <span className="font-semibold text-[var(--fc-text-primary)]">₹ {subtotal.toFixed(2)}</span>
+                  <span className="font-semibold text-[var(--fc-text-primary)]">K {subtotal.toFixed(2)}</span>
                 </li>
                 {flow.promo ? (
                   <li className="flex items-center justify-between">
                     <span className="text-[var(--fc-success)]">{t('store.discount', runtime.locale)}</span>
-                    <span className="font-semibold text-[var(--fc-success)]">-₹ {flow.promo.discount_value.toFixed(2)}</span>
+                    <span className="font-semibold text-[var(--fc-success)]">-K {flow.promo.discount_value.toFixed(2)}</span>
                   </li>
                 ) : null}
               </ul>

@@ -147,7 +147,7 @@ export default function HandymanTrackerPage(): React.ReactNode {
                 ) : null}
                 <div className="flex justify-between text-sm font-bold border-t border-[var(--fc-border)] pt-1">
                   <span className="text-[var(--fc-text-primary)]">Total Paid</span>
-                  <span className="text-[var(--fc-text-primary)]">₹{Number(detail.payment_detail.final_amount_paid).toLocaleString('en-IN')}</span>
+                  <span className="text-[var(--fc-text-primary)]">K{Number(detail.payment_detail.final_amount_paid).toLocaleString('en-IN')}</span>
                 </div>
                 {detail.payment_detail.pending_amount_status ? (
                   <p className="text-xs text-[var(--fc-warning)]">{detail.payment_detail.pending_message}</p>
@@ -251,7 +251,7 @@ export default function HandymanTrackerPage(): React.ReactNode {
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--fc-border)] bg-white px-4 py-3">
           <div className="mx-auto max-w-[430px]">
             <Button block variant="primary" onClick={() => void handlePay()}>
-              Pay now · ₹{Number(detail?.payment_detail?.total_pending_amount ?? 0).toLocaleString('en-IN')}
+              Pay now · K{Number(detail?.payment_detail?.total_pending_amount ?? 0).toLocaleString('en-IN')}
             </Button>
           </div>
         </div>

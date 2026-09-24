@@ -451,7 +451,7 @@ export async function fetchBusCheckout(
       price: num0(sp['price'], num0(sp['seat_price'])),
       formatted: str0(sp['formatted_price']),
     })),
-    currency: str0(d['currency'], '₹'),
+    currency: str0(d['currency'], 'K'),
   };
 }
 

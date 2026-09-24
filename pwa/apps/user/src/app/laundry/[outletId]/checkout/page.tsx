@@ -112,25 +112,25 @@ function CheckoutInner(): React.ReactNode {
             <section className="rounded-2xl border border-[var(--fc-border)] bg-[var(--fc-surface-raised)] p-4 space-y-1.5">
               <div className="flex justify-between text-xs">
                 <span className="text-[var(--fc-text-secondary)]">Cart Amount</span>
-                <span className="text-[var(--fc-text-primary)]">₹{cart.cart_amount.toLocaleString('en-IN')}</span>
+                <span className="text-[var(--fc-text-primary)]">K{cart.cart_amount.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-xs">
                 <span className="text-[var(--fc-text-secondary)]">{t('laundry.deliveryCharges', runtime.locale)}</span>
-                <span className="text-[var(--fc-text-primary)]">₹{cart.delivery_amount.toLocaleString('en-IN')}</span>
+                <span className="text-[var(--fc-text-primary)]">K{cart.delivery_amount.toLocaleString('en-IN')}</span>
               </div>
               {cart.discount_amount > 0 ? (
                 <div className="flex justify-between text-xs">
                   <span className="text-[var(--fc-success)]">{t('laundry.discount', runtime.locale)}</span>
-                  <span className="text-[var(--fc-success)]">-₹{cart.discount_amount.toLocaleString('en-IN')}</span>
+                  <span className="text-[var(--fc-success)]">-K{cart.discount_amount.toLocaleString('en-IN')}</span>
                 </div>
               ) : null}
               <div className="flex justify-between text-xs">
                 <span className="text-[var(--fc-text-secondary)]">{t('laundry.tax', runtime.locale)}</span>
-                <span className="text-[var(--fc-text-primary)]">₹{cart.tax.toLocaleString('en-IN')}</span>
+                <span className="text-[var(--fc-text-primary)]">K{cart.tax.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between border-t border-[var(--fc-border)] pt-2 text-sm font-bold">
                 <span className="text-[var(--fc-text-primary)]">{t('laundry.toPay', runtime.locale)}</span>
-                <span className="text-[var(--fc-text-primary)]">₹{cart.final_amount.toLocaleString('en-IN')}</span>
+                <span className="text-[var(--fc-text-primary)]">K{cart.final_amount.toLocaleString('en-IN')}</span>
               </div>
             </section>
 

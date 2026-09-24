@@ -5,7 +5,7 @@ import { ALL_COUNTRIES } from '@fixcycle/config';
 import { NextRequest, NextResponse } from 'next/server';
 
 // ---------------------------------------------------------------------------
-// Fixcycle dev mock API — serves realistic fixtures for the whole ride flow so
+// Fixcycle dev mock API â€” serves realistic fixtures for the whole ride flow so
 // the PWA is previewable end-to-end offline (no Laravel backend required).
 //
 // Wired via apps/user/.env.local: NEXT_PUBLIC_API_BASE=/api/mock
@@ -143,12 +143,7 @@ function state(): MockState {
           { id: 'fm1', name: 'Asha', phone: '+91 98765 11111', email: '', relation: 'Spouse' },
         ],
         familySeq: 2,
-        walletBalance: 1250.50,
-        walletTxns: [
-          { transaction_name: 'Wallet Top-Up', type: '1', amount: '₹ 500.00', date: '2026-03-15', value_color: '#16a34a', description: 'Cash top-up' },
-          { transaction_name: 'Ride Payment', type: '2', amount: '₹ 185.00', date: '2026-03-16', value_color: '#dc2626', description: 'Ride #BK-5001' },
-          { transaction_name: 'Referral Bonus', type: '3', amount: '₹ 100.00', date: '2026-03-17', value_color: '#16a34a', description: 'Friend signup bonus' },
-        ],
+      walletBalance: 0,      walletTxns: [],
         cards: [
           { id: 'c1', last_four: '4242', brand: 'visa', name_on_card: 'Guest User', is_default: 1 },
         ],
@@ -175,7 +170,7 @@ function state(): MockState {
         supportSeq: 2,
         rewardPoints: 750,
         rewardGifts: [
-          { id: 'rg1', name: 'Free Ride Discount', points_required: 500, description: '₹50 off your next ride', image: '' },
+          { id: 'rg1', name: 'Free Ride Discount', points_required: 500, description: 'K50 off your next ride', image: '' },
           { id: 'rg2', name: 'Coffee Voucher', points_required: 200, description: 'Free coffee at select outlets', image: '' },
         ],
         rewardHistory: [
@@ -183,18 +178,18 @@ function state(): MockState {
           { id: 'rh2', points: 50, action: 'earned', date: '2026-03-17', gift_name: 'Referral bonus' },
         ],
         subscriptions: [
-          { id: 'sub1', name: 'Gold Monthly', price: 299, duration: '30 days', description: 'Unlimited free rides under ₹100 + priority support' },
-          { id: 'sub2', name: 'Silver Weekly', price: 99, duration: '7 days', description: '3 free rides under ₹80' },
+          { id: 'sub1', name: 'Gold Monthly', price: 299, duration: '30 days', description: 'Unlimited free rides under K100 + priority support' },
+          { id: 'sub2', name: 'Silver Weekly', price: 99, duration: '7 days', description: '3 free rides under K80' },
         ],
         activeSubscription: null,
         referralCode: 'GUEST2026',
       },
     };
   }
-  return g.__fixcycleMock;
+  return g.__fixcycleMock as MockState;
 }
 
-const CURRENCY = '₹';
+const CURRENCY = 'K';
 
 const historyBookings = [
   {
@@ -316,7 +311,7 @@ function checkoutDate(ref: CheckoutRef): Record<string, unknown> {
   const base = 8.0;
   const distance = ref.dropName.length > 0 ? 3.4 : 2.4;
   const fare = round2(base + distance * 12);
-  const promo = ref.promoApplied ? '-₹40.00' : '₹0.00';
+  const promo = ref.promoApplied ? '-K40.00' : 'K0.00';
   const afterPromo = ref.promoApplied ? round2(fare - 40) : fare;
   return {
     id: ref.segmentId,
@@ -447,7 +442,7 @@ async function readBody(req: NextRequest): Promise<Record<string, unknown>> {
   }
 }
 
-// ── Handyman / Home services (Phase 9) ─────────────────────────────────────
+// â”€â”€ Handyman / Home services (Phase 9) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Mirrors backend/server.js Phase 9 engine exactly so both surfaces return
 // identical JSON for identical requests.
 
@@ -494,11 +489,11 @@ interface HmProviderDef {
   segment_price_card_id: number;
 }
 const HM_PROVIDERS: HmProviderDef[] = [
-  { id: 501, first_name: 'Ravi', last_name: 'Kumar', business_name: 'Ravi Handyman Services', rating: '4.6', time_range: '09:00 AM - 06:00 PM', distance: '1.2 km', current_latitude: '19.0761', current_longitude: '72.8774', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
-  { id: 502, first_name: 'Sunil', last_name: 'Sharma', business_name: 'Sunil Repairs & Cleaning', rating: '4.3', time_range: '08:00 AM - 05:00 PM', distance: '2.4 km', current_latitude: '19.078', current_longitude: '72.88', image: '', is_favourite: 1, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
-  { id: 503, first_name: 'Amit', last_name: 'Verma', business_name: 'Amit Electrical & Plumbing', rating: '4.8', time_range: '10:00 AM - 07:00 PM', distance: '1.9 km', current_latitude: '19.074', current_longitude: '72.875', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
-  { id: 504, first_name: 'Priya', last_name: 'Nair', business_name: 'Priya Salon & Beauty', rating: '4.9', time_range: '09:30 AM - 08:00 PM', distance: '3.1 km', current_latitude: '19.081', current_longitude: '72.889', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
-  { id: 505, first_name: 'Vikram', last_name: 'Singh', business_name: 'Vikram Tow & Assist', rating: '4.5', time_range: '24 Hours', distance: '0.8 km', current_latitude: '19.075', current_longitude: '72.876', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 501, first_name: 'Ravi', last_name: 'Kumar', business_name: 'Ravi Handyman Services', rating: '4.6', time_range: '09:00 AM - 06:00 PM', distance: '1.2 km', current_latitude: '19.0761', current_longitude: '72.8774', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of K149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 502, first_name: 'Sunil', last_name: 'Sharma', business_name: 'Sunil Repairs & Cleaning', rating: '4.3', time_range: '08:00 AM - 05:00 PM', distance: '2.4 km', current_latitude: '19.078', current_longitude: '72.88', image: '', is_favourite: 1, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of K149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 503, first_name: 'Amit', last_name: 'Verma', business_name: 'Amit Electrical & Plumbing', rating: '4.8', time_range: '10:00 AM - 07:00 PM', distance: '1.9 km', current_latitude: '19.074', current_longitude: '72.875', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of K149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 504, first_name: 'Priya', last_name: 'Nair', business_name: 'Priya Salon & Beauty', rating: '4.9', time_range: '09:30 AM - 08:00 PM', distance: '3.1 km', current_latitude: '19.081', current_longitude: '72.889', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of K149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 505, first_name: 'Vikram', last_name: 'Singh', business_name: 'Vikram Tow & Assist', rating: '4.5', time_range: '24 Hours', distance: '0.8 km', current_latitude: '19.075', current_longitude: '72.876', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of K149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
 ];
 
 const HM_PROVIDER_SERVICES: Record<number, number[]> = {
@@ -689,12 +684,12 @@ interface HmProviderServiceView { id: number; name: string; amount: number; amou
 function hmProviderResponse(p: HmProviderDef, segId: number): Record<string, unknown> {
   const svcIds = HM_PROVIDER_SERVICES[p.id] || [];
   const segSvcs = HM_SERVICES[segId] || HM_SERVICES[6] || [];
-  const serviceType = svcIds.map((svcId): HmProviderServiceView | null => { const s = segSvcs.find((x) => x.id === svcId); return s ? { id: s.id, name: s.name, amount: s.amount, amount_string: `₹${s.amount}`, segment_price_card_detail_id: s.id } : null; }).filter((x): x is HmProviderServiceView => x !== null);
+  const serviceType = svcIds.map((svcId): HmProviderServiceView | null => { const s = segSvcs.find((x) => x.id === svcId); return s ? { id: s.id, name: s.name, amount: s.amount, amount_string: `K${s.amount}`, segment_price_card_detail_id: s.id } : null; }).filter((x): x is HmProviderServiceView => x !== null);
   return { id: p.id, first_name: p.first_name, last_name: p.last_name, business_name: p.business_name, distance: p.distance, is_favourite: p.is_favourite, rating: p.rating, rating_number: Number(p.rating), time_range: p.time_range, current_latitude: p.current_latitude, current_longitude: p.current_longitude, image: p.image, segment_price_card_id: p.segment_price_card_id, hourly_amount: p.hourly_amount, minimum_booking_amount: p.minimum_booking_amount, min_bill_description: p.min_bill_description, price_type_text: p.price_type_text, price_type_slug: p.price_type_slug, service_type: serviceType };
 }
 
 function hmBuildOrderResponse(order: HmOrder): Record<string, unknown> {
-  return { order_id: order.order_id, merchant_order_id: order.merchant_order_id, first_name: order.first_name, last_name: order.last_name, profile_image: order.profile_image, phone_number: order.phone_number, drop_location: order.drop_location, drop_latitude: order.drop_latitude, drop_longitude: order.drop_longitude, currency: '₹', total_services: order.total_services, order_status: order.order_status_text, status: order.numeric_order_status, order_otp: order.order_otp, segment_name: order.segment_name, booking_date: order.booking_date, slot_time_text: order.slot_time_text, service_type: order.service_type, segment_id: order.segment_id, payment_detail: order.payment_detail, cancel_reason: HM_CANCEL_REASONS, is_rated: order.is_rated, arr_action: order.arr_action, bidding_amount_accepted: null, bidding_amount: null, handyman_customer_details_visible: true, current_latitude: order.current_latitude, current_longitude: order.current_longitude, rating: order.rating };
+  return { order_id: order.order_id, merchant_order_id: order.merchant_order_id, first_name: order.first_name, last_name: order.last_name, profile_image: order.profile_image, phone_number: order.phone_number, drop_location: order.drop_location, drop_latitude: order.drop_latitude, drop_longitude: order.drop_longitude, currency: 'K', total_services: order.total_services, order_status: order.order_status_text, status: order.numeric_order_status, order_otp: order.order_otp, segment_name: order.segment_name, booking_date: order.booking_date, slot_time_text: order.slot_time_text, service_type: order.service_type, segment_id: order.segment_id, payment_detail: order.payment_detail, cancel_reason: HM_CANCEL_REASONS, is_rated: order.is_rated, arr_action: order.arr_action, bidding_amount_accepted: null, bidding_amount: null, handyman_customer_details_visible: true, current_latitude: order.current_latitude, current_longitude: order.current_longitude, rating: order.rating };
 }
 
 // Seed demo handyman orders (mirrors server.js)
@@ -703,18 +698,18 @@ function hmSeed(): void {
   if (s.handymanOrders.length > 0) return;
   s.handymanOrders.push({
     order_id: 9011, merchant_order_id: 'hm-9011', first_name: 'Ravi', last_name: 'Kumar', rating: '4.6', profile_image: '', phone_number: '+91 98200 00000',
-    drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', currency: '₹', total_services: 1, order_status_text: 'Delivered', numeric_order_status: 11, status: 11,
+    drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', currency: 'K', total_services: 1, order_status_text: 'Delivered', numeric_order_status: 11, status: 11,
     booking_date: (() => { const d = new Date(); d.setDate(d.getDate() - 1); return d.toISOString().slice(0, 10); })(), slot_time_text: '11:30 AM',
-    service_type: [{ id: 101, name: 'Tub Change', amount: '₹149', currency: '₹', price_type: 1, segment_price_card_id: 606 }],
+    service_type: [{ id: 101, name: 'Tub Change', amount: 'K149', currency: 'K', price_type: 1, segment_price_card_id: 606 }],
     segment_id: 6, segment_name: 'Handyman', order_otp: '4587', current_latitude: '19.0761', current_longitude: '72.8774', is_rated: true,
     arr_action: { cancel: false, pay: false, create_outstanding: '' },
     payment_detail: { cart_amount: '149', dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: '149', minimum_booking_amount: '149', minimum_booking_amount_payment_status: true, total_pending_amount: '0.0', pending_amount_status: false, pending_message: '', paid_status: true, payment_method_id: 1, payment_mode: 'Cash', discount_amount: '0', additional_amount: [], custom_additional_charge: '' },
   });
   s.handymanOrders.push({
     order_id: 9012, merchant_order_id: 'hm-9012', first_name: 'Ravi', last_name: 'Kumar', rating: '0', profile_image: '', phone_number: '+91 98200 00000',
-    drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', currency: '₹', total_services: 1, order_status_text: 'Placed', numeric_order_status: 1, status: 1,
+    drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', currency: 'K', total_services: 1, order_status_text: 'Placed', numeric_order_status: 1, status: 1,
     booking_date: hmGetDate(), slot_time_text: '02:00 PM',
-    service_type: [{ id: 102, name: 'Ceiling Fan', amount: '₹249', currency: '₹', price_type: 1, segment_price_card_id: 606 }],
+    service_type: [{ id: 102, name: 'Ceiling Fan', amount: 'K249', currency: 'K', price_type: 1, segment_price_card_id: 606 }],
     segment_id: 6, segment_name: 'Handyman', order_otp: '3312', current_latitude: '19.0761', current_longitude: '72.8774', is_rated: false,
     arr_action: { cancel: true, pay: false, create_outstanding: '' },
     payment_detail: { cart_amount: '249', dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: '249', minimum_booking_amount: '149', minimum_booking_amount_payment_status: false, total_pending_amount: '249', pending_amount_status: true, pending_message: 'Balance payable to the provider after service', paid_status: false, payment_method_id: 1, payment_mode: 'Cash', discount_amount: '0', additional_amount: [], custom_additional_charge: '' },
@@ -724,8 +719,8 @@ function hmSeed(): void {
     work_image_one: '', work_image_two: '', work_image_three: '', work_image_four: '', final_amount: '200', status: 'Active', numeric_status: 1,
     created_at: new Date().toISOString(), booked_at: '', time_slot_text: '02:00 PM', user_offer_price: '200', no_of_bids: 2, segment_id: 6,
     bids: [
-      { id: 8001, driver_id: 501, first_name: 'Ravi', last_name: 'Kumar', profile_image: '', rating: '4.6', bid_amount: '₹180', amount: '180', created_at: new Date().toISOString(), time_text: '2 min ago', user_offer_price: '200', status: 'Active', numeric_status: 1, message: '' },
-      { id: 8002, driver_id: 503, first_name: 'Amit', last_name: 'Verma', profile_image: '', rating: '4.8', bid_amount: '₹165', amount: '165', created_at: new Date().toISOString(), time_text: '8 min ago', user_offer_price: '200', status: 'Active', numeric_status: 1, message: '' },
+      { id: 8001, driver_id: 501, first_name: 'Ravi', last_name: 'Kumar', profile_image: '', rating: '4.6', bid_amount: 'K180', amount: '180', created_at: new Date().toISOString(), time_text: '2 min ago', user_offer_price: '200', status: 'Active', numeric_status: 1, message: '' },
+      { id: 8002, driver_id: 503, first_name: 'Amit', last_name: 'Verma', profile_image: '', rating: '4.8', bid_amount: 'K165', amount: '165', created_at: new Date().toISOString(), time_text: '8 min ago', user_offer_price: '200', status: 'Active', numeric_status: 1, message: '' },
     ],
   });
   s.handymanBidOrders.push({
@@ -733,13 +728,13 @@ function hmSeed(): void {
     work_image_one: '', work_image_two: '', work_image_three: '', work_image_four: '', final_amount: '210', status: 'Booked', numeric_status: 3,
     created_at: new Date().toISOString(), booked_at: new Date().toISOString(), time_slot_text: '11:30 AM', user_offer_price: '250', no_of_bids: 1, segment_id: 7,
     bids: [
-      { id: 8000, driver_id: 502, first_name: 'Sunil', last_name: 'Sharma', profile_image: '', rating: '4.3', bid_amount: '₹210', amount: '210', created_at: new Date().toISOString(), time_text: '15 min ago', user_offer_price: '250', status: 'Accepted', numeric_status: 2, message: '' },
+      { id: 8000, driver_id: 502, first_name: 'Sunil', last_name: 'Sharma', profile_image: '', rating: '4.3', bid_amount: 'K210', amount: '210', created_at: new Date().toISOString(), time_text: '15 min ago', user_offer_price: '250', status: 'Accepted', numeric_status: 2, message: '' },
     ],
   });
 }
 hmSeed();
 
-// ── Handyman handler functions ──────────────────────────────────────────────
+// â”€â”€ Handyman handler functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function hmHandleGetCategories(body: Record<string, unknown>): Ok {
   const segId = num(body.segment_id, 6);
@@ -748,8 +743,8 @@ function hmHandleGetCategories(body: Record<string, unknown>): Ok {
 
 function hmHandleGetServices(body: Record<string, unknown>): Ok {
   const segId = num(body.segment_id, 6);
-  const svcs = (HM_SERVICES[segId] || []).map((s) => ({ id: s.id, name: s.name, amount: s.amount, amount_string: `₹${s.amount}`, price_type: 1, segment_price_card_id: 600 + segId }));
-  return ok({ segment_price_id: segId * 100 + 11, currency: '₹', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', minimum_booking_amount: 149, minimum_booking_amount_string: '₹149', min_bill_description: 'Minimum booking amount of ₹149 applies', hourly_amount: 0, arr_services: svcs, handyman_bidding_enable: !!HM_SEGMENTS[segId]?.biddingEnable });
+  const svcs = (HM_SERVICES[segId] || []).map((s) => ({ id: s.id, name: s.name, amount: s.amount, amount_string: `K${s.amount}`, price_type: 1, segment_price_card_id: 600 + segId }));
+  return ok({ segment_price_id: segId * 100 + 11, currency: 'K', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', minimum_booking_amount: 149, minimum_booking_amount_string: 'K149', min_bill_description: 'Minimum booking amount of K149 applies', hourly_amount: 0, arr_services: svcs, handyman_bidding_enable: !!HM_SEGMENTS[segId]?.biddingEnable });
 }
 
 function hmHandleGetProviders(body: Record<string, unknown>): Ok {
@@ -864,8 +859,8 @@ function hmHandleConfirmOrder(body: Record<string, unknown>): Ok {
     order_id: orderId, merchant_order_id: `hm-${orderId}`, first_name: prov.first_name, last_name: prov.last_name, rating: '0', profile_image: '',
     phone_number: '+91 98200 00000', drop_location: String(body.drop_location || cart.drop_location || 'Home'),
     drop_latitude: String(body.latitude || cart.latitude || '19.076'), drop_longitude: String(body.longitude || cart.longitude || '72.877'),
-    currency: '₹', total_services: cart.total_quantity, order_status_text: 'Placed', numeric_order_status: 1, status: 1, booking_date: cart.booking_date, slot_time_text: cart.slot_time_text,
-    service_type: cart.ordered_services.map((sv) => { const svc = hmServiceById(sv.service_type_id); return { id: sv.service_type_id, name: sv.service_name, amount: `₹${svc ? svc.amount : sv.service_price}`, currency: '₹', price_type: 1, segment_price_card_id: 600 + segId }; }),
+    currency: 'K', total_services: cart.total_quantity, order_status_text: 'Placed', numeric_order_status: 1, status: 1, booking_date: cart.booking_date, slot_time_text: cart.slot_time_text,
+    service_type: cart.ordered_services.map((sv) => { const svc = hmServiceById(sv.service_type_id); return { id: sv.service_type_id, name: sv.service_name, amount: `K${svc ? svc.amount : sv.service_price}`, currency: 'K', price_type: 1, segment_price_card_id: 600 + segId }; }),
     segment_id: segId, segment_name: HM_SEGMENTS[segId]?.title || 'Handyman', order_otp: hmOtp(),
     current_latitude: String(body.latitude || cart.latitude || '19.0761'), current_longitude: String(body.longitude || cart.longitude || '72.8774'),
     is_rated: false, arr_action: { cancel: true, pay: false, create_outstanding: '' },
@@ -884,7 +879,7 @@ function hmHandleGetOrders(body: Record<string, unknown>): Ok {
   else if (type === 'ONGOING') list = list.filter((o) => [6, 7, 9, 10].includes(o.numeric_order_status));
   else if (type === 'PAST') list = list.filter((o) => [2, 3, 5, 8, 11, 12].includes(o.numeric_order_status));
   if (segId) list = list.filter((o) => o.segment_id === segId);
-  return ok(list.map((o) => ({ order_id: o.order_id, merchant_order_id: o.merchant_order_id, first_name: o.first_name, last_name: o.last_name, rating: o.rating, profile_image: o.profile_image, final_amount_paid: String(o.payment_detail.final_amount_paid), currency: '₹', total_services: o.total_services, order_status: o.order_status_text, numeric_order_status: o.numeric_order_status, booking_date: o.booking_date, slot_time_text: o.slot_time_text, segment_id: o.segment_id, service_type: o.service_type })));
+  return ok(list.map((o) => ({ order_id: o.order_id, merchant_order_id: o.merchant_order_id, first_name: o.first_name, last_name: o.last_name, rating: o.rating, profile_image: o.profile_image, final_amount_paid: String(o.payment_detail.final_amount_paid), currency: 'K', total_services: o.total_services, order_status: o.order_status_text, numeric_order_status: o.numeric_order_status, booking_date: o.booking_date, slot_time_text: o.slot_time_text, segment_id: o.segment_id, service_type: o.service_type })));
 }
 
 function hmHandleGetOrderDetail(body: Record<string, unknown>): Ok {
@@ -960,7 +955,7 @@ function hmHandleBiddingCounterBid(body: Record<string, unknown>): Ok {
     if (bo.bid_order_id === orderId || bo.id === orderId) {
       for (const bid of bo.bids) {
         if (bid.id === bidOrderId || bid.driver_id === bidOrderId) {
-          bid.amount = String(counterAmount); bid.bid_amount = `₹${counterAmount}`;
+          bid.amount = String(counterAmount); bid.bid_amount = `K${counterAmount}`;
           break;
         }
       }
@@ -989,8 +984,8 @@ function hmHandleBiddingAcceptOrder(body: Record<string, unknown>): Ok {
   const order: HmOrder = {
     order_id: orderId2, merchant_order_id: `hm-${orderId2}`, first_name: prov.first_name, last_name: prov.last_name, rating: '0', profile_image: '',
     phone_number: '+91 98200 00000', drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877',
-    currency: '₹', total_services: 1, order_status_text: 'Placed', numeric_order_status: 1, status: 1, booking_date: hmGetDate(), slot_time_text: bidOrder.time_slot_text,
-    service_type: [{ id: 0, name: bidOrder.service_name, amount: `₹${total}`, currency: '₹', price_type: 1, segment_price_card_id: 600 + bidOrder.segment_id }],
+    currency: 'K', total_services: 1, order_status_text: 'Placed', numeric_order_status: 1, status: 1, booking_date: hmGetDate(), slot_time_text: bidOrder.time_slot_text,
+    service_type: [{ id: 0, name: bidOrder.service_name, amount: `K${total}`, currency: 'K', price_type: 1, segment_price_card_id: 600 + bidOrder.segment_id }],
     segment_id: bidOrder.segment_id, segment_name: HM_SEGMENTS[bidOrder.segment_id]?.title || 'Handyman', order_otp: hmOtp(),
     current_latitude: '19.0761', current_longitude: '72.8774', is_rated: false,
     arr_action: { cancel: true, pay: false, create_outstanding: '' },
@@ -1011,7 +1006,7 @@ function hmHandleBiddingCancelDelete(body: Record<string, unknown>): Ok {
   else { order.numeric_status = 4; order.status = 'Cancelled'; return ok({ message: 'Bid order cancelled' }); }
 }
 
-// ── Laundry (Phase 10) ──────────────────────────────────────────────────────
+// â”€â”€ Laundry (Phase 10) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Mirrors backend/server.js Phase 10 engine exactly so both surfaces return
 // identical JSON for identical requests. Reconstructed from LaundryServiceTrait
 // + LaundryOutlet/LaundryService model field names (user API routes are absent
@@ -1281,7 +1276,7 @@ function ldOutletResponse(o: LdOutletDef): Record<string, unknown> {
     is_outlet_open: o.is_outlet_open,
     is_admin_outlet_open: true,
     price_card_id: o.price_card_id,
-    currency: '₹',
+    currency: 'K',
     background_color: '#0ea5e9',
   };
 }
@@ -1292,10 +1287,10 @@ function ldServiceResponse(s: LdServiceDef): Record<string, unknown> {
     laundry_service_id: s.id,
     category_id: s.category_id,
     price: s.price,
-    formatted_price: `₹${s.price}`,
+    formatted_price: `K${s.price}`,
     title: s.title,
     service_description: s.description,
-    currency: '₹',
+    currency: 'K',
     image: `/assets/phase-10/${s.category_id === 11 ? 'shirt' : s.category_id === 12 ? 'suit' : s.category_id === 13 ? 'shirt' : 'duvet'}.svg`,
     service_image: '',
     service_availability: '1',
@@ -1431,7 +1426,7 @@ function ldBuildListOrder(o: LdOrder): Record<string, unknown> {
     total_quantity: o.total_quantity,
     items_count: o.items.length,
     final_amount_paid: String(o.final_amount_paid),
-    currency: '₹',
+    currency: 'K',
     booking_date: o.booking_date,
     slot_time_text: o.slot_time_text,
     is_rated: o.is_rated,
@@ -1442,7 +1437,7 @@ function ldBuildListOrder(o: LdOrder): Record<string, unknown> {
 function ldSeed(): void {
   const s = state();
   if (s.laundryOrders.length > 0) return;
-  const pastItems: LdOrderItem[] = [{ id: 1, laundry_service_id: 202, title: 'Wash & Iron', price: '₹55.00', quantity: 3, total_amount: '₹165.00', image: '/assets/phase-10/shirt.svg' }];
+  const pastItems: LdOrderItem[] = [{ id: 1, laundry_service_id: 202, title: 'Wash & Iron', price: 'K55.00', quantity: 3, total_amount: 'K165.00', image: '/assets/phase-10/shirt.svg' }];
   s.laundryOrders.push({
     order_id: 8019, merchant_order_id: 'ld-8019', laundry_outlet_id: 601, segment_id: LD_SEGMENT_ID, service_type_id: 1,
     order_status: 14, order_status_history: [1, 6, 10, 7, 13, 15, 16, 14].map((st) => ({ order_status: st, order_timestamp: new Date(Date.now() - 2 * 86400 * 1000 + st * 1000).toISOString() })),
@@ -1451,7 +1446,7 @@ function ldSeed(): void {
     otp_for_pickup: '3847', user_confirmed_otp_for_pickup: 1, payment_method_id: 1, payment_status: 1,
     created_at: Date.now() - 2 * 86400 * 1000, is_rated: true, items: pastItems,
   });
-  const ongoingItems: LdOrderItem[] = [{ id: 1, laundry_service_id: 203, title: 'Dry Clean Shirt', price: '₹80.00', quantity: 2, total_amount: '₹160.00', image: '/assets/phase-10/suit.svg' }];
+  const ongoingItems: LdOrderItem[] = [{ id: 1, laundry_service_id: 203, title: 'Dry Clean Shirt', price: 'K80.00', quantity: 2, total_amount: 'K160.00', image: '/assets/phase-10/suit.svg' }];
   s.laundryOrders.push({
     order_id: 8020, merchant_order_id: 'ld-8020', laundry_outlet_id: 602, segment_id: LD_SEGMENT_ID, service_type_id: 1,
     order_status: 13, order_status_history: [1, 6, 10, 7, 13].map((st) => ({ order_status: st, order_timestamp: new Date(Date.now() - 35000 + st * 1000).toISOString() })),
@@ -1474,7 +1469,7 @@ function ldHandleGetServices(body: Record<string, unknown>): Ok {
   if (categoryId > 0) services = services.filter((s) => s.category_id === categoryId);
   return ok({
     categories: LD_CATEGORIES.map(([id, name]) => ({ id, name, image: '' })),
-    currency: '₹',
+    currency: 'K',
     services: services.map(ldServiceResponse),
   });
 }
@@ -1612,9 +1607,9 @@ function ldHandleConfirmOrder(body: Record<string, unknown>): Ok {
       id: idx + 1,
       laundry_service_id: i.laundry_service_id,
       title: i.title,
-      price: `₹${i.price.toFixed(2)}`,
+      price: `K${i.price.toFixed(2)}`,
       quantity: i.quantity,
-      total_amount: `₹${(i.price * i.quantity).toFixed(2)}`,
+      total_amount: `K${(i.price * i.quantity).toFixed(2)}`,
       image: i.image,
     })),
   };
@@ -1677,7 +1672,7 @@ function ldHandleRateOutlet(body: Record<string, unknown>): Ok {
   return ok({ message: 'Thank you for your feedback' });
 }
 
-// ── Bus booking (Phase 11) ───────────────────────────────────────────────────
+// â”€â”€ Bus booking (Phase 11) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Mirrors the field names used by BusController (Services/BusServiceController
 // + BusTrait). `route_id`/`bus_id` are Route::id / Bus::id, NOT segment ids.
 
@@ -1737,18 +1732,18 @@ interface BusBookingMock {
 
 function busDefaultRoutes(): Record<string, unknown>[] {
   return [
-    { id: 701, route_id: 701, route_name: 'Mumbai Central → Pune', service_type_id: 1, segment_id: 4, start_point: 'Mumbai Central', end_point: 'Pune', start_latitude: 18.9696, start_longitude: 72.8199, end_latitude: 18.5289, end_longitude: 73.8735, start_stop_id: 7001, end_stop_id: 7011, distance: '149 km' },
-    { id: 702, route_id: 702, route_name: 'Pune → Mumbai Central', service_type_id: 1, segment_id: 4, start_point: 'Pune', end_point: 'Mumbai Central', start_latitude: 18.5289, start_longitude: 73.8735, end_latitude: 18.9696, end_longitude: 72.8199, start_stop_id: 7011, end_stop_id: 7001, distance: '149 km' },
-    { id: 703, route_id: 703, route_name: 'Andheri → Nashik', service_type_id: 1, segment_id: 4, start_point: 'Andheri', end_point: 'Nashik', start_latitude: 19.1197, start_longitude: 72.8468, end_latitude: 19.9975, end_longitude: 73.7898, start_stop_id: 7002, end_stop_id: 7012, distance: '167 km' },
-    { id: 704, route_id: 704, route_name: 'Nashik → Andheri', service_type_id: 1, segment_id: 4, start_point: 'Nashik', end_point: 'Andheri', start_latitude: 19.9975, start_longitude: 73.7898, end_latitude: 19.1197, end_longitude: 72.8468, start_stop_id: 7012, end_stop_id: 7002, distance: '167 km' },
+    { id: 701, route_id: 701, route_name: 'Mumbai Central â†’ Pune', service_type_id: 1, segment_id: 4, start_point: 'Mumbai Central', end_point: 'Pune', start_latitude: 18.9696, start_longitude: 72.8199, end_latitude: 18.5289, end_longitude: 73.8735, start_stop_id: 7001, end_stop_id: 7011, distance: '149 km' },
+    { id: 702, route_id: 702, route_name: 'Pune â†’ Mumbai Central', service_type_id: 1, segment_id: 4, start_point: 'Pune', end_point: 'Mumbai Central', start_latitude: 18.5289, start_longitude: 73.8735, end_latitude: 18.9696, end_longitude: 72.8199, start_stop_id: 7011, end_stop_id: 7001, distance: '149 km' },
+    { id: 703, route_id: 703, route_name: 'Andheri â†’ Nashik', service_type_id: 1, segment_id: 4, start_point: 'Andheri', end_point: 'Nashik', start_latitude: 19.1197, start_longitude: 72.8468, end_latitude: 19.9975, end_longitude: 73.7898, start_stop_id: 7002, end_stop_id: 7012, distance: '167 km' },
+    { id: 704, route_id: 704, route_name: 'Nashik â†’ Andheri', service_type_id: 1, segment_id: 4, start_point: 'Nashik', end_point: 'Andheri', start_latitude: 19.9975, start_longitude: 73.7898, end_latitude: 19.1197, end_longitude: 72.8468, start_stop_id: 7012, end_stop_id: 7002, distance: '167 km' },
   ];
 }
 
 function busDefaultBus(id: number, available: number): Record<string, unknown> {
   const buses = [
-    { id: 7101, bus_id: 7101, bus_name: 'Raj Express Luxury', bus_number: 'MH-02-AR-7701', service_type_id: 1, bus_type: 'AC Sleeper 2+1', departure_time: '21:30', arrival_time: '01:10', price: 749, formatted_price: '₹749', available_seats: 14, total_seats: 26, seat_layout: 'SLEEPER', bus_design_type: 2, service_name: 'AC Sleeper', service_short_name: 'AC SL' },
-    { id: 7102, bus_id: 7102, bus_name: 'Sai Shraddha Travels', bus_number: 'MH-12-DE-5522', service_type_id: 1, bus_type: 'AC Seater 2+2', departure_time: '22:45', arrival_time: '02:25', price: 649, formatted_price: '₹649', available_seats: 9, total_seats: 26, seat_layout: 'SEATER', bus_design_type: 1, service_name: 'AC Seater', service_short_name: 'AC SE' },
-    { id: 7103, bus_id: 7103, bus_name: 'Greenline Volvo', bus_number: 'MH-04-JP-3311', service_type_id: 1, bus_type: 'Non AC Sleeper 2+1', departure_time: '23:15', arrival_time: '03:00', price: 549, formatted_price: '₹549', available_seats: 21, total_seats: 26, seat_layout: 'SLEEPER', bus_design_type: 2, service_name: 'Non AC Sleeper', service_short_name: 'NA SL' },
+    { id: 7101, bus_id: 7101, bus_name: 'Raj Express Luxury', bus_number: 'MH-02-AR-7701', service_type_id: 1, bus_type: 'AC Sleeper 2+1', departure_time: '21:30', arrival_time: '01:10', price: 749, formatted_price: 'K749', available_seats: 14, total_seats: 26, seat_layout: 'SLEEPER', bus_design_type: 2, service_name: 'AC Sleeper', service_short_name: 'AC SL' },
+    { id: 7102, bus_id: 7102, bus_name: 'Sai Shraddha Travels', bus_number: 'MH-12-DE-5522', service_type_id: 1, bus_type: 'AC Seater 2+2', departure_time: '22:45', arrival_time: '02:25', price: 649, formatted_price: 'K649', available_seats: 9, total_seats: 26, seat_layout: 'SEATER', bus_design_type: 1, service_name: 'AC Seater', service_short_name: 'AC SE' },
+    { id: 7103, bus_id: 7103, bus_name: 'Greenline Volvo', bus_number: 'MH-04-JP-3311', service_type_id: 1, bus_type: 'Non AC Sleeper 2+1', departure_time: '23:15', arrival_time: '03:00', price: 549, formatted_price: 'K549', available_seats: 21, total_seats: 26, seat_layout: 'SLEEPER', bus_design_type: 2, service_name: 'Non AC Sleeper', service_short_name: 'NA SL' },
   ];
   const bus = buses.find((b) => b.id === id) ?? buses[1];
   if (!bus) return {};
@@ -1791,7 +1786,7 @@ function busBookingPayload(body: Record<string, unknown>): BusBookingMock {
     bus_name: bus.bus_name as string,
     bus_number: bus.bus_number as string,
     route_id: num(body.route_id, 701),
-    route_name: str(body.route_name, 'Mumbai Central → Pune'),
+    route_name: str(body.route_name, 'Mumbai Central â†’ Pune'),
     service_type_id: 1,
     booking_date: str(body.booking_date, hmGetDate()),
     departure_time: bus.departure_time as string,
@@ -1910,7 +1905,7 @@ function busHandleCancelBooking(body: Record<string, unknown>): Ok {
   return ok(true);
 }
 
-// ── Carpooling (Phase 11) ────────────────────────────────────────────────────
+// â”€â”€ Carpooling (Phase 11) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Mirrors CarpoolingController responses (CarpoolingTrait calculations).
 // Ride status: 1=Offer, 2=Booked, 3=Ongoing, 4=End, 5=Cancel, 6=Cancel (passenger), 7=Expired.
 
@@ -2355,7 +2350,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
 
       case 'user/areas': {
         // Manual location picker area list. Source: Api\HomeController@Areas /user/areas
-        // Zambia (country_id 239) first — provinces + >=10 districts each.
+        // Zambia (country_id 239) first â€” provinces + >=10 districts each.
         const zm = (aid: number, province: string, district: string, lat: number, lng: number) => ({
           id: `zm-${aid}`,
           country_id: 239,
@@ -2491,7 +2486,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           geometry: { location: { lat, lng } },
         });
         const places = [
-          // Zambia — Lusaka first (country_id 239)
+          // Zambia â€” Lusaka first (country_id 239)
           place('zm-1', 'Lusaka City Centre', 'Lusaka, Zambia', -15.3875, 28.3228),
           place('zm-2', 'Woodlands, Lusaka', 'Lusaka, Zambia', -15.4126, 28.2685),
           place('zm-3', 'Kabulonga, Lusaka', 'Lusaka, Zambia', -15.4331, 28.2993),
@@ -2504,7 +2499,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           place('zm-10', 'Chongwe', 'Lusaka, Zambia', -15.33, 28.68),
           place('zm-11', 'Kafue', 'Lusaka, Zambia', -15.7689, 28.1813),
           place('zm-12', 'Kitwe', 'Copperbelt, Zambia', -12.8024, 28.2132),
-          // India — unchanged
+          // India â€” unchanged
           place('ch-1', 'Andheri West', 'Mumbai, Maharashtra', 19.1197, 72.8468),
           place('ch-2', 'Bandra West', 'Mumbai, Maharashtra', 19.0544, 72.8406),
           place('ch-3', 'Colaba Causeway', 'Mumbai, Maharashtra', 18.9076, 72.8147),
@@ -2520,8 +2515,8 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
 
       case 'user/promotion/notification': {
         data = [
-          { id: '1', title: 'Welcome Bonus!', description: 'Get ₹100 off on your first 3 rides. Use code WELCOME.', image: '', expiry_date: '2026-06-30', created_at: '2026-03-01' },
-          { id: '2', title: 'Refer & Earn', description: 'Invite friends and earn ₹200 for each successful referral.', image: '', expiry_date: '2026-12-31', created_at: '2026-03-10' },
+          { id: '1', title: 'Welcome Bonus!', description: 'Get K100 off on your first 3 rides. Use code WELCOME.', image: '', expiry_date: '2026-06-30', created_at: '2026-03-01' },
+          { id: '2', title: 'Refer & Earn', description: 'Invite friends and earn K200 for each successful referral.', image: '', expiry_date: '2026-12-31', created_at: '2026-03-10' },
         ];
         break;
       }
@@ -3000,7 +2995,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
       }
 
       // ------------------------------------------------------------------
-      // Store ordering (Phase 8 — grocery, pharmacy, generic)
+      // Store ordering (Phase 8 â€” grocery, pharmacy, generic)
       // ------------------------------------------------------------------
       case 'user/store/store-list': {
         const slug = String(body['slug'] ?? 'grocery');
@@ -3030,7 +3025,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           402: [
             { id: 711, product_name: 'Paracetamol 500mg', description: 'Strip of 10 tablets', price: 25, category_id: 805, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '10 tabs', variants: [], options: [], prescription: 0 },
             { id: 712, product_name: 'Cetirizine 10mg', description: 'Strip of 10 tablets', price: 35, category_id: 805, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '10 tabs', variants: [], options: [], prescription: 0 },
-            { id: 713, product_name: 'Amoxicillin 250mg', description: 'Capsules — prescription required', price: 120, category_id: 806, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '15 caps', variants: [], options: [], prescription: 1 },
+            { id: 713, product_name: 'Amoxicillin 250mg', description: 'Capsules â€” prescription required', price: 120, category_id: 806, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '15 caps', variants: [], options: [], prescription: 1 },
             { id: 714, product_name: 'Vitamin D3', description: '60,000 IU softgel', price: 199, category_id: 807, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '4 caps', variants: [], options: [] },
           ],
           403: [
@@ -3054,9 +3049,9 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           categories: storeCats[sid] ?? storeCats[401],
           products: storeProducts[sid] ?? storeProducts[401],
           time_slots: [
-            { id: 101, label: 'Morning 8 AM – 12 PM', start: '08:00', end: '12:00', is_active: 1 },
-            { id: 102, label: 'Afternoon 12 PM – 4 PM', start: '12:00', end: '16:00', is_active: 1 },
-            { id: 103, label: 'Evening 4 PM – 8 PM', start: '16:00', end: '20:00', is_active: 1 },
+            { id: 101, label: 'Morning 8 AM â€“ 12 PM', start: '08:00', end: '12:00', is_active: 1 },
+            { id: 102, label: 'Afternoon 12 PM â€“ 4 PM', start: '12:00', end: '16:00', is_active: 1 },
+            { id: 103, label: 'Evening 4 PM â€“ 8 PM', start: '16:00', end: '20:00', is_active: 1 },
           ],
           use_time_slots: 1,
           is_pharmacy: isPharmacyStore,
@@ -3128,7 +3123,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
       case 'user/store/order-detail':
       case 'user/store/track': {
         const oid = str(body['order_id'] ?? body['id'], 'so-1');
-        data = { id: oid, order_number: Math.floor(Date.now() / 1000), order_status: 1, store_id: 401, store_name: 'QuickMart', full_name: 'QuickMart', store_address: '15 Linking Road, Mumbai', products: [{ cart_id: 'sc-1', product_id: 701, product_name: 'Organic Apples', price: 180, quantity: 2, variant_id: 802, variant_name: '1 kg', option_ids: [], total_amount: 360, is_veg: 1, image: '', store_id: 401, weight: '1 kg' }], subtotal: 360, delivery_fee: 25, tax: 18, discount_amount: 0, promo_code: '', total_amount: 403, delivery_mode: 1, payment_mode: '1', payment_mode_name: 'Cash', address: 'Home', latitude: 19.076, longitude: 72.877, created_at: Date.now() - 30000, cancel_able: true, rate: null, status_text: 'Placed', ticket: 0, time_slot_label: 'Morning 8 AM – 12 PM', prescription_image: '' };
+        data = { id: oid, order_number: Math.floor(Date.now() / 1000), order_status: 1, store_id: 401, store_name: 'QuickMart', full_name: 'QuickMart', store_address: '15 Linking Road, Mumbai', products: [{ cart_id: 'sc-1', product_id: 701, product_name: 'Organic Apples', price: 180, quantity: 2, variant_id: 802, variant_name: '1 kg', option_ids: [], total_amount: 360, is_veg: 1, image: '', store_id: 401, weight: '1 kg' }], subtotal: 360, delivery_fee: 25, tax: 18, discount_amount: 0, promo_code: '', total_amount: 403, delivery_mode: 1, payment_mode: '1', payment_mode_name: 'Cash', address: 'Home', latitude: 19.076, longitude: 72.877, created_at: Date.now() - 30000, cancel_able: true, rate: null, status_text: 'Placed', ticket: 0, time_slot_label: 'Morning 8 AM â€“ 12 PM', prescription_image: '' };
         break;
       }
 
@@ -3280,7 +3275,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
         return NextResponse.json(data);
       }
 
-      // ── Laundry (Phase 10) ──────────────────────────────────────────────
+      // â”€â”€ Laundry (Phase 10) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case 'user/laundry/get-categories': {
         data = ldHandleGetCategories(body);
         return NextResponse.json(data);
@@ -3422,7 +3417,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
       }
 
       // ------------------------------------------------------------------
-      // Phase 12 — Account, wallet, history, SOS, favourites, family, etc.
+      // Phase 12 â€” Account, wallet, history, SOS, favourites, family, etc.
       // ------------------------------------------------------------------
       case 'user/booking/history': {
         const segmentId = num(body['segment_id'], 0);
@@ -3710,7 +3705,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           end_date: '2026-12-31',
           refer_code: s.phase12.referralCode,
           refer_status: '1',
-          refer_offer: 'Your friend gets ₹100 off; you earn ₹200',
+          refer_offer: 'Your friend gets K100 off; you earn K200',
           sharing_text: `Use my referral code ${s.phase12.referralCode} on Fixcycle and earn rewards!`,
           referral_count: 3,
         };

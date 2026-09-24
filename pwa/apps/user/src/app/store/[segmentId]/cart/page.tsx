@@ -71,10 +71,10 @@ export default function StoreCartPage(): React.ReactNode {
             <section className="mt-5 rounded-2xl border border-[var(--fc-border)] bg-[var(--fc-surface-raised)] p-4">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-[var(--fc-text-secondary)]">{t('store.subtotal', runtime.locale)}</span>
-                <span className="font-bold text-[var(--fc-text-primary)]">₹ {subtotal.toFixed(2)}</span>
+                <span className="font-bold text-[var(--fc-text-primary)]">K {subtotal.toFixed(2)}</span>
               </div>
               <p className="mt-1 text-[10px] text-[var(--fc-text-secondary)]">
-                {t('store.minimumOrder', runtime.locale)}: ₹ {cart.products[0]?.store_id ? '99' : '—'}
+                {t('store.minimumOrder', runtime.locale)}: K {cart.products[0]?.store_id ? '99' : '—'}
               </p>
             </section>
 
@@ -110,7 +110,7 @@ function CartItemRow({
         <p className="flex items-center gap-1.5 text-xs text-[var(--fc-text-secondary)]">
           {item.variant_name ? <span>{item.variant_name}</span> : null}
           {item.weight ? <span>{item.weight}</span> : null}
-          <span>₹ {item.price.toFixed(2)}</span>
+          <span>K {item.price.toFixed(2)}</span>
         </p>
         <div className="mt-1.5 flex items-center gap-3">
           <span className="flex items-center gap-2">

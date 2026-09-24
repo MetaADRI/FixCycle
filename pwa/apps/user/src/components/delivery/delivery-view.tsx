@@ -189,7 +189,7 @@ function VehicleStep({ flow }: { flow: DeliveryFlow }): React.ReactNode {
                     </span>
                   </span>
                   <span className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-[var(--fc-text-primary)]">{veh.ride_fare_text || `₹ ${veh.ride_fare}`}</span>
+                    <span className="text-sm font-bold text-[var(--fc-text-primary)]">{veh.ride_fare_text || `K ${veh.ride_fare}`}</span>
                     {active ? <Icon name="check" size={18} className="text-[var(--fc-bg-secondary)]" /> : null}
                   </span>
                 </button>
@@ -321,7 +321,7 @@ function CheckoutStep({ flow }: { flow: DeliveryFlow }): React.ReactNode {
               <li className="flex items-center justify-between">
                 <span className="text-[var(--fc-text-secondary)]">{t('delivery.estimateFare', 'en')}</span>
                 <span className="font-semibold text-[var(--fc-text-primary)]">
-                  ₹ {checkoutResult.estimate_fare}
+                  K {checkoutResult.estimate_fare}
                 </span>
               </li>
             </ul>

@@ -1,21 +1,21 @@
-#!/usr/bin/env node
-// ────────────────────────────────────────────────────────────────────────────
-// Fixcycle standalone API server — zero dependencies
+﻿#!/usr/bin/env node
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Fixcycle standalone API server â€” zero dependencies
 // Reimplements the Laravel API routes the PWA user app needs for the ride
-// flow (boot → auth → home → plan → checkout → confirm → tracking → receipt).
+// flow (boot â†’ auth â†’ home â†’ plan â†’ checkout â†’ confirm â†’ tracking â†’ receipt).
 // Routes are derived from pwa/packages/api-client/src/endpoints/*.ts.
-// ────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const http = require('node:http');
 const { randomUUID, randomInt } = require('node:crypto');
 
-// Load optional .env (e.g. DATABASE_URL) — guarded so a missing dotenv install
+// Load optional .env (e.g. DATABASE_URL) â€” guarded so a missing dotenv install
 // never breaks the server when persistence is not configured.
-try { require('dotenv').config(); } catch (_) { /* dotenv not installed — fine */ }
+try { require('dotenv').config(); } catch (_) { /* dotenv not installed â€” fine */ }
 
 const PORT = Number(process.env.PORT) || 4001;
 
-// ── Helpers ─────────────────────────────────────────────────────────────────
+// â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function ok(data, message = 'OK') {
   return { version: '1.5', result: '1', message, data, time: Date.now() };
@@ -79,11 +79,11 @@ function polylineFor(ref, progress) {
   return encodePolyline(pts);
 }
 
-const CURRENCY = '₹';
+const CURRENCY = 'â‚¹';
 function round2(n) { return Math.round(n * 100) / 100; }
 function fmtCurrency(n) { return `${CURRENCY} ${round2(n).toFixed(2)}`; }
 
-// ── Seed data ───────────────────────────────────────────────────────────────
+// â”€â”€ Seed data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const COUNTRY = { id: 91, name: 'India', phonecode: '+91', country_code: 'IN', iso: 'IN', currency: 'INR', minNumPhone: 10, maxNumPhone: 10, country_status: 1 };
 
@@ -153,7 +153,7 @@ const TRANSFER_PACKAGES = [
 // Transfer service type id (distinct from Taxi 1001 / Premium 1002).
 const TRANSFER_SERVICE_TYPE = 1003;
 
-// Pool (carpool) service type id — matches the Android app's pool segment.
+// Pool (carpool) service type id â€” matches the Android app's pool segment.
 const POOL_SERVICE_TYPE = 5;
 
 // Delivery service type id.
@@ -181,7 +181,7 @@ const DELIVERY_PRODUCTS = [
   { id: 302, product_name: 'Laptop / Tablet', description: 'Electronics up to 5kg', weight: 2, category_id: 2, price: 0 },
   { id: 303, product_name: 'Small Garment', description: 'Shirts, dresses, small clothing', weight: 0.5, category_id: 3, price: 0 },
   { id: 304, product_name: 'Meal / Tiffin', description: 'Home-cooked or restaurant food', weight: 1, category_id: 4, price: 0 },
-  { id: 305, product_name: 'Glass / Ceramics', description: 'Fragile — handle with care', weight: 2, category_id: 5, price: 10 },
+  { id: 305, product_name: 'Glass / Ceramics', description: 'Fragile â€” handle with care', weight: 2, category_id: 5, price: 10 },
   { id: 306, product_name: 'Medicine / Prescription', description: 'Pharmacy items', weight: 0.3, category_id: 6, price: 0 },
   { id: 307, product_name: 'General Parcel', description: 'Anything else under 25kg', weight: 3, category_id: 7, price: 0 },
 ];
@@ -192,7 +192,7 @@ const DELIVERY_VEHICLES = [
   { id: 16, name: 'Van Delivery', capacity_kg: 50, image: '', fare_per_km: 25, fare_per_min: 2, base_fare: 99, ride_fare: '99', ride_fare_text: 'From 99' },
 ];
 
-// ── Food ordering mock data ─────────────────────────────────────────────────
+// â”€â”€ Food ordering mock data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const FOOD_SEGMENT_ID = 2;
 
@@ -245,7 +245,7 @@ const FOOD_CANCEL_REASONS = [
   { id: 5, reason: 'Other' },
 ];
 
-// ── Store ordering (Phase 8) ────────────────────────────────────────────────
+// â”€â”€ Store ordering (Phase 8) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Grocery, pharmacy and generic stores. sub_group_for_app == 2 (vs food 1).
 // The PHARMACY slug triggers prescription upload (config/custom.php
 // prescription_image). Products carry weight units; orders can use time slots.
@@ -413,7 +413,7 @@ const MAIN_SCREEN_CELLS = [
   },
 ];
 
-// ── In-memory state ─────────────────────────────────────────────────────────
+// â”€â”€ In-memory state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const state = {
   // token -> user record
@@ -446,29 +446,6 @@ const state = {
   storeCartSeq: 9100,
 };
 
-// Seed a demo user for password login
-const DEMO_USER = {
-  id: 1,
-  firstName: 'Demo',
-  lastName: 'User',
-  email: 'demo@fixcycle.com',
-  phone: '9876543210',
-  phoneCode: '+91',
-  countryCode: 'IN',
-  gender: '',
-  smokerType: 'no',
-  networkCode: '',
-  referralCode: 'DEMO01',
-  signupStatus: '1',
-  walletBalance: '50.00',
-  outstandingAmount: '0',
-  password: '12345678',
-  country_id: 91,
-  merchant_id: 1,
-  user_type: 1,
-  is_guest: false,
-};
-state.users.set(1, DEMO_USER);
 
 function issueToken(user) {
   const token = randomUUID();
@@ -485,21 +462,21 @@ function getUserFromRequest(req) {
   return null;
 }
 
-// ── PostgreSQL (Neon) persistence — optional ────────────────────────────────
+// â”€â”€ PostgreSQL (Neon) persistence â€” optional â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // When process.env.DATABASE_URL is set, phone/password accounts are persisted
 // in a real Postgres `users` table (schema bootstrapped idempotently on first
 // use). When it is NOT set, the server keeps today's purely in-memory
-// behaviour (accept any phone/password combo for dev) — see the fallback logs
+// behaviour (accept any phone/password combo for dev) â€” see the fallback logs
 // and the `dbEnabled` guards below.
 // NODE_ENV/PORT note: this stays a zero-surprise mock when unconfigured.
 
 const DATABASE_URL = String(process.env.DATABASE_URL || '').trim();
 
-// bcryptjs — pure JS bcrypt, no native build (only required when DB enabled).
+// bcryptjs â€” pure JS bcrypt, no native build (only required when DB enabled).
 let bcrypt = null;
 try { bcrypt = require('bcryptjs'); } catch (_) { /* not installed */ }
 
-// Neon query function — created lazily and only when a URL is present.
+// Neon query function â€” created lazily and only when a URL is present.
 let db = null;
 if (DATABASE_URL) {
   try {
@@ -507,7 +484,7 @@ if (DATABASE_URL) {
     db = neon(DATABASE_URL);
   } catch (err) {
     db = null;
-    console.error('[fixcycle-backend] Neon init failed — falling back to in-memory accounts:', err.message);
+    console.error('[fixcycle-backend] Neon init failed â€” falling back to in-memory accounts:', err.message);
   }
 }
 
@@ -516,10 +493,10 @@ const dbEnabled = !!db && !!bcrypt;
 if (DATABASE_URL && dbEnabled) {
   console.log('[fixcycle-backend] PostgreSQL (Neon) persistence ENABLED');
 } else if (DATABASE_URL) {
-  console.log('[fixcycle-backend] DATABASE_URL present but Neon/bcryptjs not available — falling back to in-memory accounts (no persistence)');
+  console.log('[fixcycle-backend] DATABASE_URL present but Neon/bcryptjs not available â€” falling back to in-memory accounts (no persistence)');
 }
 if (!DATABASE_URL) {
-  console.log('[fixcycle-backend] DATABASE_URL not set — falling back to in-memory accounts (no persistence)');
+  console.log('[fixcycle-backend] DATABASE_URL not set â€” falling back to in-memory accounts (no persistence)');
 }
 
 // Schema bootstrapped once per process, lazily, only when the DB is enabled.
@@ -621,7 +598,7 @@ async function findUserByPhone(phone) {
   return rows[0] ? userFromDbRow(rows[0]) : null;
 }
 
-// ── Booking lifecycle ───────────────────────────────────────────────────────
+// â”€â”€ Booking lifecycle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function bookingStatusAt(booking) {
   const el = (Date.now() - booking.createdAt) / 1000;
@@ -700,7 +677,7 @@ function buildCheckoutData(ref) {
     estimate_bill_without_format: afterPromo,
     promo_code: ref.promoApplied ? 'FIX10' : undefined,
     discounted_amout: ref.promoApplied ? '40.00' : undefined,
-    discount_amount_formatted: ref.promoApplied ? '-₹40.00' : '₹0.00',
+    discount_amount_formatted: ref.promoApplied ? '-â‚¹40.00' : 'â‚¹0.00',
     outstandAmount: '0',
     outstandShow: false,
     service_type_name: isPool ? 'Pool' : (isTransfer ? 'Transfer' : (isRental ? 'Rental' : (isOutstation ? 'Outstation' : 'Taxi'))),
@@ -831,7 +808,7 @@ function buildReceiptData(booking) {
   };
 }
 
-// ── Route handlers ──────────────────────────────────────────────────────────
+// â”€â”€ Route handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function handleConfiguration() {
   return ok(CONFIGURATION);
@@ -1072,7 +1049,7 @@ function handleDrivers(body) {
 }
 
 // ---------------------------------------------------------------------------
-// Rental cars — POST /user/rental-cars  (Api\HomeController@rentalCars)
+// Rental cars â€” POST /user/rental-cars  (Api\HomeController@rentalCars)
 // ---------------------------------------------------------------------------
 function handleRentalCars(body) {
   const areaId = num(body.area_id, 1);
@@ -1104,7 +1081,7 @@ function handleRentalCars(body) {
 }
 
 // ---------------------------------------------------------------------------
-// Outstation details — POST /user/outstation-details  (OutstationController@outstationDetail)
+// Outstation details â€” POST /user/outstation-details  (OutstationController@outstationDetail)
 // Returns { single: [package vehicles], round: [per-km vehicles], return_time }
 // ---------------------------------------------------------------------------
 function haversineKm(lat1, lng1, lat2, lng2) {
@@ -1162,7 +1139,7 @@ function handleOutstationDetails(body) {
 }
 
 // ---------------------------------------------------------------------------
-// Transfer details — POST /user/transfer-details  (TransferController@transferDetail)
+// Transfer details â€” POST /user/transfer-details  (TransferController@transferDetail)
 // Airport / hourly transfer: returns per-vehicle hourly packages.
 // ---------------------------------------------------------------------------
 function handleTransferDetails(body) {
@@ -1194,7 +1171,7 @@ function handleTransferDetails(body) {
 }
 
 // ---------------------------------------------------------------------------
-// Pool details — POST /user/pool-details  (PoolController-like behaviour)
+// Pool details â€” POST /user/pool-details  (PoolController-like behaviour)
 // Returns pool-enabled vehicles with seat capacity and per-seat fare estimate.
 // ---------------------------------------------------------------------------
 function handlePoolDetails(body) {
@@ -1219,7 +1196,7 @@ function handlePoolDetails(body) {
 }
 
 // ---------------------------------------------------------------------------
-// CheckSeats — POST /user/CheckSeats  (UserController@CheckSeats)
+// CheckSeats â€” POST /user/CheckSeats  (UserController@CheckSeats)
 // Validates seat availability for pool rides against checkout and rider count.
 // ---------------------------------------------------------------------------
 function handleCheckSeats(body) {
@@ -1467,7 +1444,7 @@ function handleGetNavigationDrawer() { return ok(NAVIGATION_DRAWER); }
 function handleGetNavigationDrawerConfig() { return ok(NAVIGATION_DRAWER_CONFIG); }
 function handleSaveNavigationDrawer() { return ok({ ok: true }); }
 
-// ── Delivery handlers ──────────────────────────────────────────────────────
+// â”€â”€ Delivery handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function handleDeliveryPackage() {
   return ok(DELIVERY_PACKAGES.map((p) => ({
@@ -1646,7 +1623,7 @@ function handleConfirmDelivery(body) {
   });
 }
 
-// ── Food handlers ──────────────────────────────────────────────────────────
+// â”€â”€ Food handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function cartKey(user) {
   const uid = user && user.id ? user.id : 'guest';
@@ -2092,7 +2069,7 @@ function handleGetFavouriteBusinessSegment() {
   return ok([]);
 }
 
-// ── Store (grocery / pharmacy / generic) handlers — Phase 8 ─────────────────
+// â”€â”€ Store (grocery / pharmacy / generic) handlers â€” Phase 8 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function storeCartKey(user) {
   const uid = user && user.id ? user.id : 'guest';
@@ -2308,7 +2285,7 @@ function handleStoreCheckout(body, user) {
   if (items.length === 0) return fail('Cart is empty');
   const subtotal = Math.round(items.reduce((s, i) => s + i.price * i.quantity, 0) * 100) / 100;
   if (subtotal < store.minimum_order) {
-    return fail(`Minimum order is ₹ ${store.minimum_order}`);
+    return fail(`Minimum order is â‚¹ ${store.minimum_order}`);
   }
   const id = `sck-${(state.checkoutSeq += 1)}`;
   const deliveryMode = num(body.delivery_mode, 1);
@@ -2386,7 +2363,7 @@ function handleStorePlaceOrder(body, user) {
     const store = storeById(body.business_segment_id || 0);
     if (!store) return fail('Checkout not found');
     const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
-    if (subtotal < store.minimum_order) return fail(`Minimum order is ₹ ${store.minimum_order}`);
+    if (subtotal < store.minimum_order) return fail(`Minimum order is â‚¹ ${store.minimum_order}`);
     const deliveryMode = num(body.delivery_mode, 1);
     const slot = num(body.time_slot_id, 0);
     const slotObj = (STORE_SLOTS[store.id] || []).find((s) => s.id === slot) || null;
@@ -2572,7 +2549,7 @@ function handleStoreSendChat(body) {
   return ok({ ok: true, message: 'Sent' });
 }
 
-// ── Phase 9 — Handyman / plumber / salon / towing engine ─────────────────────
+// â”€â”€ Phase 9 â€” Handyman / plumber / salon / towing engine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const HM_SEGMENTS = { 6: { title: 'Handyman', biddingEnable: true }, 7: { title: 'Plumber', biddingEnable: false }, 8: { title: 'Salon & Spa', biddingEnable: false }, 9: { title: 'Vehicle Towing', biddingEnable: true } };
 const HM_SEGMENT_IDS = [6, 7, 8, 9];
@@ -2592,11 +2569,11 @@ const HM_SERVICES = {
 };
 
 const HM_PROVIDERS = [
-  { id: 501, first_name: 'Ravi', last_name: 'Kumar', business_name: 'Ravi Handyman Services', rating: '4.6', time_range: '09:00 AM - 06:00 PM', distance: '1.2 km', current_latitude: '19.0761', current_longitude: '72.8774', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
-  { id: 502, first_name: 'Sunil', last_name: 'Sharma', business_name: 'Sunil Repairs & Cleaning', rating: '4.3', time_range: '08:00 AM - 05:00 PM', distance: '2.4 km', current_latitude: '19.078', current_longitude: '72.88', image: '', is_favourite: 1, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
-  { id: 503, first_name: 'Amit', last_name: 'Verma', business_name: 'Amit Electrical & Plumbing', rating: '4.8', time_range: '10:00 AM - 07:00 PM', distance: '1.9 km', current_latitude: '19.074', current_longitude: '72.875', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
-  { id: 504, first_name: 'Priya', last_name: 'Nair', business_name: 'Priya Salon & Beauty', rating: '4.9', time_range: '09:30 AM - 08:00 PM', distance: '3.1 km', current_latitude: '19.081', current_longitude: '72.889', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
-  { id: 505, first_name: 'Vikram', last_name: 'Singh', business_name: 'Vikram Tow & Assist', rating: '4.5', time_range: '24 Hours', distance: '0.8 km', current_latitude: '19.075', current_longitude: '72.876', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of ₹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 501, first_name: 'Ravi', last_name: 'Kumar', business_name: 'Ravi Handyman Services', rating: '4.6', time_range: '09:00 AM - 06:00 PM', distance: '1.2 km', current_latitude: '19.0761', current_longitude: '72.8774', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of â‚¹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 502, first_name: 'Sunil', last_name: 'Sharma', business_name: 'Sunil Repairs & Cleaning', rating: '4.3', time_range: '08:00 AM - 05:00 PM', distance: '2.4 km', current_latitude: '19.078', current_longitude: '72.88', image: '', is_favourite: 1, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of â‚¹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 503, first_name: 'Amit', last_name: 'Verma', business_name: 'Amit Electrical & Plumbing', rating: '4.8', time_range: '10:00 AM - 07:00 PM', distance: '1.9 km', current_latitude: '19.074', current_longitude: '72.875', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of â‚¹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 504, first_name: 'Priya', last_name: 'Nair', business_name: 'Priya Salon & Beauty', rating: '4.9', time_range: '09:30 AM - 08:00 PM', distance: '3.1 km', current_latitude: '19.081', current_longitude: '72.889', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of â‚¹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
+  { id: 505, first_name: 'Vikram', last_name: 'Singh', business_name: 'Vikram Tow & Assist', rating: '4.5', time_range: '24 Hours', distance: '0.8 km', current_latitude: '19.075', current_longitude: '72.876', image: '', is_favourite: 0, hourly_amount: '0', minimum_booking_amount: '149', min_bill_description: 'Minimum booking amount of â‚¹149 applies', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', segment_price_card_id: 606 },
 ];
 
 const HM_PROVIDER_SERVICES = {
@@ -2657,27 +2634,27 @@ function hmProviderById(id) { return HM_PROVIDERS.find((p) => p.id === id) || nu
 function hmProviderResponse(p, segId) {
   const svcIds = HM_PROVIDER_SERVICES[p.id] || [];
   const segSvcs = HM_SERVICES[segId] || HM_SERVICES[6];
-  const serviceType = svcIds.map((svcId) => { const s = segSvcs.find((x) => x.id === svcId); return s ? { id: s.id, name: s.name, amount: s.amount, amount_string: `₹${s.amount}`, segment_price_card_detail_id: s.id } : null; }).filter(Boolean);
+  const serviceType = svcIds.map((svcId) => { const s = segSvcs.find((x) => x.id === svcId); return s ? { id: s.id, name: s.name, amount: s.amount, amount_string: `â‚¹${s.amount}`, segment_price_card_detail_id: s.id } : null; }).filter(Boolean);
   return { id: p.id, first_name: p.first_name, last_name: p.last_name, business_name: p.business_name, distance: p.distance, is_favourite: p.is_favourite, rating: p.rating, rating_number: Number(p.rating), time_range: p.time_range, current_latitude: p.current_latitude, current_longitude: p.current_longitude, image: p.image, segment_price_card_id: p.segment_price_card_id, hourly_amount: p.hourly_amount, minimum_booking_amount: p.minimum_booking_amount, min_bill_description: p.min_bill_description, price_type_text: p.price_type_text, price_type_slug: p.price_type_slug, service_type: serviceType };
 }
 
 function hmBuildOrderResponse(order) {
-  return { order_id: order.order_id, merchant_order_id: order.merchant_order_id, first_name: order.first_name, last_name: order.last_name, rating: order.rating, profile_image: order.profile_image, phone_number: order.phone_number, drop_location: order.drop_location, drop_latitude: order.drop_latitude, drop_longitude: order.drop_longitude, currency: '₹', total_services: order.total_services, order_status: order.order_status_text, status: order.numeric_order_status, order_otp: order.order_otp, segment_name: order.segment_name, booking_date: order.booking_date, slot_time_text: order.slot_time_text, service_type: order.service_type, segment_id: order.segment_id, payment_detail: order.payment_detail, cancel_reason: HM_CANCEL_REASONS, is_rated: order.is_rated, arr_action: order.arr_action, bidding_amount_accepted: null, bidding_amount: null, handyman_customer_details_visible: true, current_latitude: order.current_latitude, current_longitude: order.current_longitude, rating: order.rating };
+  return { order_id: order.order_id, merchant_order_id: order.merchant_order_id, first_name: order.first_name, last_name: order.last_name, rating: order.rating, profile_image: order.profile_image, phone_number: order.phone_number, drop_location: order.drop_location, drop_latitude: order.drop_latitude, drop_longitude: order.drop_longitude, currency: 'â‚¹', total_services: order.total_services, order_status: order.order_status_text, status: order.numeric_order_status, order_otp: order.order_otp, segment_name: order.segment_name, booking_date: order.booking_date, slot_time_text: order.slot_time_text, service_type: order.service_type, segment_id: order.segment_id, payment_detail: order.payment_detail, cancel_reason: HM_CANCEL_REASONS, is_rated: order.is_rated, arr_action: order.arr_action, bidding_amount_accepted: null, bidding_amount: null, handyman_customer_details_visible: true, current_latitude: order.current_latitude, current_longitude: order.current_longitude, rating: order.rating };
 }
 
 // Seed demo orders
 HANDYMAN_ORDERS = [
-  { order_id: 9011, merchant_order_id: 'hm-9011', first_name: 'Ravi', last_name: 'Kumar', rating: '4.6', profile_image: '', phone_number: '+91 98200 00000', drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', total_services: 1, order_status_text: 'Delivered', numeric_order_status: 11, booking_date: (() => { const d = new Date(); d.setDate(d.getDate() - 1); return d.toISOString().slice(0, 10); })(), slot_time_text: '11:30 AM', service_type: [{ id: 101, name: 'Tub Change', amount: '₹149', currency: '₹', price_type: 1, segment_price_card_id: 606 }], segment_id: 6, segment_name: 'Handyman', order_otp: '4587', current_latitude: '19.0761', current_longitude: '72.8774', is_rated: true, arr_action: { cancel: false, pay: false, create_outstanding: '' }, payment_detail: { cart_amount: '149', dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: '149', minimum_booking_amount: '149', minimum_booking_amount_payment_status: true, total_pending_amount: '0.0', pending_amount_status: false, pending_message: '', paid_status: true, payment_method_id: 1, payment_mode: 'Cash', discount_amount: '0', additional_amount: [], custom_additional_charge: '' } },
-  { order_id: 9012, merchant_order_id: 'hm-9012', first_name: 'Ravi', last_name: 'Kumar', rating: '0', profile_image: '', phone_number: '+91 98200 00000', drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', total_services: 1, order_status_text: 'Placed', numeric_order_status: 1, booking_date: hmGetDate(), slot_time_text: '02:00 PM', service_type: [{ id: 102, name: 'Ceiling Fan', amount: '₹249', currency: '₹', price_type: 1, segment_price_card_id: 606 }], segment_id: 6, segment_name: 'Handyman', order_otp: '3312', current_latitude: '19.0761', current_longitude: '72.8774', is_rated: false, arr_action: { cancel: true, pay: false, create_outstanding: '' }, payment_detail: { cart_amount: '249', dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: '249', minimum_booking_amount: '149', minimum_booking_amount_payment_status: false, total_pending_amount: '249', pending_amount_status: true, pending_message: 'Balance payable to the provider after service', paid_status: false, payment_method_id: 1, payment_mode: 'Cash', discount_amount: '0', additional_amount: [], custom_additional_charge: '' } },
+  { order_id: 9011, merchant_order_id: 'hm-9011', first_name: 'Ravi', last_name: 'Kumar', rating: '4.6', profile_image: '', phone_number: '+91 98200 00000', drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', total_services: 1, order_status_text: 'Delivered', numeric_order_status: 11, booking_date: (() => { const d = new Date(); d.setDate(d.getDate() - 1); return d.toISOString().slice(0, 10); })(), slot_time_text: '11:30 AM', service_type: [{ id: 101, name: 'Tub Change', amount: 'â‚¹149', currency: 'â‚¹', price_type: 1, segment_price_card_id: 606 }], segment_id: 6, segment_name: 'Handyman', order_otp: '4587', current_latitude: '19.0761', current_longitude: '72.8774', is_rated: true, arr_action: { cancel: false, pay: false, create_outstanding: '' }, payment_detail: { cart_amount: '149', dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: '149', minimum_booking_amount: '149', minimum_booking_amount_payment_status: true, total_pending_amount: '0.0', pending_amount_status: false, pending_message: '', paid_status: true, payment_method_id: 1, payment_mode: 'Cash', discount_amount: '0', additional_amount: [], custom_additional_charge: '' } },
+  { order_id: 9012, merchant_order_id: 'hm-9012', first_name: 'Ravi', last_name: 'Kumar', rating: '0', profile_image: '', phone_number: '+91 98200 00000', drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', total_services: 1, order_status_text: 'Placed', numeric_order_status: 1, booking_date: hmGetDate(), slot_time_text: '02:00 PM', service_type: [{ id: 102, name: 'Ceiling Fan', amount: 'â‚¹249', currency: 'â‚¹', price_type: 1, segment_price_card_id: 606 }], segment_id: 6, segment_name: 'Handyman', order_otp: '3312', current_latitude: '19.0761', current_longitude: '72.8774', is_rated: false, arr_action: { cancel: true, pay: false, create_outstanding: '' }, payment_detail: { cart_amount: '249', dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: '249', minimum_booking_amount: '149', minimum_booking_amount_payment_status: false, total_pending_amount: '249', pending_amount_status: true, pending_message: 'Balance payable to the provider after service', paid_status: false, payment_method_id: 1, payment_mode: 'Cash', discount_amount: '0', additional_amount: [], custom_additional_charge: '' } },
 ];
 
 HANDYMAN_BID_ORDERS = [
   { id: 1001, bid_order_id: 'bdo-1001', service_name: 'Ceiling Fan Fixing', category_name: 'Home Repair', description: 'Two ceiling fans not working', work_image_one: '', work_image_two: '', work_image_three: '', work_image_four: '', final_amount: '200', status: 'Active', numeric_status: 1, created_at: new Date().toISOString(), booked_at: '', time_slot_text: '02:00 PM', user_offer_price: '200', no_of_bids: 2, segment_id: 6, bids: [
-    { id: 8001, driver_id: 501, first_name: 'Ravi', last_name: 'Kumar', profile_image: '', rating: '4.6', bid_amount: '₹180', amount: '180', created_at: new Date().toISOString(), time_text: '2 min ago', user_offer_price: '200', status: 'Active', numeric_status: 1, message: '' },
-    { id: 8002, driver_id: 503, first_name: 'Amit', last_name: 'Verma', profile_image: '', rating: '4.8', bid_amount: '₹165', amount: '165', created_at: new Date().toISOString(), time_text: '8 min ago', user_offer_price: '200', status: 'Active', numeric_status: 1, message: '' },
+    { id: 8001, driver_id: 501, first_name: 'Ravi', last_name: 'Kumar', profile_image: '', rating: '4.6', bid_amount: 'â‚¹180', amount: '180', created_at: new Date().toISOString(), time_text: '2 min ago', user_offer_price: '200', status: 'Active', numeric_status: 1, message: '' },
+    { id: 8002, driver_id: 503, first_name: 'Amit', last_name: 'Verma', profile_image: '', rating: '4.8', bid_amount: 'â‚¹165', amount: '165', created_at: new Date().toISOString(), time_text: '8 min ago', user_offer_price: '200', status: 'Active', numeric_status: 1, message: '' },
   ] },
   { id: 1000, bid_order_id: 'bdo-1000', service_name: 'Kitchen Tap Replacement', category_name: 'Repair', description: 'Leaking kitchen tap', work_image_one: '', work_image_two: '', work_image_three: '', work_image_four: '', final_amount: '210', status: 'Booked', numeric_status: 3, created_at: new Date().toISOString(), booked_at: new Date().toISOString(), time_slot_text: '11:30 AM', user_offer_price: '250', no_of_bids: 1, segment_id: 7, bids: [
-    { id: 8000, driver_id: 502, first_name: 'Sunil', last_name: 'Sharma', profile_image: '', rating: '4.3', bid_amount: '₹210', amount: '210', created_at: new Date().toISOString(), time_text: '15 min ago', user_offer_price: '250', status: 'Accepted', numeric_status: 2, message: '' },
+    { id: 8000, driver_id: 502, first_name: 'Sunil', last_name: 'Sharma', profile_image: '', rating: '4.3', bid_amount: 'â‚¹210', amount: '210', created_at: new Date().toISOString(), time_text: '15 min ago', user_offer_price: '250', status: 'Accepted', numeric_status: 2, message: '' },
   ] },
 ];
 
@@ -2689,7 +2666,7 @@ const HM_CANCEL_REASONS = [
 ];
 
 function handleHandymanGetCategories(body) { const segId = num(body.segment_id, 6); return ok({ arr_categories: (HM_SEGMENT_CATEGORIES[segId] || []).map(([id, name]) => ({ id, name, image: '' })) }); }
-function handleHandymanGetServices(body) { const segId = num(body.segment_id, 6); const svcs = (HM_SERVICES[segId] || []).map((s) => ({ id: s.id, name: s.name, amount: s.amount, amount_string: `₹${s.amount}`, price_type: 1, segment_price_card_id: 600 + segId })); return ok({ segment_price_id: segId * 100 + 11, currency: '₹', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', minimum_booking_amount: 149, minimum_booking_amount_string: '₹149', min_bill_description: 'Minimum booking amount of ₹149 applies', hourly_amount: 0, arr_services: svcs, handyman_bidding_enable: !!HM_SEGMENTS[segId]?.biddingEnable }); }
+function handleHandymanGetServices(body) { const segId = num(body.segment_id, 6); const svcs = (HM_SERVICES[segId] || []).map((s) => ({ id: s.id, name: s.name, amount: s.amount, amount_string: `â‚¹${s.amount}`, price_type: 1, segment_price_card_id: 600 + segId })); return ok({ segment_price_id: segId * 100 + 11, currency: 'â‚¹', price_type_text: 'Fixed Price', price_type_slug: 'fixed-price', minimum_booking_amount: 149, minimum_booking_amount_string: 'â‚¹149', min_bill_description: 'Minimum booking amount of â‚¹149 applies', hourly_amount: 0, arr_services: svcs, handyman_bidding_enable: !!HM_SEGMENTS[segId]?.biddingEnable }); }
 function handleHandymanGetProviders(body) { const segId = num(body.segment_id, 6); const selected = Array.isArray(body.selected_services) ? body.selected_services.map((s) => num(s.service_type_id, 0)).filter(Boolean) : []; let list = HM_PROVIDERS.map((p) => hmProviderResponse(p, segId)); if (selected.length > 0) { const filtered = list.filter((p) => selected.every((sid) => p.service_type.some((s) => s.id === sid))); if (filtered.length > 0) list = filtered; } return ok({ providers: list, total_pages: 1, current_page: 1, tax_per: 0, limit: 10 }); }
 function handleHandymanGetProvider(body) { const providerId = num(body.provider_id, 0); const segId = num(body.segment_id, 6); const p = hmProviderById(providerId); if (!p) return fail('Provider not found'); return ok(hmProviderResponse(p, segId)); }
 function handleHandymanServiceSlots(body) { return ok({ time_slots: hmGetSlots(), instant_booking_time_slot_id: 503, instant_booking_after_text: 'Available now' }); }
@@ -2697,8 +2674,8 @@ function handleHandymanSaveBookingCart(body) { const segId = num(body.segment_id
 function handleHandymanGetCart(body) { const cartId = num(body.cart_id, 0); for (const key of Object.keys(HANDYMAN_CARTS)) { if (HANDYMAN_CARTS[key].cart_id === cartId) return ok(hmBuildCartResponse(HANDYMAN_CARTS[key])); } return fail('Cart not found'); }
 function handleHandymanDeleteCart(body) { const cartId = num(body.cart_id, 0); const deleteType = String(body.delete_type || '').toUpperCase(); for (const key of Object.keys(HANDYMAN_CARTS)) { if (HANDYMAN_CARTS[key].cart_id === cartId) { const cart = HANDYMAN_CARTS[key]; if (deleteType === 'CART') { delete HANDYMAN_CARTS[key]; return ok({}); } else if (deleteType === 'SERVICE') { const svcId = num(body.service_type_id, 0); cart.ordered_services = cart.ordered_services.filter((s) => s.service_type_id !== svcId); hmRecalcCart(cart); return ok(hmBuildCartResponse(cart)); } } } return fail('Cart not found'); }
 function handleHandymanApplyPromo(body) { const cartId = num(body.cart_id, 0); for (const key of Object.keys(HANDYMAN_CARTS)) { if (HANDYMAN_CARTS[key].cart_id === cartId) { const cart = HANDYMAN_CARTS[key]; const code = String(body.promo_code || '').toUpperCase(); if (code === 'WELCOME10' || code === 'FLAT25') { cart.applied_promo_code = code; } else { cart.applied_promo_code = ''; } hmRecalcCart(cart); return ok(hmBuildCartResponse(cart)); } } return fail('Cart not found'); }
-function handleHandymanConfirmOrder(body) { const cartId = num(body.cart_id, 0); let cart = null; for (const key of Object.keys(HANDYMAN_CARTS)) { if (HANDYMAN_CARTS[key].cart_id === cartId) { cart = HANDYMAN_CARTS[key]; break; } } if (!cart || cart.ordered_services.length === 0) return fail('Cart is empty'); const segId = Math.floor(cartId / 100); const prov = hmProviderById(segId === 6 ? 501 : segId === 7 ? 502 : segId === 8 ? 504 : 505); const pmtId = num(body.payment_method_id, 1); const adv = num(body.advance_payment_of_min_bill, 0); const final = cart.final_amount; const pending = adv > 0 ? Math.max(0, final - adv) : 0; const paid = pmtId === 3 || adv >= final; const orderId = HANDYMAN_ORDER_SEQ++; const advance = num(body.advance_payment_of_min_bill, 0); const order = { order_id: orderId, merchant_order_id: `hm-${orderId}`, first_name: prov.first_name, last_name: prov.last_name, rating: '0', profile_image: '', phone_number: '+91 98200 00000', drop_location: body.drop_location || cart.drop_location || 'Home', drop_latitude: String(body.latitude || cart.latitude || '19.076'), drop_longitude: String(body.longitude || cart.longitude || '72.877'), currency: '₹', total_services: cart.total_quantity, order_status_text: 'Placed', numeric_order_status: 1, status: 1, booking_date: cart.booking_date, slot_time_text: cart.slot_time_text, service_type: cart.ordered_services.map((s) => { const svc = hmServiceById(s.service_type_id); return { id: s.service_type_id, name: s.service_name, amount: `₹${svc ? svc.amount : s.service_price}`, currency: '₹', price_type: 1, segment_price_card_id: 600 + segId }; }), segment_id: segId, segment_name: HM_SEGMENTS[segId]?.title || 'Handyman', order_otp: String(randomInt(1000, 9999)), current_latitude: String(body.latitude || cart.latitude || '19.0761'), current_longitude: String(body.longitude || cart.longitude || '72.8774'), is_rated: false, arr_action: { cancel: true, pay: false, create_outstanding: '' }, payment_detail: { cart_amount: String(cart.total_amount), dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: String(final), minimum_booking_amount: '149', minimum_booking_amount_payment_status: advance >= 149, total_pending_amount: pending > 0 ? String(pending) : '0.0', pending_amount_status: pending > 0, pending_message: pending > 0 ? 'Balance payable to the provider after service' : '', paid_status: paid, payment_method_id: pmtId, payment_mode: pmtId === 3 ? 'Online' : 'Cash', discount_amount: String(cart.discount_amount), additional_amount: [], custom_additional_charge: '' } }; HANDYMAN_ORDERS.push(order); delete HANDYMAN_CARTS[String(segId)]; return ok({ order_id: orderId, order_status: 1 }); }
-function handleHandymanGetOrders(body) { const type = String(body.type || 'SCHEDULED').toUpperCase(); const segId = body.segment_id != null ? num(body.segment_id, 0) : 0; let list = HANDYMAN_ORDERS; if (type === 'SCHEDULED') list = list.filter((o) => o.numeric_order_status === 1); else if (type === 'ONGOING') list = list.filter((o) => [6, 7, 9, 10].includes(o.numeric_order_status)); else if (type === 'PAST') list = list.filter((o) => [2, 3, 5, 8, 11, 12].includes(o.numeric_order_status)); if (segId) list = list.filter((o) => o.segment_id === segId); return ok(list.map((o) => ({ order_id: o.order_id, merchant_order_id: o.merchant_order_id, first_name: o.first_name, last_name: o.last_name, rating: o.rating, profile_image: o.profile_image, final_amount_paid: String(o.payment_detail.final_amount_paid), currency: '₹', total_services: o.total_services, order_status: o.order_status_text, numeric_order_status: o.numeric_order_status, booking_date: o.booking_date, slot_time_text: o.slot_time_text, segment_id: o.segment_id, service_type: o.service_type }))); }
+function handleHandymanConfirmOrder(body) { const cartId = num(body.cart_id, 0); let cart = null; for (const key of Object.keys(HANDYMAN_CARTS)) { if (HANDYMAN_CARTS[key].cart_id === cartId) { cart = HANDYMAN_CARTS[key]; break; } } if (!cart || cart.ordered_services.length === 0) return fail('Cart is empty'); const segId = Math.floor(cartId / 100); const prov = hmProviderById(segId === 6 ? 501 : segId === 7 ? 502 : segId === 8 ? 504 : 505); const pmtId = num(body.payment_method_id, 1); const adv = num(body.advance_payment_of_min_bill, 0); const final = cart.final_amount; const pending = adv > 0 ? Math.max(0, final - adv) : 0; const paid = pmtId === 3 || adv >= final; const orderId = HANDYMAN_ORDER_SEQ++; const advance = num(body.advance_payment_of_min_bill, 0); const order = { order_id: orderId, merchant_order_id: `hm-${orderId}`, first_name: prov.first_name, last_name: prov.last_name, rating: '0', profile_image: '', phone_number: '+91 98200 00000', drop_location: body.drop_location || cart.drop_location || 'Home', drop_latitude: String(body.latitude || cart.latitude || '19.076'), drop_longitude: String(body.longitude || cart.longitude || '72.877'), currency: 'â‚¹', total_services: cart.total_quantity, order_status_text: 'Placed', numeric_order_status: 1, status: 1, booking_date: cart.booking_date, slot_time_text: cart.slot_time_text, service_type: cart.ordered_services.map((s) => { const svc = hmServiceById(s.service_type_id); return { id: s.service_type_id, name: s.service_name, amount: `â‚¹${svc ? svc.amount : s.service_price}`, currency: 'â‚¹', price_type: 1, segment_price_card_id: 600 + segId }; }), segment_id: segId, segment_name: HM_SEGMENTS[segId]?.title || 'Handyman', order_otp: String(randomInt(1000, 9999)), current_latitude: String(body.latitude || cart.latitude || '19.0761'), current_longitude: String(body.longitude || cart.longitude || '72.8774'), is_rated: false, arr_action: { cancel: true, pay: false, create_outstanding: '' }, payment_detail: { cart_amount: String(cart.total_amount), dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: String(final), minimum_booking_amount: '149', minimum_booking_amount_payment_status: advance >= 149, total_pending_amount: pending > 0 ? String(pending) : '0.0', pending_amount_status: pending > 0, pending_message: pending > 0 ? 'Balance payable to the provider after service' : '', paid_status: paid, payment_method_id: pmtId, payment_mode: pmtId === 3 ? 'Online' : 'Cash', discount_amount: String(cart.discount_amount), additional_amount: [], custom_additional_charge: '' } }; HANDYMAN_ORDERS.push(order); delete HANDYMAN_CARTS[String(segId)]; return ok({ order_id: orderId, order_status: 1 }); }
+function handleHandymanGetOrders(body) { const type = String(body.type || 'SCHEDULED').toUpperCase(); const segId = body.segment_id != null ? num(body.segment_id, 0) : 0; let list = HANDYMAN_ORDERS; if (type === 'SCHEDULED') list = list.filter((o) => o.numeric_order_status === 1); else if (type === 'ONGOING') list = list.filter((o) => [6, 7, 9, 10].includes(o.numeric_order_status)); else if (type === 'PAST') list = list.filter((o) => [2, 3, 5, 8, 11, 12].includes(o.numeric_order_status)); if (segId) list = list.filter((o) => o.segment_id === segId); return ok(list.map((o) => ({ order_id: o.order_id, merchant_order_id: o.merchant_order_id, first_name: o.first_name, last_name: o.last_name, rating: o.rating, profile_image: o.profile_image, final_amount_paid: String(o.payment_detail.final_amount_paid), currency: 'â‚¹', total_services: o.total_services, order_status: o.order_status_text, numeric_order_status: o.numeric_order_status, booking_date: o.booking_date, slot_time_text: o.slot_time_text, segment_id: o.segment_id, service_type: o.service_type }))); }
 function handleHandymanGetOrderDetail(body) { const orderId = num(body.order_id, 0); const order = HANDYMAN_ORDERS.find((o) => o.order_id === orderId); if (!order) return fail('Order not found'); return ok(hmBuildOrderResponse(order)); }
 function handleHandymanCancelOrder(body) { const orderId = num(body.order_id, 0); const order = HANDYMAN_ORDERS.find((o) => o.order_id === orderId); if (!order) return fail('Order not found'); order.numeric_order_status = 2; order.status = 2; order.order_status_text = 'Cancelled'; order.arr_action = { cancel: false, pay: false, create_outstanding: '' }; return ok({ message: 'Order cancelled' }); }
 function handleHandymanRateProvider(body) { const orderId = num(body.order_id, 0); const order = HANDYMAN_ORDERS.find((o) => o.order_id === orderId); if (!order) return fail('Order not found'); order.is_rated = true; order.rating = String(body.rating || 5); return ok({ message: 'Thank you for your feedback' }); }
@@ -2706,11 +2683,11 @@ function handleHandymanBookingPayment(body) { const orderId = num(body.order_id,
 function handleHandymanBiddingCreateOrder(body) { const segId = num(body.segment_id, 6); const catId = num(body.category_id, 0); const svcId = num(body.service_type_id, 0); const svc = hmServiceById(svcId); const catMap = { 60: 'Home Repair', 70: 'Repair', 90: 'Towing' }; const id = HANDYMAN_BID_SEQ++; const bidOrder = { id, bid_order_id: `bdo-${id}`, service_name: svc ? svc.name : 'General Work Request', category_name: catMap[catId] || 'Request', description: body.description || '', work_image_one: '', work_image_two: '', work_image_three: '', work_image_four: '', final_amount: String(body.user_offer_price || 0), status: 'Active', numeric_status: 1, created_at: new Date().toISOString(), booked_at: '', time_slot_text: (HM_SLOT_MAP || {})[num(body.service_time_slot_detail_id, 501)] || '09:00 AM', user_offer_price: String(body.user_offer_price || 0), no_of_bids: 0, segment_id: segId, bids: [] }; HANDYMAN_BID_ORDERS.push(bidOrder); return ok(bidOrder); }
 function handleHandymanBiddingGetOrders(body) { const type = String(body.type || 'ALL').toUpperCase(); let list = HANDYMAN_BID_ORDERS; if (type === 'ACTIVE') list = list.filter((o) => o.numeric_status === 1); return ok(list); }
 function handleHandymanBiddingGetOrderDetail(body) { const orderId = body.order_id; const bidOrder = HANDYMAN_BID_ORDERS.find((o) => o.bid_order_id === orderId || o.id === orderId); if (!bidOrder) return fail('Bid order not found'); return ok(bidOrder); }
-function handleHandymanBiddingCounterBid(body) { const orderId = body.order_id; const bidOrderId = body.driver_bid_id; const counterAmount = num(body.counter_amount, 0); for (const bo of HANDYMAN_BID_ORDERS) { if (bo.bid_order_id === orderId || bo.id === orderId) { for (const bid of bo.bids) { if (bid.id === bidOrderId || bid.driver_id === bidOrderId) { bid.amount = String(counterAmount); bid.bid_amount = `₹${counterAmount}`; break; } } break; } } return ok({ message: 'Counter offer sent to the driver' }); }
-function handleHandymanBiddingAcceptOrder(body) { const orderId = body.order_id; const driverId = num(body.driver_id, 0); const bidOrder = HANDYMAN_BID_ORDERS.find((o) => o.bid_order_id === orderId || o.id === orderId); if (!bidOrder) return fail('Bid order not found'); bidOrder.numeric_status = 3; bidOrder.status = 'Booked'; bidOrder.booked_at = new Date().toISOString(); const winBid = bidOrder.bids.find((b) => b.driver_id === driverId) || bidOrder.bids[0]; const prov = hmProviderById(driverId) || hmProviderById(501); const pmtId = num(body.payment_method_id, 1); const total = Number(winBid ? winBid.amount : bidOrder.final_amount); const orderId2 = HANDYMAN_ORDER_SEQ++; const advance = num(body.advance_payment_of_min_bill, 0); const pending = advance > 0 ? Math.max(0, total - advance) : 0; const paid = pmtId === 3 || advance >= total; const order = { order_id: orderId2, merchant_order_id: `hm-${orderId2}`, first_name: prov.first_name, last_name: prov.last_name, rating: '0', profile_image: '', phone_number: '+91 98200 00000', drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', currency: '₹', total_services: 1, order_status_text: 'Placed', numeric_order_status: 1, status: 1, booking_date: hmGetDate(), slot_time_text: bidOrder.time_slot_text, service_type: [{ id: 0, name: bidOrder.service_name, amount: `₹${total}`, currency: '₹', price_type: 1, segment_price_card_id: 600 + bidOrder.segment_id }], segment_id: bidOrder.segment_id, segment_name: HM_SEGMENTS[bidOrder.segment_id]?.title || 'Handyman', order_otp: String(randomInt(1000, 9999)), current_latitude: '19.0761', current_longitude: '72.8774', is_rated: false, arr_action: { cancel: true, pay: false, create_outstanding: '' }, payment_detail: { cart_amount: String(total), dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: String(total), minimum_booking_amount: '149', minimum_booking_amount_payment_status: advance >= 149, total_pending_amount: pending > 0 ? String(pending) : '0.0', pending_amount_status: pending > 0, pending_message: pending > 0 ? 'Balance payable to the provider after service' : '', paid_status: paid, payment_method_id: pmtId, payment_mode: pmtId === 3 ? 'Online' : 'Cash', discount_amount: '0', additional_amount: [], custom_additional_charge: '' } }; HANDYMAN_ORDERS.push(order); return ok({ order_id: orderId2, message: 'Bid accepted' }); }
+function handleHandymanBiddingCounterBid(body) { const orderId = body.order_id; const bidOrderId = body.driver_bid_id; const counterAmount = num(body.counter_amount, 0); for (const bo of HANDYMAN_BID_ORDERS) { if (bo.bid_order_id === orderId || bo.id === orderId) { for (const bid of bo.bids) { if (bid.id === bidOrderId || bid.driver_id === bidOrderId) { bid.amount = String(counterAmount); bid.bid_amount = `â‚¹${counterAmount}`; break; } } break; } } return ok({ message: 'Counter offer sent to the driver' }); }
+function handleHandymanBiddingAcceptOrder(body) { const orderId = body.order_id; const driverId = num(body.driver_id, 0); const bidOrder = HANDYMAN_BID_ORDERS.find((o) => o.bid_order_id === orderId || o.id === orderId); if (!bidOrder) return fail('Bid order not found'); bidOrder.numeric_status = 3; bidOrder.status = 'Booked'; bidOrder.booked_at = new Date().toISOString(); const winBid = bidOrder.bids.find((b) => b.driver_id === driverId) || bidOrder.bids[0]; const prov = hmProviderById(driverId) || hmProviderById(501); const pmtId = num(body.payment_method_id, 1); const total = Number(winBid ? winBid.amount : bidOrder.final_amount); const orderId2 = HANDYMAN_ORDER_SEQ++; const advance = num(body.advance_payment_of_min_bill, 0); const pending = advance > 0 ? Math.max(0, total - advance) : 0; const paid = pmtId === 3 || advance >= total; const order = { order_id: orderId2, merchant_order_id: `hm-${orderId2}`, first_name: prov.first_name, last_name: prov.last_name, rating: '0', profile_image: '', phone_number: '+91 98200 00000', drop_location: 'Home', drop_latitude: '19.076', drop_longitude: '72.877', currency: 'â‚¹', total_services: 1, order_status_text: 'Placed', numeric_order_status: 1, status: 1, booking_date: hmGetDate(), slot_time_text: bidOrder.time_slot_text, service_type: [{ id: 0, name: bidOrder.service_name, amount: `â‚¹${total}`, currency: 'â‚¹', price_type: 1, segment_price_card_id: 600 + bidOrder.segment_id }], segment_id: bidOrder.segment_id, segment_name: HM_SEGMENTS[bidOrder.segment_id]?.title || 'Handyman', order_otp: String(randomInt(1000, 9999)), current_latitude: '19.0761', current_longitude: '72.8774', is_rated: false, arr_action: { cancel: true, pay: false, create_outstanding: '' }, payment_detail: { cart_amount: String(total), dispute_settled_amount: '0.0', tax: '0.0', final_amount_paid: String(total), minimum_booking_amount: '149', minimum_booking_amount_payment_status: advance >= 149, total_pending_amount: pending > 0 ? String(pending) : '0.0', pending_amount_status: pending > 0, pending_message: pending > 0 ? 'Balance payable to the provider after service' : '', paid_status: paid, payment_method_id: pmtId, payment_mode: pmtId === 3 ? 'Online' : 'Cash', discount_amount: '0', additional_amount: [], custom_additional_charge: '' } }; HANDYMAN_ORDERS.push(order); return ok({ order_id: orderId2, message: 'Bid accepted' }); }
 function handleHandymanBiddingCancelDelete(body) { const orderId = body.order_id; const action = String(body.action || 'CANCEL').toUpperCase(); const idx = HANDYMAN_BID_ORDERS.findIndex((o) => o.bid_order_id === orderId || o.id === orderId); if (idx === -1) return fail('Bid order not found'); if (action === 'DELETE') { HANDYMAN_BID_ORDERS.splice(idx, 1); return ok({ message: 'Bid order deleted' }); } else { HANDYMAN_BID_ORDERS[idx].numeric_status = 4; HANDYMAN_BID_ORDERS[idx].status = 'Cancelled'; return ok({ message: 'Bid order cancelled' }); } }
 
-// ── Phase 10 — Laundry engine ────────────────────────────────────────────────
+// â”€â”€ Phase 10 â€” Laundry engine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Mirrors the route.ts mock so both surfaces return identical JSON.
 
 const LD_OUTLET_BY_ID = new Map(LD_OUTLETS.map((o) => [o.id, o]));
@@ -2868,7 +2845,7 @@ function ldOutletResponse(o) {
     is_outlet_open: o.is_outlet_open,
     is_admin_outlet_open: true,
     price_card_id: o.price_card_id,
-    currency: '₹',
+    currency: 'â‚¹',
     background_color: '#0ea5e9',
   };
 }
@@ -2879,10 +2856,10 @@ function ldServiceResponse(s) {
     laundry_service_id: s.id,
     category_id: s.category_id,
     price: s.price,
-    formatted_price: `₹${s.price}`,
+    formatted_price: `â‚¹${s.price}`,
     title: s.title,
     service_description: s.description,
-    currency: '₹',
+    currency: 'â‚¹',
     image: ldServiceImage(s.category_id),
     service_image: '',
     service_availability: '1',
@@ -2998,7 +2975,7 @@ function ldBuildOrderResponse(order) {
 // Seed demo laundry orders
 (function ldSeed() {
   if (LAUNDRY_ORDERS.length > 0) return;
-  const pastItems = [{ id: 1, laundry_service_id: 202, title: 'Wash & Iron', price: '₹55.00', quantity: 3, total_amount: '₹165.00', image: '/assets/phase-10/shirt.svg' }];
+  const pastItems = [{ id: 1, laundry_service_id: 202, title: 'Wash & Iron', price: 'â‚¹55.00', quantity: 3, total_amount: 'â‚¹165.00', image: '/assets/phase-10/shirt.svg' }];
   LAUNDRY_ORDERS.push({
     order_id: 8019, merchant_order_id: 'ld-8019', laundry_outlet_id: 601, segment_id: LD_SEGMENT_ID, service_type_id: 1,
     order_status: 14, order_status_history: [1, 6, 10, 7, 13, 15, 16, 14].map((st) => ({ order_status: st, order_timestamp: new Date(Date.now() - 2 * 86400 * 1000 + st * 1000).toISOString() })),
@@ -3007,7 +2984,7 @@ function ldBuildOrderResponse(order) {
     otp_for_pickup: '3847', user_confirmed_otp_for_pickup: 1, payment_method_id: 1, payment_status: 1,
     created_at: Date.now() - 2 * 86400 * 1000, is_rated: true, items: pastItems,
   });
-  const ongoingItems = [{ id: 1, laundry_service_id: 203, title: 'Dry Clean Shirt', price: '₹80.00', quantity: 2, total_amount: '₹160.00', image: '/assets/phase-10/suit.svg' }];
+  const ongoingItems = [{ id: 1, laundry_service_id: 203, title: 'Dry Clean Shirt', price: 'â‚¹80.00', quantity: 2, total_amount: 'â‚¹160.00', image: '/assets/phase-10/suit.svg' }];
   LAUNDRY_ORDERS.push({
     order_id: 8020, merchant_order_id: 'ld-8020', laundry_outlet_id: 602, segment_id: LD_SEGMENT_ID, service_type_id: 1,
     order_status: 13, order_status_history: [1, 6, 10, 7, 13].map((st) => ({ order_status: st, order_timestamp: new Date(Date.now() - 35000 + st * 1000).toISOString() })),
@@ -3023,7 +3000,7 @@ function handleLaundryGetServices(body) {
   const categoryId = num(body.category_id, 0);
   let services = LD_SERVICES;
   if (categoryId > 0) services = services.filter((s) => s.category_id === categoryId);
-  return ok({ categories: LD_CATEGORIES.map(([id, name]) => ({ id, name, image: '' })), currency: '₹', services: services.map(ldServiceResponse) });
+  return ok({ categories: LD_CATEGORIES.map(([id, name]) => ({ id, name, image: '' })), currency: 'â‚¹', services: services.map(ldServiceResponse) });
 }
 function handleLaundryGetOutlets(body) { return ok({ outlets: LD_OUTLETS.map(ldOutletResponse), total_pages: 1, current_page: 1 }); }
 function handleLaundryGetOutlet(body) {
@@ -3138,7 +3115,7 @@ function handleLaundryConfirmOrder(body) {
     payment_status: pmtId === 3 ? 1 : 0,
     created_at: Date.now(),
     is_rated: false,
-    items: cart.items.map((i, idx) => ({ id: idx + 1, laundry_service_id: i.laundry_service_id, title: i.title, price: `₹${i.price.toFixed(2)}`, quantity: i.quantity, total_amount: `₹${(i.price * i.quantity).toFixed(2)}`, image: i.image })),
+    items: cart.items.map((i, idx) => ({ id: idx + 1, laundry_service_id: i.laundry_service_id, title: i.title, price: `â‚¹${i.price.toFixed(2)}`, quantity: i.quantity, total_amount: `â‚¹${(i.price * i.quantity).toFixed(2)}`, image: i.image })),
   };
   LAUNDRY_ORDERS.push(order);
   delete LAUNDRY_CARTS[String(outletId)];
@@ -3168,7 +3145,7 @@ function handleLaundryGetOrders(body) {
       total_quantity: o.total_quantity,
       items_count: o.items.length,
       final_amount_paid: String(o.final_amount_paid),
-      currency: '₹',
+      currency: 'â‚¹',
       booking_date: o.booking_date,
       slot_time_text: o.slot_time_text,
       is_rated: o.is_rated,
@@ -3212,7 +3189,7 @@ function handleLaundryRateOutlet(body) {
   return ok({ message: 'Thank you for your feedback' });
 }
 
-// ── Route table ─────────────────────────────────────────────────────────────
+// â”€â”€ Route table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const PUBLIC_ROUTES = new Set([
   '/api/user/configuration',
@@ -3313,7 +3290,7 @@ const routes = {
   '/api/user/food/chat/send': (body) => handleFoodSendChat(body),
   '/api/user/favourite-business-segment': (body) => handleFavouriteBusinessSegment(body),
   '/api/user/get-favourite-business-segment': () => handleGetFavouriteBusinessSegment(),
-  // Store ordering (Phase 8) — grocery / pharmacy / generic
+  // Store ordering (Phase 8) â€” grocery / pharmacy / generic
   '/api/user/store/store-list': (body) => handleStoreList(body),
   '/api/user/store/store-details': (body) => handleStoreDetails(body),
   '/api/user/store/search-store-products': (body) => handleSearchStoreProducts(body),
@@ -3382,7 +3359,7 @@ const routes = {
   '/api/user/laundry/rate': (body) => handleLaundryRateOutlet(body),
 };
 
-// ── HTTP server ─────────────────────────────────────────────────────────────
+// â”€â”€ HTTP server â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function readBody(req) {
   return new Promise((resolve, reject) => {

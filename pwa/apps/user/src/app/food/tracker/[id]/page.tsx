@@ -193,7 +193,7 @@ export default function FoodTrackerPage(): React.ReactNode {
                       <span className="block truncate font-semibold text-[var(--fc-text-primary)]">{p.product_name}</span>
                       <span className="block text-xs text-[var(--fc-text-secondary)]">x{p.quantity}</span>
                     </span>
-                    <span className="font-semibold text-[var(--fc-text-primary)]">₹ {p.total_amount.toFixed(2)}</span>
+                    <span className="font-semibold text-[var(--fc-text-primary)]">K {p.total_amount.toFixed(2)}</span>
                   </li>
                 ))}
               </ul>
@@ -204,25 +204,25 @@ export default function FoodTrackerPage(): React.ReactNode {
               <ul className="space-y-1.5 text-sm">
                 <li className="flex justify-between">
                   <span className="text-[var(--fc-text-secondary)]">{t('food.subtotal', runtime.locale)}</span>
-                  <span className="font-bold text-[var(--fc-text-primary)]">₹ {order.subtotal.toFixed(2)}</span>
+                  <span className="font-bold text-[var(--fc-text-primary)]">K {order.subtotal.toFixed(2)}</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="text-[var(--fc-text-secondary)]">{t('food.delivery', runtime.locale)}</span>
-                  <span className="font-bold text-[var(--fc-text-primary)]">₹ {order.delivery_fee.toFixed(2)}</span>
+                  <span className="font-bold text-[var(--fc-text-primary)]">K {order.delivery_fee.toFixed(2)}</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="text-[var(--fc-text-secondary)]">{t('food.tax', runtime.locale)}</span>
-                  <span className="font-bold text-[var(--fc-text-primary)]">₹ {order.tax.toFixed(2)}</span>
+                  <span className="font-bold text-[var(--fc-text-primary)]">K {order.tax.toFixed(2)}</span>
                 </li>
                 {order.discount_amount > 0 ? (
                   <li className="flex justify-between">
                     <span className="text-[var(--fc-success)]">{t('food.discount', runtime.locale)}</span>
-                    <span className="font-bold text-[var(--fc-success)]">-₹ {order.discount_amount.toFixed(2)}</span>
+                    <span className="font-bold text-[var(--fc-success)]">-K {order.discount_amount.toFixed(2)}</span>
                   </li>
                 ) : null}
                 <li className="flex justify-between border-t border-[var(--fc-border)] pt-1.5">
                   <span className="text-sm font-bold text-[var(--fc-text-primary)]">{t('food.placeOrder', runtime.locale)}</span>
-                  <span className="font-bold text-[var(--fc-text-primary)]">₹ {order.total_amount.toFixed(2)}</span>
+                  <span className="font-bold text-[var(--fc-text-primary)]">K {order.total_amount.toFixed(2)}</span>
                 </li>
               </ul>
             </section>

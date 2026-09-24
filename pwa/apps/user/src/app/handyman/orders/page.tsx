@@ -132,7 +132,7 @@ function OrderCard({ order }: { order: HandymanOrder }): React.ReactNode {
 
       <div className="mt-2 flex items-center justify-between border-t border-[var(--fc-border)] pt-2">
         <span className="text-sm font-bold text-[var(--fc-text-primary)]">
-          ₹{Number(order.final_amount_paid).toLocaleString('en-IN')}
+          K{Number(order.final_amount_paid).toLocaleString('en-IN')}
         </span>
         {isActive ? (
           <Button variant="secondary" onClick={() => router.push(`/handyman/tracker/${order.order_id}`)}>
