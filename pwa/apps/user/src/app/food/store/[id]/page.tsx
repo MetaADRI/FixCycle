@@ -81,7 +81,7 @@ export default function FoodStorePage(): React.ReactNode {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={store.full_name}
         leading={
@@ -110,7 +110,7 @@ export default function FoodStorePage(): React.ReactNode {
                   {store.rating.toFixed(1)} ({store.review_count})
                 </span>
                 <span>
-                  {store.delivery_time_min}–{store.delivery_time_max} {t('food.min', runtime.locale)}
+                  {store.delivery_time_min}Ã¢â‚¬â€œ{store.delivery_time_max} {t('food.min', runtime.locale)}
                 </span>
                 <span>
                   {store.is_open === 1 ? t('food.open', runtime.locale) : t('food.closed', runtime.locale)}
@@ -181,7 +181,7 @@ export default function FoodStorePage(): React.ReactNode {
                   {p.options.length > 0 ? (
                     <span className="text-[10px] font-semibold uppercase tracking-wide text-[var(--fc-bg-secondary)]">
                       {t('food.customise', runtime.locale)}
-                      {p.variants.length > 1 ? ' · ' + p.variants.length + ' ' + t('food.variant', runtime.locale).toLowerCase() : ''}
+                      {p.variants.length > 1 ? ' Ã‚Â· ' + p.variants.length + ' ' + t('food.variant', runtime.locale).toLowerCase() : ''}
                     </span>
                   ) : null}
                   <span className="text-sm font-bold text-[var(--fc-text-primary)]">K {p.price.toFixed(2)}</span>

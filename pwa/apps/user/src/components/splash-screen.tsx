@@ -64,7 +64,7 @@ export function SplashScreen({ onReady }: SplashScreenProps): React.ReactNode {
   return (
     <div className="flex min-h-dvh flex-col bg-[var(--fc-bg-primary)]">
       {capabilities ? (capabilities.online ? null : <OfflineBanner />) : null}
-      <div className="mx-auto flex w-full max-w-[430px] flex-1 flex-col items-center justify-between px-6 py-10">
+      <div className="mx-auto flex w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-1 flex-col items-center justify-between px-6 py-10">
         <div className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
           <div className="flex h-24 w-24 items-center justify-center rounded-[1.75rem] bg-white/10 ring-1 ring-white/15">
             {runtime.businessLogoUrl ? (

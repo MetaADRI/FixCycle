@@ -79,7 +79,7 @@ export default function DevStatusPage(): React.ReactNode {
   const standalone = useStandaloneMode();
 
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col gap-4 bg-[var(--fc-surface-raised)] px-4 py-6">
+    <main className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col gap-4 bg-[var(--fc-surface-raised)] px-4 py-6">
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Icon name="settings" size={20} />
@@ -116,18 +116,18 @@ export default function DevStatusPage(): React.ReactNode {
       <SectionCard title="Device capabilities">
         <EnvRow
           label="Online"
-          value={capabilities ? (capabilities.online ? 'yes' : 'no') : '…'}
+          value={capabilities ? (capabilities.online ? 'yes' : 'no') : 'Ã¢â‚¬Â¦'}
           tone={!capabilities || capabilities.online ? 'ok' : 'bad'}
         />
         <EnvRow
           label="Service worker"
-          value={capabilities ? (capabilities.serviceWorker ? 'supported' : 'unsupported') : '…'}
+          value={capabilities ? (capabilities.serviceWorker ? 'supported' : 'unsupported') : 'Ã¢â‚¬Â¦'}
           tone={!capabilities || capabilities.serviceWorker ? 'ok' : 'warn'}
         />
-        <EnvRow label="Touch" value={capabilities ? (capabilities.touch ? 'yes' : 'no') : '…'} />
+        <EnvRow label="Touch" value={capabilities ? (capabilities.touch ? 'yes' : 'no') : 'Ã¢â‚¬Â¦'} />
         <EnvRow label="Standalone" value={standalone ? 'yes' : 'no'} />
-        <EnvRow label="Install platform" value={install?.platform ?? '…'} />
-        <EnvRow label="Install available" value={install ? (install.canInstall ? 'yes' : 'no') : '…'} />
+        <EnvRow label="Install platform" value={install?.platform ?? 'Ã¢â‚¬Â¦'} />
+        <EnvRow label="Install available" value={install ? (install.canInstall ? 'yes' : 'no') : 'Ã¢â‚¬Â¦'} />
       </SectionCard>
 
       <SectionCard title="Configuration endpoint">
@@ -203,7 +203,7 @@ export default function DevStatusPage(): React.ReactNode {
         <EnvRow label="Flags available" value={runtime.flags ? 'yes' : 'no'} />
       </SectionCard>
 
-      <p className="text-center text-[11px] text-[var(--fc-text-secondary)]">Fixcycle PWA — Phase 1 diagnostic</p>
+      <p className="text-center text-[11px] text-[var(--fc-text-secondary)]">Fixcycle PWA Ã¢â‚¬â€ Phase 1 diagnostic</p>
     </main>
   );
 }

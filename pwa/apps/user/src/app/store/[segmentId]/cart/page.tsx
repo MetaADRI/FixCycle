@@ -34,7 +34,7 @@ export default function StoreCartPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('store.cart', runtime.locale)}
         leading={
@@ -74,7 +74,7 @@ export default function StoreCartPage(): React.ReactNode {
                 <span className="font-bold text-[var(--fc-text-primary)]">K {subtotal.toFixed(2)}</span>
               </div>
               <p className="mt-1 text-[10px] text-[var(--fc-text-secondary)]">
-                {t('store.minimumOrder', runtime.locale)}: K {cart.products[0]?.store_id ? '99' : '—'}
+                {t('store.minimumOrder', runtime.locale)}: K {cart.products[0]?.store_id ? '99' : 'Ã¢â‚¬â€'}
               </p>
             </section>
 

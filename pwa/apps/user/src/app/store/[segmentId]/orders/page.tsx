@@ -49,7 +49,7 @@ export default function StoreOrdersPage(): React.ReactNode {
   const orders = tab === 'active' ? flow.activeOrders : flow.pastOrders;
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('store.myOrders', runtime.locale)}
         leading={
@@ -164,7 +164,7 @@ function OrderCard({
       </p>
 
       <div className="mt-2 flex items-center justify-between border-t border-[var(--fc-border)] pt-2">
-        <span className="text-sm font-bold text-[var(--fc-text-primary)]">₹ {order.total_amount.toFixed(2)}</span>
+        <span className="text-sm font-bold text-[var(--fc-text-primary)]">Ã¢â€šÂ¹ {order.total_amount.toFixed(2)}</span>
         <div className="flex gap-2">
           {order.order_status !== 11 && !statusCancelled ? (
             <Button variant="secondary" onClick={() => router.push(`/store/${segmentId}/tracker/${order.id}`)}>

@@ -40,7 +40,7 @@ function CheckoutInner(): React.ReactNode {
   const cart = flow.cart;
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('laundry.checkout', runtime.locale)}
         leading={
@@ -75,7 +75,7 @@ function CheckoutInner(): React.ReactNode {
                 <Icon name="clock" size={16} className="text-[var(--fc-text-secondary)]" />
                 <span className="text-[var(--fc-text-primary)]">
                   {cart.booking_date}
-                  {cart.slot_time_text ? ` · ${cart.slot_time_text}` : ''}
+                  {cart.slot_time_text ? ` Ã‚Â· ${cart.slot_time_text}` : ''}
                 </span>
               </div>
             </section>

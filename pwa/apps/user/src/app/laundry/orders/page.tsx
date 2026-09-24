@@ -29,7 +29,7 @@ export default function LaundryOrdersPage(): React.ReactNode {
   const orders: LaundryOrder[] = tab === 'ONGOING' ? flow.ongoingOrders : flow.pastOrders;
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('laundry.myOrders', runtime.locale)}
         leading={
@@ -94,8 +94,8 @@ export default function LaundryOrdersPage(): React.ReactNode {
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-bold text-[var(--fc-text-primary)]">{order.outlet_name}</p>
                       <p className="truncate text-xs text-[var(--fc-text-secondary)]">
-                        {order.items_count} {t('laundry.itemsCount', runtime.locale)} · {order.booking_date}
-                        {order.slot_time_text ? ` · ${order.slot_time_text}` : ''}
+                        {order.items_count} {t('laundry.itemsCount', runtime.locale)} Ã‚Â· {order.booking_date}
+                        {order.slot_time_text ? ` Ã‚Â· ${order.slot_time_text}` : ''}
                       </p>
                       <div className="mt-1 flex items-center justify-between">
                         <span className="text-xs font-semibold text-[var(--fc-primary)]">{order.order_status_text}</span>

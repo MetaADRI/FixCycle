@@ -66,7 +66,7 @@ export function CountrySheet({
         className="absolute inset-0 bg-[var(--fc-overlay)]"
         onClick={onClose}
       />
-      <div className="relative z-10 mx-auto flex max-h-[72dvh] w-full max-w-[430px] flex-col rounded-t-[1.5rem] bg-[var(--fc-surface)] shadow-2xl">
+      <div className="relative z-10 mx-auto flex max-h-[72dvh] w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col rounded-t-[1.5rem] bg-[var(--fc-surface)] shadow-2xl">
         <div className="flex items-center justify-between border-b border-[var(--fc-border)] px-4 py-3">
           <h2 className="text-base font-bold text-[var(--fc-text-primary)]">{t('auth.phoneCode', locale)}</h2>
           <IconButton icon="close" label="Close" size={20} onClick={onClose} />

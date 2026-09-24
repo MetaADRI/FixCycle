@@ -41,7 +41,7 @@ export default function BusBookingsPage(): React.ReactNode {
   }, [tab]);
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('bus.myBookings', runtime.locale)}
         leading={
@@ -104,10 +104,10 @@ export default function BusBookingsPage(): React.ReactNode {
                   </span>
                 </div>
                 <div className="mt-2 text-xs text-[var(--fc-text-secondary)]">
-                  {booking.booking_date} · {booking.departure_time} → {booking.arrival_time}
+                  {booking.booking_date} Ã‚Â· {booking.departure_time} Ã¢â€ â€™ {booking.arrival_time}
                 </div>
                 <div className="mt-1 text-xs text-[var(--fc-text-secondary)]">
-                  {booking.seat_numbers} · {booking.seat_count} seats
+                  {booking.seat_numbers} Ã‚Â· {booking.seat_count} seats
                 </div>
                 <div className="mt-2 flex items-center justify-between border-t border-[var(--fc-border)] pt-2">
                   <span className="text-xs text-[var(--fc-text-secondary)]">{booking.pickup_location || booking.boarding_point}</span>

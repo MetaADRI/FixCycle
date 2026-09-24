@@ -82,7 +82,7 @@ export default function StoreProductPage(): React.ReactNode {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('store.customise', runtime.locale)}
         leading={
@@ -105,9 +105,9 @@ export default function StoreProductPage(): React.ReactNode {
               <p className="mt-1 text-sm text-[var(--fc-text-secondary)]">{product.description}</p>
             ) : null}
             <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--fc-text-secondary)]">
-              {t('store.weight', runtime.locale)}: {product.weight || '—'}
+              {t('store.weight', runtime.locale)}: {product.weight || 'Ã¢â‚¬â€'}
             </p>
-            <p className="mt-2 text-lg font-bold text-[var(--fc-text-primary)]">₹ {product.price.toFixed(2)}</p>
+            <p className="mt-2 text-lg font-bold text-[var(--fc-text-primary)]">Ã¢â€šÂ¹ {product.price.toFixed(2)}</p>
           </div>
         </section>
 
@@ -131,7 +131,7 @@ export default function StoreProductPage(): React.ReactNode {
                         <span className="text-sm font-bold text-[var(--fc-text-primary)]">{v.name}</span>
                       </span>
                       <span className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-[var(--fc-text-primary)]">₹ {v.price.toFixed(2)}</span>
+                        <span className="text-sm font-bold text-[var(--fc-text-primary)]">Ã¢â€šÂ¹ {v.price.toFixed(2)}</span>
                         {active ? <Icon name="check" size={18} className="text-[var(--fc-bg-secondary)]" /> : null}
                       </span>
                     </button>
@@ -161,7 +161,7 @@ export default function StoreProductPage(): React.ReactNode {
                       <span className="text-sm font-bold text-[var(--fc-text-primary)]">{o.name}</span>
                       <span className="flex items-center gap-2">
                         {o.price > 0 ? (
-                          <span className="text-sm font-bold text-[var(--fc-text-primary)]">₹ {o.price.toFixed(2)}</span>
+                          <span className="text-sm font-bold text-[var(--fc-text-primary)]">Ã¢â€šÂ¹ {o.price.toFixed(2)}</span>
                         ) : null}
                         <span
                           className={`flex h-5 w-5 items-center justify-center rounded-full border ${
@@ -203,10 +203,10 @@ export default function StoreProductPage(): React.ReactNode {
         </section>
       </main>
 
-      <div className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[430px] px-4 pb-4">
+      <div className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] px-4 pb-4">
         <Button block variant="primary" loading={flow.loading} onClick={() => void handleAdd()}>
           <span className="font-semibold">{t('store.add', runtime.locale)}</span>
-          <span className="font-bold">₹ {totalPrice.toFixed(2)}</span>
+          <span className="font-bold">Ã¢â€šÂ¹ {totalPrice.toFixed(2)}</span>
         </Button>
       </div>
     </div>

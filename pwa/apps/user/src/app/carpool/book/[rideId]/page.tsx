@@ -56,7 +56,7 @@ export default function CarpoolBookPage(): React.ReactNode {
 
   if (!ride) {
     return (
-      <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+      <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
         <TopHeader
           title={t('carpool.bookRide', runtime.locale)}
           leading={
@@ -79,7 +79,7 @@ export default function CarpoolBookPage(): React.ReactNode {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('carpool.bookRide', runtime.locale)}
         leading={
@@ -108,7 +108,7 @@ export default function CarpoolBookPage(): React.ReactNode {
           </div>
           {ride.vehicle && (
             <div className="mt-2 text-xs text-[var(--fc-text-secondary)]">
-              {ride.vehicle.make} {ride.vehicle.model} · {ride.vehicle.color} · {ride.vehicle.number}
+              {ride.vehicle.make} {ride.vehicle.model} Ã‚Â· {ride.vehicle.color} Ã‚Â· {ride.vehicle.number}
             </div>
           )}
         </div>
@@ -207,7 +207,7 @@ export default function CarpoolBookPage(): React.ReactNode {
         {carpool.error && <p className="mt-3 text-xs text-[var(--fc-error)]">{carpool.error}</p>}
       </main>
 
-      <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
+      <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
         <Button
           variant="primary"
           onClick={() => void handleBook()}

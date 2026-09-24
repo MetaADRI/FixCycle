@@ -46,7 +46,7 @@ export default function HandymanHomePage(): React.ReactNode {
   );
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={title}
         leading={
@@ -159,14 +159,14 @@ export default function HandymanHomePage(): React.ReactNode {
       {/* Bottom bar */}
       {cartCount > 0 || flow.selectedServiceIds.length > 0 ? (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--fc-border)] bg-white px-4 py-3">
-          <div className="mx-auto flex max-w-[430px] items-center gap-3">
+          <div className="mx-auto flex max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] items-center gap-3">
             {cartCount > 0 ? (
               <Button
                 variant="secondary"
                 onClick={() => router.push(`/handyman/${segmentId}/cart`)}
                 className="flex items-center gap-2"
               >
-                {cartCount} services · K{cartTotal.toLocaleString('en-IN')}
+                {cartCount} services Ã‚Â· K{cartTotal.toLocaleString('en-IN')}
               </Button>
             ) : null}
             {flow.selectedServiceIds.length > 0 ? (

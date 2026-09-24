@@ -81,7 +81,7 @@ export default function FoodProductPage(): React.ReactNode {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('food.customise', runtime.locale)}
         leading={
@@ -209,7 +209,7 @@ export default function FoodProductPage(): React.ReactNode {
         </section>
       </main>
 
-      <div className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[430px] px-4 pb-4">
+      <div className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] px-4 pb-4">
         <Button block variant="primary" loading={flow.loading} onClick={() => void handleAdd()}>
           <span className="font-semibold">{t('food.add', runtime.locale)}</span>
           <span className="font-bold">K {totalPrice.toFixed(2)}</span>

@@ -41,7 +41,7 @@ export default function HandymanProviderDetailPage(): React.ReactNode {
   );
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={provider ? `${provider.first_name} ${provider.last_name}` : 'Provider'}
         leading={
@@ -151,10 +151,10 @@ export default function HandymanProviderDetailPage(): React.ReactNode {
 
       {/* Bottom bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--fc-border)] bg-white px-4 py-3">
-        <div className="mx-auto flex max-w-[430px] items-center justify-between">
+        <div className="mx-auto flex max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] items-center justify-between">
           <div>
             <p className="text-xs text-[var(--fc-text-secondary)]">Total</p>
-            <p className="text-base font-bold text-[var(--fc-text-primary)]">₹{cartTotal.toLocaleString('en-IN')}</p>
+            <p className="text-base font-bold text-[var(--fc-text-primary)]">Ã¢â€šÂ¹{cartTotal.toLocaleString('en-IN')}</p>
           </div>
           <Button variant="primary" onClick={() => router.push(`/handyman/${segmentId}/cart`)}>
             {t('handyman.bookNow', runtime.locale)}

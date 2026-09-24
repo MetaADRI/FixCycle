@@ -32,7 +32,7 @@ export default function HandymanCartPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('handyman.cart', runtime.locale)}
         leading={
@@ -152,7 +152,7 @@ export default function HandymanCartPage(): React.ReactNode {
             </section>
 
             <Button block variant="primary" onClick={handleCheckout}>
-              {t('handyman.checkout', runtime.locale)} · K{cart!.final_amount.toLocaleString('en-IN')}
+              {t('handyman.checkout', runtime.locale)} Ã‚Â· K{cart!.final_amount.toLocaleString('en-IN')}
             </Button>
           </div>
         )}

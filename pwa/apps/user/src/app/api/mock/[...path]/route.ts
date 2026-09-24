@@ -5,7 +5,7 @@ import { ALL_COUNTRIES } from '@fixcycle/config';
 import { NextRequest, NextResponse } from 'next/server';
 
 // ---------------------------------------------------------------------------
-// Fixcycle dev mock API â€” serves realistic fixtures for the whole ride flow so
+// Fixcycle dev mock API Ã¢â‚¬â€ serves realistic fixtures for the whole ride flow so
 // the PWA is previewable end-to-end offline (no Laravel backend required).
 //
 // Wired via apps/user/.env.local: NEXT_PUBLIC_API_BASE=/api/mock
@@ -442,7 +442,7 @@ async function readBody(req: NextRequest): Promise<Record<string, unknown>> {
   }
 }
 
-// â”€â”€ Handyman / Home services (Phase 9) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢â€â‚¬Ã¢â€â‚¬ Handyman / Home services (Phase 9) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 // Mirrors backend/server.js Phase 9 engine exactly so both surfaces return
 // identical JSON for identical requests.
 
@@ -734,7 +734,7 @@ function hmSeed(): void {
 }
 hmSeed();
 
-// â”€â”€ Handyman handler functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢â€â‚¬Ã¢â€â‚¬ Handyman handler functions Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 function hmHandleGetCategories(body: Record<string, unknown>): Ok {
   const segId = num(body.segment_id, 6);
@@ -1006,7 +1006,7 @@ function hmHandleBiddingCancelDelete(body: Record<string, unknown>): Ok {
   else { order.numeric_status = 4; order.status = 'Cancelled'; return ok({ message: 'Bid order cancelled' }); }
 }
 
-// â”€â”€ Laundry (Phase 10) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢â€â‚¬Ã¢â€â‚¬ Laundry (Phase 10) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 // Mirrors backend/server.js Phase 10 engine exactly so both surfaces return
 // identical JSON for identical requests. Reconstructed from LaundryServiceTrait
 // + LaundryOutlet/LaundryService model field names (user API routes are absent
@@ -1672,7 +1672,7 @@ function ldHandleRateOutlet(body: Record<string, unknown>): Ok {
   return ok({ message: 'Thank you for your feedback' });
 }
 
-// â”€â”€ Bus booking (Phase 11) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢â€â‚¬Ã¢â€â‚¬ Bus booking (Phase 11) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 // Mirrors the field names used by BusController (Services/BusServiceController
 // + BusTrait). `route_id`/`bus_id` are Route::id / Bus::id, NOT segment ids.
 
@@ -1732,10 +1732,10 @@ interface BusBookingMock {
 
 function busDefaultRoutes(): Record<string, unknown>[] {
   return [
-    { id: 701, route_id: 701, route_name: 'Mumbai Central â†’ Pune', service_type_id: 1, segment_id: 4, start_point: 'Mumbai Central', end_point: 'Pune', start_latitude: 18.9696, start_longitude: 72.8199, end_latitude: 18.5289, end_longitude: 73.8735, start_stop_id: 7001, end_stop_id: 7011, distance: '149 km' },
-    { id: 702, route_id: 702, route_name: 'Pune â†’ Mumbai Central', service_type_id: 1, segment_id: 4, start_point: 'Pune', end_point: 'Mumbai Central', start_latitude: 18.5289, start_longitude: 73.8735, end_latitude: 18.9696, end_longitude: 72.8199, start_stop_id: 7011, end_stop_id: 7001, distance: '149 km' },
-    { id: 703, route_id: 703, route_name: 'Andheri â†’ Nashik', service_type_id: 1, segment_id: 4, start_point: 'Andheri', end_point: 'Nashik', start_latitude: 19.1197, start_longitude: 72.8468, end_latitude: 19.9975, end_longitude: 73.7898, start_stop_id: 7002, end_stop_id: 7012, distance: '167 km' },
-    { id: 704, route_id: 704, route_name: 'Nashik â†’ Andheri', service_type_id: 1, segment_id: 4, start_point: 'Nashik', end_point: 'Andheri', start_latitude: 19.9975, start_longitude: 73.7898, end_latitude: 19.1197, end_longitude: 72.8468, start_stop_id: 7012, end_stop_id: 7002, distance: '167 km' },
+    { id: 701, route_id: 701, route_name: 'Mumbai Central Ã¢â€ â€™ Pune', service_type_id: 1, segment_id: 4, start_point: 'Mumbai Central', end_point: 'Pune', start_latitude: 18.9696, start_longitude: 72.8199, end_latitude: 18.5289, end_longitude: 73.8735, start_stop_id: 7001, end_stop_id: 7011, distance: '149 km' },
+    { id: 702, route_id: 702, route_name: 'Pune Ã¢â€ â€™ Mumbai Central', service_type_id: 1, segment_id: 4, start_point: 'Pune', end_point: 'Mumbai Central', start_latitude: 18.5289, start_longitude: 73.8735, end_latitude: 18.9696, end_longitude: 72.8199, start_stop_id: 7011, end_stop_id: 7001, distance: '149 km' },
+    { id: 703, route_id: 703, route_name: 'Andheri Ã¢â€ â€™ Nashik', service_type_id: 1, segment_id: 4, start_point: 'Andheri', end_point: 'Nashik', start_latitude: 19.1197, start_longitude: 72.8468, end_latitude: 19.9975, end_longitude: 73.7898, start_stop_id: 7002, end_stop_id: 7012, distance: '167 km' },
+    { id: 704, route_id: 704, route_name: 'Nashik Ã¢â€ â€™ Andheri', service_type_id: 1, segment_id: 4, start_point: 'Nashik', end_point: 'Andheri', start_latitude: 19.9975, start_longitude: 73.7898, end_latitude: 19.1197, end_longitude: 72.8468, start_stop_id: 7012, end_stop_id: 7002, distance: '167 km' },
   ];
 }
 
@@ -1786,7 +1786,7 @@ function busBookingPayload(body: Record<string, unknown>): BusBookingMock {
     bus_name: bus.bus_name as string,
     bus_number: bus.bus_number as string,
     route_id: num(body.route_id, 701),
-    route_name: str(body.route_name, 'Mumbai Central â†’ Pune'),
+    route_name: str(body.route_name, 'Mumbai Central Ã¢â€ â€™ Pune'),
     service_type_id: 1,
     booking_date: str(body.booking_date, hmGetDate()),
     departure_time: bus.departure_time as string,
@@ -1905,7 +1905,7 @@ function busHandleCancelBooking(body: Record<string, unknown>): Ok {
   return ok(true);
 }
 
-// â”€â”€ Carpooling (Phase 11) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢â€â‚¬Ã¢â€â‚¬ Carpooling (Phase 11) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 // Mirrors CarpoolingController responses (CarpoolingTrait calculations).
 // Ride status: 1=Offer, 2=Booked, 3=Ongoing, 4=End, 5=Cancel, 6=Cancel (passenger), 7=Expired.
 
@@ -2350,7 +2350,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
 
       case 'user/areas': {
         // Manual location picker area list. Source: Api\HomeController@Areas /user/areas
-        // Zambia (country_id 239) first â€” provinces + >=10 districts each.
+        // Zambia (country_id 239) first Ã¢â‚¬â€ provinces + >=10 districts each.
         const zm = (aid: number, province: string, district: string, lat: number, lng: number) => ({
           id: `zm-${aid}`,
           country_id: 239,
@@ -2486,7 +2486,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           geometry: { location: { lat, lng } },
         });
         const places = [
-          // Zambia â€” Lusaka first (country_id 239)
+          // Zambia Ã¢â‚¬â€ Lusaka first (country_id 239)
           place('zm-1', 'Lusaka City Centre', 'Lusaka, Zambia', -15.3875, 28.3228),
           place('zm-2', 'Woodlands, Lusaka', 'Lusaka, Zambia', -15.4126, 28.2685),
           place('zm-3', 'Kabulonga, Lusaka', 'Lusaka, Zambia', -15.4331, 28.2993),
@@ -2499,7 +2499,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           place('zm-10', 'Chongwe', 'Lusaka, Zambia', -15.33, 28.68),
           place('zm-11', 'Kafue', 'Lusaka, Zambia', -15.7689, 28.1813),
           place('zm-12', 'Kitwe', 'Copperbelt, Zambia', -12.8024, 28.2132),
-          // India â€” unchanged
+          // India Ã¢â‚¬â€ unchanged
           place('ch-1', 'Andheri West', 'Mumbai, Maharashtra', 19.1197, 72.8468),
           place('ch-2', 'Bandra West', 'Mumbai, Maharashtra', 19.0544, 72.8406),
           place('ch-3', 'Colaba Causeway', 'Mumbai, Maharashtra', 18.9076, 72.8147),
@@ -2995,7 +2995,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
       }
 
       // ------------------------------------------------------------------
-      // Store ordering (Phase 8 â€” grocery, pharmacy, generic)
+      // Store ordering (Phase 8 Ã¢â‚¬â€ grocery, pharmacy, generic)
       // ------------------------------------------------------------------
       case 'user/store/store-list': {
         const slug = String(body['slug'] ?? 'grocery');
@@ -3025,7 +3025,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           402: [
             { id: 711, product_name: 'Paracetamol 500mg', description: 'Strip of 10 tablets', price: 25, category_id: 805, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '10 tabs', variants: [], options: [], prescription: 0 },
             { id: 712, product_name: 'Cetirizine 10mg', description: 'Strip of 10 tablets', price: 35, category_id: 805, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '10 tabs', variants: [], options: [], prescription: 0 },
-            { id: 713, product_name: 'Amoxicillin 250mg', description: 'Capsules â€” prescription required', price: 120, category_id: 806, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '15 caps', variants: [], options: [], prescription: 1 },
+            { id: 713, product_name: 'Amoxicillin 250mg', description: 'Capsules Ã¢â‚¬â€ prescription required', price: 120, category_id: 806, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '15 caps', variants: [], options: [], prescription: 1 },
             { id: 714, product_name: 'Vitamin D3', description: '60,000 IU softgel', price: 199, category_id: 807, store_id: 402, is_veg: 1, is_available: 1, image: '', weight: '4 caps', variants: [], options: [] },
           ],
           403: [
@@ -3049,9 +3049,9 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
           categories: storeCats[sid] ?? storeCats[401],
           products: storeProducts[sid] ?? storeProducts[401],
           time_slots: [
-            { id: 101, label: 'Morning 8 AM â€“ 12 PM', start: '08:00', end: '12:00', is_active: 1 },
-            { id: 102, label: 'Afternoon 12 PM â€“ 4 PM', start: '12:00', end: '16:00', is_active: 1 },
-            { id: 103, label: 'Evening 4 PM â€“ 8 PM', start: '16:00', end: '20:00', is_active: 1 },
+            { id: 101, label: 'Morning 8 AM Ã¢â‚¬â€œ 12 PM', start: '08:00', end: '12:00', is_active: 1 },
+            { id: 102, label: 'Afternoon 12 PM Ã¢â‚¬â€œ 4 PM', start: '12:00', end: '16:00', is_active: 1 },
+            { id: 103, label: 'Evening 4 PM Ã¢â‚¬â€œ 8 PM', start: '16:00', end: '20:00', is_active: 1 },
           ],
           use_time_slots: 1,
           is_pharmacy: isPharmacyStore,
@@ -3123,7 +3123,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
       case 'user/store/order-detail':
       case 'user/store/track': {
         const oid = str(body['order_id'] ?? body['id'], 'so-1');
-        data = { id: oid, order_number: Math.floor(Date.now() / 1000), order_status: 1, store_id: 401, store_name: 'QuickMart', full_name: 'QuickMart', store_address: '15 Linking Road, Mumbai', products: [{ cart_id: 'sc-1', product_id: 701, product_name: 'Organic Apples', price: 180, quantity: 2, variant_id: 802, variant_name: '1 kg', option_ids: [], total_amount: 360, is_veg: 1, image: '', store_id: 401, weight: '1 kg' }], subtotal: 360, delivery_fee: 25, tax: 18, discount_amount: 0, promo_code: '', total_amount: 403, delivery_mode: 1, payment_mode: '1', payment_mode_name: 'Cash', address: 'Home', latitude: 19.076, longitude: 72.877, created_at: Date.now() - 30000, cancel_able: true, rate: null, status_text: 'Placed', ticket: 0, time_slot_label: 'Morning 8 AM â€“ 12 PM', prescription_image: '' };
+        data = { id: oid, order_number: Math.floor(Date.now() / 1000), order_status: 1, store_id: 401, store_name: 'QuickMart', full_name: 'QuickMart', store_address: '15 Linking Road, Mumbai', products: [{ cart_id: 'sc-1', product_id: 701, product_name: 'Organic Apples', price: 180, quantity: 2, variant_id: 802, variant_name: '1 kg', option_ids: [], total_amount: 360, is_veg: 1, image: '', store_id: 401, weight: '1 kg' }], subtotal: 360, delivery_fee: 25, tax: 18, discount_amount: 0, promo_code: '', total_amount: 403, delivery_mode: 1, payment_mode: '1', payment_mode_name: 'Cash', address: 'Home', latitude: 19.076, longitude: 72.877, created_at: Date.now() - 30000, cancel_able: true, rate: null, status_text: 'Placed', ticket: 0, time_slot_label: 'Morning 8 AM Ã¢â‚¬â€œ 12 PM', prescription_image: '' };
         break;
       }
 
@@ -3275,7 +3275,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
         return NextResponse.json(data);
       }
 
-      // â”€â”€ Laundry (Phase 10) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // Ã¢â€â‚¬Ã¢â€â‚¬ Laundry (Phase 10) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
       case 'user/laundry/get-categories': {
         data = ldHandleGetCategories(body);
         return NextResponse.json(data);
@@ -3417,7 +3417,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ path: stri
       }
 
       // ------------------------------------------------------------------
-      // Phase 12 â€” Account, wallet, history, SOS, favourites, family, etc.
+      // Phase 12 Ã¢â‚¬â€ Account, wallet, history, SOS, favourites, family, etc.
       // ------------------------------------------------------------------
       case 'user/booking/history': {
         const segmentId = num(body['segment_id'], 0);

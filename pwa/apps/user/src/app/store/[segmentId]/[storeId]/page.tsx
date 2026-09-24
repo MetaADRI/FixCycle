@@ -83,7 +83,7 @@ export default function StoreDetailPage(): React.ReactNode {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={store.full_name}
         leading={
@@ -116,9 +116,9 @@ export default function StoreDetailPage(): React.ReactNode {
                   {store.rating.toFixed(1)} ({store.review_count})
                 </span>
                 <span>
-                  {store.delivery_time_min}–{store.delivery_time_max} {t('store.min', runtime.locale)}
+                  {store.delivery_time_min}Ã¢â‚¬â€œ{store.delivery_time_max} {t('store.min', runtime.locale)}
                 </span>
-                <span>{t('store.minimumOrder', runtime.locale)} ₹ {store.minimum_order}</span>
+                <span>{t('store.minimumOrder', runtime.locale)} Ã¢â€šÂ¹ {store.minimum_order}</span>
                 <span>{store.is_open === 1 ? t('store.open', runtime.locale) : t('store.closed', runtime.locale)}</span>
               </div>
             </div>
@@ -221,10 +221,10 @@ export default function StoreDetailPage(): React.ReactNode {
                   ) : null}
                   {p.variants.length > 1 ? (
                     <span className="text-[10px] font-semibold uppercase tracking-wide text-[var(--fc-bg-secondary)]">
-                      {t('store.customise', runtime.locale)} · {p.variants.length} {t('store.variant', runtime.locale).toLowerCase()}
+                      {t('store.customise', runtime.locale)} Ã‚Â· {p.variants.length} {t('store.variant', runtime.locale).toLowerCase()}
                     </span>
                   ) : null}
-                  <span className="text-sm font-bold text-[var(--fc-text-primary)]">₹ {p.price.toFixed(2)}</span>
+                  <span className="text-sm font-bold text-[var(--fc-text-primary)]">Ã¢â€šÂ¹ {p.price.toFixed(2)}</span>
                 </button>
                 <button
                   onClick={() => void handleAdd(p)}

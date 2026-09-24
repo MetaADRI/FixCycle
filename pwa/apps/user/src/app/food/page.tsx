@@ -32,7 +32,7 @@ export default function FoodHomePage(): React.ReactNode {
   const closed = stores.filter((s) => s.is_open !== 1);
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('food.title', runtime.locale)}
         leading={
@@ -135,11 +135,11 @@ function StoreCard({
               {store.rating.toFixed(1)}
             </span>
             <span>
-              {store.delivery_time_min}–{store.delivery_time_max} {t('food.min', runtime.locale)}
+              {store.delivery_time_min}Ã¢â‚¬â€œ{store.delivery_time_max} {t('food.min', runtime.locale)}
             </span>
             <span>
               {t('food.deliveryFee', runtime.locale)}{' '}
-              {store.delivery_fee === 0 ? t('food.free', runtime.locale) : `₹ ${store.delivery_fee}`}
+              {store.delivery_fee === 0 ? t('food.free', runtime.locale) : `Ã¢â€šÂ¹ ${store.delivery_fee}`}
             </span>
           </span>
         </span>

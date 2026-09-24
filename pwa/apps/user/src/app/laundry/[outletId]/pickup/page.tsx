@@ -51,7 +51,7 @@ export default function LaundryPickupPage(): React.ReactNode {
   const showDeliveryFee = serviceTypeId === 1;
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('laundry.pickup', runtime.locale)}
         leading={
@@ -87,11 +87,11 @@ export default function LaundryPickupPage(): React.ReactNode {
             </div>
             {showDeliveryFee ? (
               <p className="mt-2 text-xs text-[var(--fc-text-secondary)]">
-                {t('laundry.deliveryCharges', runtime.locale)} ₹{deliveryFee}
+                {t('laundry.deliveryCharges', runtime.locale)} Ã¢â€šÂ¹{deliveryFee}
                 <span className="ml-1 inline-flex h-2 w-2 rounded-full bg-[var(--fc-success)]" style={{ verticalAlign: 'middle' }} />
               </p>
             ) : (
-              <p className="mt-2 text-xs text-[var(--fc-text-secondary)]">No delivery charge · pick up from the outlet counter</p>
+              <p className="mt-2 text-xs text-[var(--fc-text-secondary)]">No delivery charge Ã‚Â· pick up from the outlet counter</p>
             )}
           </section>
 
@@ -150,7 +150,7 @@ export default function LaundryPickupPage(): React.ReactNode {
                 {flow.cart?.total_quantity ?? 0} {t('laundry.itemsCount', runtime.locale)}
               </span>
               <span className="font-bold text-[var(--fc-text-primary)]">
-                ₹{flow.cart?.final_amount?.toLocaleString('en-IN') ?? '0'}
+                Ã¢â€šÂ¹{flow.cart?.final_amount?.toLocaleString('en-IN') ?? '0'}
               </span>
             </div>
           </section>

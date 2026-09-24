@@ -38,7 +38,7 @@ function StoreHomeInner(): React.ReactNode {
   const closed = useMemo(() => stores.filter((s) => s.is_open !== 1), [stores]);
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('store.title', runtime.locale)}
         leading={
@@ -141,7 +141,7 @@ function StoreCard({
               {store.rating.toFixed(1)}
             </span>
             <span>
-              {store.delivery_time_min}–{store.delivery_time_max} {t('store.min', runtime.locale)}
+              {store.delivery_time_min}Ã¢â‚¬â€œ{store.delivery_time_max} {t('store.min', runtime.locale)}
             </span>
             <span>
               {t('store.deliveryFee', runtime.locale)}{' '}

@@ -31,7 +31,7 @@ export default function CarpoolResultsPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('carpool.availableRides', runtime.locale)}
         leading={
@@ -79,7 +79,7 @@ export default function CarpoolResultsPage(): React.ReactNode {
 
                 {ride.vehicle && (
                   <div className="mt-2 text-xs text-[var(--fc-text-secondary)]">
-                    {ride.vehicle.make} {ride.vehicle.model} · {ride.vehicle.color} · {ride.vehicle.number}
+                    {ride.vehicle.make} {ride.vehicle.model} Ã‚Â· {ride.vehicle.color} Ã‚Â· {ride.vehicle.number}
                   </div>
                 )}
 

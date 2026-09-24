@@ -26,7 +26,7 @@ export default function HandymanBiddingPage(): React.ReactNode {
   const bids = tab === 'active' ? flow.activeBids : flow.allBids;
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('handyman.workRequests', runtime.locale)}
         leading={
@@ -96,7 +96,7 @@ function BidCard({ bid }: { bid: HandymanBidOrder }): React.ReactNode {
     >
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold text-[var(--fc-text-secondary)]">
-          {bid.category_name} · {bid.service_name}
+          {bid.category_name} Ã‚Â· {bid.service_name}
         </span>
         {bid.no_of_bids > 0 ? (
           <span className="rounded-full bg-[var(--fc-primary)]/10 px-2 py-0.5 text-[10px] font-bold text-[var(--fc-primary)]">
@@ -109,7 +109,7 @@ function BidCard({ bid }: { bid: HandymanBidOrder }): React.ReactNode {
       ) : null}
       <div className="mt-2 flex items-center justify-between border-t border-[var(--fc-border)] pt-2">
         <span className="text-sm font-bold text-[var(--fc-text-primary)]">
-          {t('handyman.fromPrice', runtime.locale)} ₹{Number(bid.user_offer_price).toLocaleString('en-IN')}
+          {t('handyman.fromPrice', runtime.locale)} Ã¢â€šÂ¹{Number(bid.user_offer_price).toLocaleString('en-IN')}
         </span>
         <span className="text-xs text-[var(--fc-text-secondary)]">{bid.time_slot_text || bid.booked_at}</span>
       </div>

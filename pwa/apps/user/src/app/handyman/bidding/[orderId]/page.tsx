@@ -51,7 +51,7 @@ export default function HandymanBidDetailPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title="Work Request"
         leading={
@@ -80,7 +80,7 @@ export default function HandymanBidDetailPage(): React.ReactNode {
             <section className="rounded-2xl border border-[var(--fc-border)] bg-[var(--fc-surface-raised)] p-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-[var(--fc-text-secondary)]">
-                  {detail.category_name} · {detail.service_name}
+                  {detail.category_name} Ã‚Â· {detail.service_name}
                 </span>
                 <StatusPill tone={isBooked ? 'success' : 'warning'}>
                   {detail.status}
@@ -178,7 +178,7 @@ export default function HandymanBidDetailPage(): React.ReactNode {
       {/* Bottom bar */}
       {isActive ? (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--fc-border)] bg-white px-4 py-3">
-          <div className="mx-auto flex max-w-[430px] gap-3">
+          <div className="mx-auto flex max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] gap-3">
             <Button variant="danger" onClick={() => void handleCancel()}>
               {t('handyman.cancelRequest', runtime.locale)}
             </Button>

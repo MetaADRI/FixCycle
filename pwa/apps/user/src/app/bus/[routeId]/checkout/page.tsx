@@ -32,7 +32,7 @@ export default function BusCheckoutPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('bus.checkout', runtime.locale)}
         leading={
@@ -62,7 +62,7 @@ export default function BusCheckoutPage(): React.ReactNode {
               <p className="text-sm font-bold text-[var(--fc-text-primary)]">{sm.bus_name} ({sm.bus_number})</p>
               <div className="mt-2 flex items-center gap-2">
                 <p className="text-xs text-[var(--fc-text-secondary)]">
-                  {bus.selectedBoardingPoint?.stop_name || 'Boarding'} → {bus.selectedDroppingPoint?.stop_name || 'Dropping'}
+                  {bus.selectedBoardingPoint?.stop_name || 'Boarding'} Ã¢â€ â€™ {bus.selectedDroppingPoint?.stop_name || 'Dropping'}
                 </p>
               </div>
               <div className="mt-2 flex items-center gap-2 text-xs text-[var(--fc-text-secondary)]">
@@ -139,7 +139,7 @@ export default function BusCheckoutPage(): React.ReactNode {
         )}
       </main>
 
-      <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
+      <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
         <Button variant="primary" onClick={() => void handleConfirm()} className="w-full" disabled={bus.confirmLoading}>
           {bus.confirmLoading ? 'Confirming...' : t('bus.confirmBooking', runtime.locale)}
         </Button>

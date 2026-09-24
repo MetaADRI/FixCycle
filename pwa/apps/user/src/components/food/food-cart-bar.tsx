@@ -20,7 +20,7 @@ export function FoodCartBar({
   if (count === 0) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[430px] px-4 pb-4">
+    <div className="fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] px-4 pb-4">
       <Button block variant="primary" onClick={onOpenCart} className="shadow-lg">
         <span className="flex flex-1 items-center gap-2">
           <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-white/20 px-1 text-xs font-bold">

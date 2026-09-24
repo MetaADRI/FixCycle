@@ -67,7 +67,7 @@ export default function LaundryTrackerPage(): React.ReactNode {
   }, [flow, orderId, rating, comment]);
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('laundry.trackOrder', runtime.locale)}
         leading={
@@ -184,7 +184,7 @@ export default function LaundryTrackerPage(): React.ReactNode {
                 {detail.items.map((item) => (
                   <li key={item.id} className="flex items-center justify-between gap-2 text-sm">
                     <span className="truncate text-[var(--fc-text-primary)]">
-                      {item.title} <span className="text-[var(--fc-text-secondary)]">× {item.quantity}</span>
+                      {item.title} <span className="text-[var(--fc-text-secondary)]">Ãƒâ€” {item.quantity}</span>
                     </span>
                     <span className="shrink-0 font-semibold text-[var(--fc-text-primary)]">{item.total_amount}</span>
                   </li>
@@ -214,7 +214,7 @@ export default function LaundryTrackerPage(): React.ReactNode {
                 <div className="flex justify-between border-t border-[var(--fc-border)] pt-1 text-sm font-bold">
                   <span className="text-[var(--fc-text-primary)]">{t('laundry.toPay', runtime.locale)}</span>
                   <span className="text-[var(--fc-text-primary)]">
-                    ₹{Number(detail.payment_detail.final_amount_paid).toLocaleString('en-IN')}
+                    Ã¢â€šÂ¹{Number(detail.payment_detail.final_amount_paid).toLocaleString('en-IN')}
                   </span>
                 </div>
               </div>
@@ -229,7 +229,7 @@ export default function LaundryTrackerPage(): React.ReactNode {
               <div className="flex items-center gap-2 text-sm">
                 <Icon name="clock" size={14} className="text-[var(--fc-text-secondary)]" />
                 <span className="text-[var(--fc-text-primary)]">
-                  {detail.booking_date} · {detail.slot_time_text}
+                  {detail.booking_date} Ã‚Â· {detail.slot_time_text}
                 </span>
               </div>
               {detail.estimate_delivery_time ? (

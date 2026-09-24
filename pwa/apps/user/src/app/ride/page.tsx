@@ -73,7 +73,7 @@ function RideInner(): React.ReactNode {
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       {showHeader ? (
         <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b border-[var(--fc-border)] bg-[var(--fc-surface)] px-2">
           <div className="flex w-12 items-center justify-start">

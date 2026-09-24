@@ -44,7 +44,7 @@ export default function HandymanOrdersPage(): React.ReactNode {
   const orders = tab === 'active' ? flow.activeOrders : flow.pastOrders;
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('handyman.myBookings', runtime.locale)}
         leading={
@@ -127,7 +127,7 @@ function OrderCard({ order }: { order: HandymanOrder }): React.ReactNode {
       <p className="mt-1 line-clamp-1 text-xs text-[var(--fc-text-secondary)]">{serviceName}</p>
       <div className="mt-1 flex items-center gap-2 text-xs text-[var(--fc-text-secondary)]">
         <Icon name="clock" size={10} />
-        <span>{order.booking_date} · {order.slot_time_text}</span>
+        <span>{order.booking_date} Ã‚Â· {order.slot_time_text}</span>
       </div>
 
       <div className="mt-2 flex items-center justify-between border-t border-[var(--fc-border)] pt-2">

@@ -24,7 +24,7 @@ export default function LaundryHomePage(): React.ReactNode {
   const popular = flow.outlets.slice(0, 3);
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('laundry.home', runtime.locale)}
         leading={
@@ -88,7 +88,7 @@ export default function LaundryHomePage(): React.ReactNode {
                         <p className="flex items-center gap-1 text-xs text-[var(--fc-text-secondary)]">
                           <Icon name="star" size={12} className="text-[var(--fc-warning)]" />
                           {outlet.rating}
-                          <span className="text-[var(--fc-border-strong)]">·</span>
+                          <span className="text-[var(--fc-border-strong)]">Ã‚Â·</span>
                           {outlet.distance}
                         </p>
                       </div>
@@ -124,7 +124,7 @@ export default function LaundryHomePage(): React.ReactNode {
                             <Icon name="star" size={12} className="text-[var(--fc-warning)]" />
                             {outlet.rating}
                           </span>
-                          <span className="text-[var(--fc-border-strong)]">·</span>
+                          <span className="text-[var(--fc-border-strong)]">Ã‚Â·</span>
                           <span className="text-[var(--fc-text-secondary)]">{outlet.distance}</span>
                           {outlet.is_outlet_open ? (
                             <span className="ml-auto flex items-center gap-1 text-[var(--fc-success)]">

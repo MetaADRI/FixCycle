@@ -33,7 +33,7 @@ export default function CarpoolRideDetailPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('carpool.rideDetail', runtime.locale)}
         leading={
@@ -81,7 +81,7 @@ export default function CarpoolRideDetailPage(): React.ReactNode {
                 </div>
                 {d.vehicle && (
                   <div className="mt-3 border-t border-[var(--fc-border)] pt-2 text-xs text-[var(--fc-text-secondary)]">
-                    {d.vehicle.make} {d.vehicle.model} · {d.vehicle.color} · {d.vehicle.number}
+                    {d.vehicle.make} {d.vehicle.model} Ã‚Â· {d.vehicle.color} Ã‚Â· {d.vehicle.number}
                   </div>
                 )}
               </div>
@@ -134,7 +134,7 @@ export default function CarpoolRideDetailPage(): React.ReactNode {
       </main>
 
       {canCancel && (
-        <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
+        <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
           <Button variant="danger" onClick={() => void handleCancel()} className="w-full" disabled={carpool.cancelLoading}>
             {carpool.cancelLoading ? 'Cancelling...' : t('carpool.cancelRide', runtime.locale)}
           </Button>

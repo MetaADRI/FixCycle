@@ -48,7 +48,7 @@ export default function BusBookingDetailPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('bus.bookingDetail', runtime.locale)}
         leading={
@@ -113,7 +113,7 @@ export default function BusBookingDetailPage(): React.ReactNode {
               {bd.passenger_name && (
                 <div className="mt-2 flex items-center justify-between">
                   <span className="text-xs font-semibold text-[var(--fc-text-secondary)]">{t('carpool.passenger', runtime.locale)}</span>
-                  <span className="text-sm text-[var(--fc-text-primary)]">{bd.passenger_name} {bd.passenger_phone ? `· ${bd.passenger_phone}` : ''}</span>
+                  <span className="text-sm text-[var(--fc-text-primary)]">{bd.passenger_name} {bd.passenger_phone ? `Ã‚Â· ${bd.passenger_phone}` : ''}</span>
                 </div>
               )}
             </div>
@@ -138,7 +138,7 @@ export default function BusBookingDetailPage(): React.ReactNode {
       </main>
 
       {canCancel && (
-        <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
+        <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
           <Button variant="danger" onClick={() => void handleCancel()} className="w-full" disabled={bus.cancelLoading}>
             {bus.cancelLoading ? 'Cancelling...' : t('bus.cancelBooking', runtime.locale)}
           </Button>

@@ -56,7 +56,7 @@ export default function HandymanTrackerPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title="Order Tracker"
         leading={
@@ -163,7 +163,7 @@ export default function HandymanTrackerPage(): React.ReactNode {
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Icon name="clock" size={14} className="text-[var(--fc-text-secondary)]" />
-                <span className="text-[var(--fc-text-primary)]">{detail.booking_date} · {detail.slot_time_text}</span>
+                <span className="text-[var(--fc-text-primary)]">{detail.booking_date} Ã‚Â· {detail.slot_time_text}</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-[var(--fc-text-secondary)]">
                 <Icon name="document" size={14} />
@@ -249,9 +249,9 @@ export default function HandymanTrackerPage(): React.ReactNode {
       {/* Bottom bar - pay */}
       {detail?.arr_action.pay || detail?.payment_detail?.pending_amount_status ? (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--fc-border)] bg-white px-4 py-3">
-          <div className="mx-auto max-w-[430px]">
+          <div className="mx-auto max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px]">
             <Button block variant="primary" onClick={() => void handlePay()}>
-              Pay now · K{Number(detail?.payment_detail?.total_pending_amount ?? 0).toLocaleString('en-IN')}
+              Pay now Ã‚Â· K{Number(detail?.payment_detail?.total_pending_amount ?? 0).toLocaleString('en-IN')}
             </Button>
           </div>
         </div>

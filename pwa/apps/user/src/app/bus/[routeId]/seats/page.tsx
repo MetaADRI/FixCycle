@@ -34,7 +34,7 @@ export default function BusSeatMapPage(): React.ReactNode {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-[var(--fc-surface)]">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]">
       <TopHeader
         title={t('bus.seatMap', runtime.locale)}
         leading={
@@ -130,7 +130,7 @@ export default function BusSeatMapPage(): React.ReactNode {
 
       {/* Fixed bottom CTA */}
       {sm && bus.selectedSeats.length > 0 && (
-        <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
+        <div className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] -translate-x-1/2 border-t border-[var(--fc-border)] bg-[var(--fc-surface)] p-4">
           <Button variant="primary" onClick={() => void handleCheckout()} className="w-full" disabled={bus.checkoutLoading}>
             {bus.checkoutLoading ? 'Processing...' : t('bus.checkout', runtime.locale)}
           </Button>

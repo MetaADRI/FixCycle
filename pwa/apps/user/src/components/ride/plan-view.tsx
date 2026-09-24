@@ -948,7 +948,7 @@ function VehicleSheet({
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold text-[var(--fc-text-primary)]">{v.name}</p>
-                  {v.eta ? <p className="text-xs text-[var(--fc-text-secondary)]">{t('ride.eta', locale)} · {v.eta} min</p> : null}
+                  {v.eta ? <p className="text-xs text-[var(--fc-text-secondary)]">{t('ride.eta', locale)} Ã‚Â· {v.eta} min</p> : null}
                 </div>
                 <div className="text-right">
                   {v.estimateFare ? (
@@ -988,7 +988,7 @@ function DropSearchOverlay({
 }): React.ReactNode {
   return (
     <div className="fixed inset-0 z-30 bg-black/40" onClick={onClose}>
-      <div className="mx-auto flex h-full max-w-[430px] flex-col bg-[var(--fc-surface)]" onClick={(e) => e.stopPropagation()}>
+      <div className="mx-auto flex h-full max-w-[430px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] md:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] flex-col bg-[var(--fc-surface)]" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center gap-2 border-b border-[var(--fc-border)] px-3 py-3">
           <button onClick={onClose} aria-label={t('ride.back', locale)} className="text-[var(--fc-text-primary)]">
             <Icon name="back" size={22} />
